@@ -1,9 +1,13 @@
 import { Stack, useGlobalSearchParams, useRouter } from "expo-router";
 import react from "react";
-import { SafeAreaView, Text, View, ScrollView, ActivityIndicator, RefreshControl } from "react-native";
+import { SafeAreaView, Text, View, ScrollView, ActivityIndicator, RefreshControl, Image, Button } from "react-native";
 import ScreenHeaderBtn from "../../components/ScreenHeaderBtn";
 
 import getSingleRecipe from "../../components/hooks/getSingleRecipe"
+import RecipeDetailCard from "../../components/RecipeDetailCard";
+import IngredientCard from "../../components/IngredientCard";
+import { TouchableOpacity } from "react-native-gesture-handler";
+
 
 const RecipeDetails = () => {
     const params = useGlobalSearchParams();
@@ -25,7 +29,7 @@ const RecipeDetails = () => {
                     headerRight: () => (
                         <ScreenHeaderBtn title={"Add to Cart"} dimension="100%"  />
                     ),
-                    headerTitle: data.recipe ? data.recipe.name : "loading",
+                    headerTitle: "Recipe Details",
                     headerTitleAlign: "center"
                 }}/>
             <ScrollView showsVerticalScrollIndicator={false} >
@@ -40,9 +44,42 @@ const RecipeDetails = () => {
                             <Text>Retry</Text>
                         </TouchableOpacity>
                     </View>
-                ) : ( data.recipe ? <Text>{data.recipe.name}</Text> : null)
+                ) : ( data.recipe ? 
+                    <RecipeDetailCard item={data.recipe} /> : null)
+                }
+                <Text style={{fontSize: 24, alignSelf: "center"}}>Ingredients</Text>
+                {isLoading ? (
+                    <ActivityIndicator size="large" />
+                ) : error ? (
+                    <View>
+                        <Text>Something Went Wrong:</Text>
+                    </View>
+                ) : ( data.ingredients?.map((item) => (
+                    <IngredientCard item={item} />
+                ))
+                    
+                )
                 }
                 </View>
+                <TouchableOpacity style={{
+                    width: "80%",
+                    marginLeft: "auto",
+                    marginRight: "auto",
+                    marginTop: 15,
+                    marginBottom: 15,
+                    borderRadius: 15,
+                    shadowColor: "#000",
+                    shadowOffset: {
+                        width: 0,
+                        height: 2,
+                        },
+                    shadowOpacity: 0.25,
+                    shadowRadius: 5.84,
+                    elevation: 5,
+                }}>
+                    <Button title="Save Recipe" style={{color: "blue"}}/>
+                </TouchableOpacity>
+                
             </ScrollView>
         </SafeAreaView>
     )
