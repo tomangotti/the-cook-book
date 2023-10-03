@@ -27,7 +27,10 @@ const Home = () => {
                     headerTitleAlign: "center"
                 }}
             />
-            <Feed />
+            <ScrollView showsVerticalScrollIndicator={false}>
+                <Feed />
+            </ScrollView>
+            
         </SafeAreaView>
     )
 }

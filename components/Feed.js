@@ -10,6 +10,7 @@ const Feed = () => {
 
     const { data, isLoading, error, reFetch } = getRecipes('recipes/all');
 
+    
     return (
         <View style={{margin: 24}}>
             <View style={{
@@ -38,7 +39,7 @@ const Feed = () => {
                         </TouchableOpacity>
                     </View>
                 ) : ( data?.map((item) => (
-                        <RecipeCard item={item} />
+                        <RecipeCard item={item} handleNavigate={() => router.push(`/recipe-details/${item.id}`)}/>
                     ))
                 )}
             </View>

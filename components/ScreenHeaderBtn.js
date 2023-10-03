@@ -1,9 +1,9 @@
 import react from "react";
 import { TouchableOpacity,Text } from "react-native";
 
-const ScreenHeaderBtn = ({title, dimension}) => {
+const ScreenHeaderBtn = ({title, dimension, handlePress}) => {
     return(
-        <TouchableOpacity>
+        <TouchableOpacity onPress={handlePress}>
             <Text style={{width: dimension, borderRadius: 10 / 1.25}}>{title}</Text>
         </TouchableOpacity>
     )

@@ -1,10 +1,10 @@
 import React from "react";
 import { View, Text, TouchableOpacity, Image } from 'react-native';
 
-const RecipeCard = ({item}) => {
+const RecipeCard = ({item, handleNavigate}) => {
     return(
         <>
-        <TouchableOpacity onPress={() => {handleCardPress(item)}} style={{ 
+        <TouchableOpacity onPress={handleNavigate} style={{ 
             justifyContent: "space-between",
             alignItems: "center",
             flexDirection: "row",
