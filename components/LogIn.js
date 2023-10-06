@@ -1,16 +1,16 @@
 import React from "react";
 import { useState } from "react";
-import { View, Text, TextInput, TouchableOpacity, Button} from 'react-native';
+import { View, Text, TextInput, TouchableOpacity} from 'react-native';
+import { Button } from "react-native";
 
 
 
-const SignUp = () => {
+const Login = () => {
     const [email, setEmail] = useState("")
-    const [name, setName] = useState("")
     const [password, setPassword] = useState("")
-    const [passwordConfirm, setPasswordConfirm] = useState("")
-   
 
+
+    
     return (
         <View>
             <View>
@@ -18,16 +18,8 @@ const SignUp = () => {
                 <TextInput  value={email} onChangeText={setEmail}></TextInput>
             </View>
             <View>
-                <Text>Name</Text>
-                <TextInput  value={name} onChangeText={setName}></TextInput>
-            </View>
-            <View>
                 <Text>Password</Text>
                 <TextInput  value={password} onChangeText={setPassword}></TextInput>
-            </View>
-            <View>
-                <Text>Password Confirmation</Text>
-                <TextInput  value={passwordConfirm} onChangeText={setPasswordConfirm}></TextInput>
             </View>
             <View>
                 <TouchableOpacity onPress={() => null} style={{
@@ -46,7 +38,7 @@ const SignUp = () => {
                     shadowRadius: 5.84,
                     elevation: 5,
                 }}>
-                    <Button title="Sign Up" />
+                    <Button title="Log In" />
                 </TouchableOpacity>
             </View>
         </View>
@@ -54,4 +46,4 @@ const SignUp = () => {
 }
 
 
-export default SignUp
+export default Login

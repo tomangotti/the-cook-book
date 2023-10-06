@@ -26,9 +26,6 @@ const RecipeDetails = () => {
                     headerLeft: () => (
                         <ScreenHeaderBtn title={"back"} dimension="100%" handlePress={() => router.back()} />
                     ),
-                    headerRight: () => (
-                        <ScreenHeaderBtn title={"Add to Cart"} dimension="100%"  />
-                    ),
                     headerTitle: "Recipe Details",
                     headerTitleAlign: "center"
                 }}/>
@@ -78,6 +75,24 @@ const RecipeDetails = () => {
                     elevation: 5,
                 }}>
                     <Button title="Save Recipe" style={{color: "blue"}}/>
+                </TouchableOpacity>
+                <TouchableOpacity style={{
+                    width: "80%",
+                    marginLeft: "auto",
+                    marginRight: "auto",
+                    marginTop: 15,
+                    marginBottom: 15,
+                    borderRadius: 15,
+                    shadowColor: "#000",
+                    shadowOffset: {
+                        width: 0,
+                        height: 2,
+                        },
+                    shadowOpacity: 0.25,
+                    shadowRadius: 5.84,
+                    elevation: 5,
+                }}>
+                    <Button title="Add to Cart" />
                 </TouchableOpacity>
                 
             </ScrollView>

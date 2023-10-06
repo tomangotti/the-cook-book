@@ -4,11 +4,18 @@ import { Stack, useRouter } from "expo-router";
 
 import Feed from "../components/Feed";
 import ScreenHeaderBtn from "../components/ScreenHeaderBtn";
+import { useState } from "react";
+import getToken from "../components/tokens/getToken";
 
 
 
 const Home = () => {
     const router = useRouter();
+    const {token, error, loggedIn,} = getToken();
+    
+
+
+
 
 
     return(
@@ -21,7 +28,9 @@ const Home = () => {
                         <ScreenHeaderBtn title={"Saved Recipes"} dimension='75%' />
                     ),
                     headerRight: () => (
-                        <ScreenHeaderBtn title={"Cart"} dimension='100%' />
+                        loggedIn ? 
+                            <ScreenHeaderBtn title={"Profile"} dimension='100%' /> :
+                            <ScreenHeaderBtn title={"Log in"} dimension='100%' handlePress={() => router.push('logIn/login-signup')}/>
                     ),
                     headerTitle: "The Good Cook Book",
                     headerTitleAlign: "center"
