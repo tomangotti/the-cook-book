@@ -39,7 +39,7 @@ const Feed = () => {
                         </TouchableOpacity>
                     </View>
                 ) : ( data?.map((item) => (
-                        <RecipeCard item={item} handleNavigate={() => router.push(`/recipe-details/${item.id}`)}/>
+                        <RecipeCard item={item} key={item.id} handleNavigate={() => router.push(`/recipe-details/${item.id}`)}/>
                     ))
                 )}
             </View>

@@ -12,7 +12,7 @@ const Login = () => {
     const [password, setPassword] = useState("")
     const router = useRouter();
 
-    console.log("HELLO")
+    
 
 
 

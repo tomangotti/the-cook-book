@@ -4,16 +4,20 @@ import { Stack, useRouter } from "expo-router";
 
 import Feed from "../components/Feed";
 import ScreenHeaderBtn from "../components/ScreenHeaderBtn";
-import { useState } from "react";
-import getToken from "../components/tokens/getToken";
+import { useEffect, useState } from "react";
+import checkToken from "../components/hooks/checkToken";
 
 
 
 const Home = () => {
     const router = useRouter();
-    const {token, error, loggedIn,} = getToken();
+    const [loggedIn, setLoggedIn] = useState(false)
     
 
+    useEffect(() => {
+        setLoggedIn(() => checkToken())
+    },[])
+    
 
 
 
@@ -36,6 +40,7 @@ const Home = () => {
                     headerTitleAlign: "center"
                 }}
             />
+            
             <ScrollView showsVerticalScrollIndicator={false}>
                 <Feed />
             </ScrollView>

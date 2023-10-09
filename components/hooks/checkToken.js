@@ -1,28 +1,48 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-
-
-const checkToken = (savedToken, token, setToken, setloggedIn, setLoggedIn) => {
-    fetch(`http://10.0.0.106:8000/users/check-logged-in`, {
-        method: 'GET',
-        headers: {
-            'Authorization': `Token ${savedToken}`,
-            'Content-Type': 'application/json'
-        },
-    })
-    .then((r) => {
-        if(r.ok){
-            setLoggedIn(true)
-            setToken(savedToken)
-        }else{
-            setLoggedIn(false)
+const getToken = async () => {
+    try {
+        const savedToken = await AsyncStorage.getItem('authToken');
+        console.log(savedToken)
+        if (savedToken) {
+            return savedToken;
+        } else {
+            return false;
         }
-    })
-    .catch((error) => {
+    } catch (error) {
+        console.error('Error retrieving token:', error);
+        return false;
+    }
+};
 
-    })
+const checkToken = async () => {
+    const savedToken = await getToken();
+    if (!savedToken) {
+        console.log('Token not found. User is not authenticated.');
+        return false;
+    }
+    try {
+        const response = await fetch('http://10.0.0.106:8000/users/check-logged-in', {
+            method: 'GET',
+            headers: {
+                'Authorization': `Token ${savedToken}`,
+                'Content-Type': 'application/json'
+            },
+        });
 
-    return {loggedIn, token}
-}
+        if (response.ok) {
+            const data = await response.json();
+            console.log(data);
+            console.log("we are ok")
+            return true;
+        } else {
+            console.error('Error checking token:', response.status);
+            return false;
+        }
+    } catch (error) {
+        console.error('Error checking token:', error);
+        return false;
+    }
+};
 
-
-export default checkToken
+export default checkToken;

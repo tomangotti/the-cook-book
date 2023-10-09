@@ -3,7 +3,7 @@ import { router, useRouter } from "expo-router";
 
 const postLogin = (info) => {
     const router = useRouter()
-    console.log(info)
+    
     fetch('http://10.0.0.106:8000/users/login', {
         method: "POST",
         headers: {
