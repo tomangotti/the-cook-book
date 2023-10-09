@@ -1,4 +1,4 @@
-import { Stack } from "expo-router";
+import { Stack, useRouter } from "expo-router";
 import react, { useState } from "react";
 import { TouchableOpacity, View, Text, FlatList, ScrollView, SafeAreaView } from "react-native";
 
@@ -9,6 +9,7 @@ import Login from "../../components/LogIn";
 const logInSignUp = () => {
     const [activeTab, setActiveTab] = useState("log-in");
     const tabs = ["log-in", "sign-up"]
+    const router = useRouter();
 
 
 
@@ -67,7 +68,7 @@ const logInSignUp = () => {
                 headerTitleAlign: "center"
             }}/>
             <ScrollView showsVerticalScrollIndicator={false} >
-                <View>
+                <View style={{alignItems: 'center', marginTop: 25}}>
                     <FlatList 
                         data={tabs}
                         horizontal

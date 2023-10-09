@@ -9,7 +9,7 @@ const SignUp = () => {
     const [name, setName] = useState("")
     const [password, setPassword] = useState("")
     const [passwordConfirm, setPasswordConfirm] = useState("")
-   
+
 
     return (
         <View>
