@@ -12,10 +12,13 @@ import checkToken from "../components/hooks/checkToken";
 const Home = () => {
     const router = useRouter();
     const [loggedIn, setLoggedIn] = useState(false)
+    const [userId, setUserId] = useState(null)
     
-
+    
+   
     useEffect(() => {
-        setLoggedIn(() => checkToken())
+        setLoggedIn(() => checkToken(userId, setUserId))
+        console.log(userId)
     },[])
     
 
@@ -29,7 +32,9 @@ const Home = () => {
                     headerShadowVisible: false,
                     headerStyle: {backgroundColor: "#FAFAFC"},
                     headerLeft: () => (
-                        <ScreenHeaderBtn title={"Saved Recipes"} dimension='75%' />
+                        loggedIn ? 
+                        <ScreenHeaderBtn title={"Saved Recipes"} dimension='75%' handlePress={() => router.push(`/saved-recipes/${userId}`)} /> :
+                        null
                     ),
                     headerRight: () => (
                         loggedIn ? 

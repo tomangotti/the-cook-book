@@ -3,7 +3,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 const getToken = async () => {
     try {
         const savedToken = await AsyncStorage.getItem('authToken');
-        console.log(savedToken)
+        
         if (savedToken) {
             return savedToken;
         } else {
@@ -15,8 +15,10 @@ const getToken = async () => {
     }
 };
 
-const checkToken = async () => {
+const checkToken = async (userId, setUserId) => {
     const savedToken = await getToken();
+   
+
     if (!savedToken) {
         console.log('Token not found. User is not authenticated.');
         return false;
@@ -34,6 +36,7 @@ const checkToken = async () => {
             const data = await response.json();
             console.log(data);
             console.log("we are ok")
+            setUserId(data.user_id)
             return true;
         } else {
             console.error('Error checking token:', response.status);
@@ -43,6 +46,7 @@ const checkToken = async () => {
         console.error('Error checking token:', error);
         return false;
     }
+
 };
 
 export default checkToken;
