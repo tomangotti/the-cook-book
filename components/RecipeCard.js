@@ -2,6 +2,7 @@ import React from "react";
 import { View, Text, TouchableOpacity, Image } from 'react-native';
 
 const RecipeCard = ({item, handleNavigate, userId}) => {
+    console.log(item)
     return(
         <>
         <TouchableOpacity onPress={handleNavigate} style={{ 
@@ -37,7 +38,7 @@ const RecipeCard = ({item, handleNavigate, userId}) => {
             <Image
                 source={{
                     uri: item.image
-                    ? item.image
+                    ? item.image.uri
                     : "https://media.istockphoto.com/id/148013107/vector/my_plate_dinner.jpg?s=612x612&w=is&k=20&c=iuqT-RX-MxMXiuvozXktNViCK744rzn7al7DdIxkyO8="
                     }}
                     resizeMode="contain" style={{

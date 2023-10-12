@@ -33,7 +33,7 @@ const SavedRecipePage = () => {
                     headerTitle: "Saved Recipes",
                     headerTitleAlign: "center"
                 }}/>
-                <TouchableOpacity onPress={() => router.push(`/new-recipe-form/new-recipe`)} style={{
+                <TouchableOpacity onPress={() => router.push(`/new-recipe-form/${params.id}`, {userId: params.id})} style={{
                         width: "80%",
                         marginLeft: "auto",
                         marginRight: "auto",

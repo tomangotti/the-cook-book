@@ -1,5 +1,6 @@
 import react, { useState } from "react";
-import { Stack, router, useRouter } from "expo-router";
+import { Stack, router, useGlobalSearchParams, useRouter } from "expo-router";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import * as ImagePicker from 'expo-image-picker';
 import Constants from 'expo-constants';
@@ -7,6 +8,7 @@ import Constants from 'expo-constants';
 import { ScrollView, View, Text, TextInput, TouchableOpacity, SafeAreaView, Platform, Button, Image} from 'react-native';
 
 import ScreenHeaderBtn from "../../components/ScreenHeaderBtn";
+import addNewRecipe from "../../components/hooks/addNewRecipe";
 
 
 const newRecipeForm = () => {
@@ -16,7 +18,8 @@ const newRecipeForm = () => {
     const [ingredients, setIngredients] = useState([])
     const [image, setImage] = useState(null);
     const router = useRouter();
-
+    const params = useGlobalSearchParams()
+    
 
     const pickImage = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
@@ -32,7 +35,7 @@ const newRecipeForm = () => {
     };
 
     const addIngredient = () => {
-        setIngredients([...ingredients, { name: "", quantity: "", quantityType: "" }]);
+        setIngredients([...ingredients, { name: "", quantity: "", quantity_type: "" }]);
     };
 
     const updateIngredient = (text, index, field) => {
@@ -46,6 +49,55 @@ const newRecipeForm = () => {
         updatedIngredients.splice(index, 1);
         setIngredients(updatedIngredients);
     };
+
+    const getToken = async () => {
+        try {
+            const savedToken = await AsyncStorage.getItem('authToken');
+            
+            if (savedToken) {
+                return savedToken;
+            } else {
+                return false;
+            }
+        } catch (error) {
+            console.error('Error retrieving token:', error);
+            return false;
+        }
+    };
+
+    const handleSubmit = async () => {
+        const formData = new FormData();
+
+
+        if (image) {
+            const imageUri = image; // Replace with the actual image file URI.
+            const uriParts = imageUri.split(".");
+            const fileType = uriParts[uriParts.length - 1];
+            formData.append("image", {
+                uri: imageUri,
+                name: `image.${fileType}`,
+                type: `image/${fileType}`,
+            });
+}
+        
+
+        formData.append("name", name);
+        formData.append("description", description);
+        formData.append("instructions", instructions);
+        formData.append("user", params.id);
+
+        const ingredientsJSON = JSON.stringify(ingredients)
+        formData.append("ingredients", ingredientsJSON);
+        console.log(formData)
+        const token = await getToken();
+
+        const sendData = await addNewRecipe(formData, token)
+        if(!sendData) {
+            alert("error saving recipe. try again")
+        } else {
+            router.push(`/saved-recipes/${params.id}`)
+        }
+    }
 
     return (
 
@@ -98,8 +150,8 @@ const newRecipeForm = () => {
                             />
                             <TextInput
                                 placeholder="Quantity Type"
-                                value={ingredient.quantityType}
-                                onChangeText={(text) => updateIngredient(text, index, "quantityType")}
+                                value={ingredient.quantity_type}
+                                onChangeText={(text) => updateIngredient(text, index, "quantity_type")}
                                 style={{ backgroundColor: "lightgrey", width: 200 }}
                             />
                             <Button title="Remove" onPress={() => removeIngredient(index)} />
@@ -109,7 +161,7 @@ const newRecipeForm = () => {
                 </View>
             </View>
             
-            <TouchableOpacity 
+            <TouchableOpacity onPress={handleSubmit}
                     style={{
                         width: "80%",
                         marginLeft: "auto",

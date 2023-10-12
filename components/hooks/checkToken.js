@@ -17,7 +17,7 @@ const getToken = async () => {
 
 const checkToken = async (userId, setUserId) => {
     const savedToken = await getToken();
-   
+
 
     if (!savedToken) {
         console.log('Token not found. User is not authenticated.');
@@ -35,7 +35,6 @@ const checkToken = async (userId, setUserId) => {
         if (response.ok) {
             const data = await response.json();
             console.log(data);
-            console.log("we are ok")
             setUserId(data.user_id)
             return true;
         } else {
