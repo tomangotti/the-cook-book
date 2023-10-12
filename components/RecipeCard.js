@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, TouchableOpacity, Image } from 'react-native';
 
-const RecipeCard = ({item, handleNavigate}) => {
+const RecipeCard = ({item, handleNavigate, userId}) => {
     return(
         <>
         <TouchableOpacity onPress={handleNavigate} style={{ 

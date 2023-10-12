@@ -1,7 +1,7 @@
 import { Stack, useGlobalSearchParams, useRouter } from "expo-router";
 import react, { useEffect } from "react";
 
-import { SafeAreaView, Text, View, ScrollView, ActivityIndicator, RefreshControl } from "react-native";
+import { SafeAreaView, Text, View, ScrollView, ActivityIndicator, RefreshControl, TouchableOpacity } from "react-native";
 
 
 import ScreenHeaderBtn from "../../components/ScreenHeaderBtn";
@@ -16,6 +16,7 @@ const SavedRecipePage = () => {
     const {data, isLoading, error, reFetch} = getUserSavedRecipes(params.id)
 
 
+
     return (
         <SafeAreaView>
             <Stack.Screen
@@ -26,9 +27,36 @@ const SavedRecipePage = () => {
                     headerLeft: () => (
                         <ScreenHeaderBtn title={"back"} dimension="100%" handlePress={() => router.back()} />
                     ),
+                    headerRight: () => (
+                        <ScreenHeaderBtn title={"Cart"} dimension="100%" handlePress={() => router.back()} />
+                    ),
                     headerTitle: "Saved Recipes",
                     headerTitleAlign: "center"
                 }}/>
+                <TouchableOpacity onPress={() => router.push(`/new-recipe-form/new-recipe`)} style={{
+                        width: "80%",
+                        marginLeft: "auto",
+                        marginRight: "auto",
+                        marginTop: 15,
+                        marginBottom: 15,
+                        borderRadius: 15,
+                        shadowColor: "#000",
+                        shadowOffset: {
+                            width: 0,
+                            height: 2,
+                            },
+                        shadowOpacity: 0.25,
+                        shadowRadius: 5.84,
+                        elevation: 5,
+                    }}>
+                        <Text style={{ 
+                            textAlign: "center", 
+                            padding: 10, 
+                            backgroundColor: "blue", 
+                            color: "white", 
+                            borderRadius: 15 
+                            }}>Add NEW Recipe</Text>
+                    </TouchableOpacity>
                 <ScrollView showsVerticalScrollIndicator={false}>
                     <View style={{margin: 24}}>
                         <View style={{

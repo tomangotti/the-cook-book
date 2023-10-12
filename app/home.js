@@ -15,15 +15,10 @@ const Home = () => {
     const [userId, setUserId] = useState(null)
     
     
-   
     useEffect(() => {
         setLoggedIn(() => checkToken(userId, setUserId))
-        console.log(userId)
     },[])
     
-
-
-
 
     return(
         <SafeAreaView style={{flex: 1}}>
@@ -47,7 +42,7 @@ const Home = () => {
             />
             
             <ScrollView showsVerticalScrollIndicator={false}>
-                <Feed />
+                <Feed userId={userId}/>
             </ScrollView>
             
         </SafeAreaView>
