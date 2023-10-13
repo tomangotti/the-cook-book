@@ -1,5 +1,5 @@
 import { Stack, useGlobalSearchParams, useRouter } from "expo-router";
-import react from "react";
+import react, { useEffect, useState } from "react";
 import { SafeAreaView, Text, View, ScrollView, ActivityIndicator, RefreshControl, Image, Button } from "react-native";
 import ScreenHeaderBtn from "../../components/ScreenHeaderBtn";
 
@@ -7,20 +7,30 @@ import getSingleRecipe from "../../components/hooks/getSingleRecipe"
 import RecipeDetailCard from "../../components/RecipeDetailCard";
 import IngredientCard from "../../components/IngredientCard";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import checkToken from "../../components/hooks/checkToken";
+import SaveRecipe from "../../components/hooks/saveRecipe";
 
 
 const RecipeDetails = () => {
     const params = useGlobalSearchParams();
     const router = useRouter();
     const { data, isLoading, error, reFetch} = getSingleRecipe(params.id)
+    const [userId, setUserId] = useState(null)
+   
 
-    const userId = router.user_id
+    useEffect(() => {
+        checkToken(userId, setUserId)
 
+        
+    },[])
+
+    
+    
 
     function buttonOptions() {
         if(data.users) {
-            for(let i=0; i < data.users.length; i++) {
-                if(data.users[i] === userId){
+            for(let i=0; i < data.users.length; i++) {  
+                if(data.users[i].user === userId){
                     return true
                 }
             }
@@ -33,6 +43,19 @@ const RecipeDetails = () => {
             return true
         } else {
             return false
+        }
+    }
+    
+
+    const handleSave = async () => {
+        console.log(buttonOptions())
+        
+        if(buttonOptions() === false) {
+            const save = await SaveRecipe(userId, data.recipe.id, "POST")
+            save ? router.back() : alert("item was not saved successfully")
+        } else {
+            const remove = await SaveRecipe(userId, data.recipe.id, "DELETE")
+            remove ? router.back() : alert("item was not removed successfully") 
         }
     }
 
@@ -75,13 +98,13 @@ const RecipeDetails = () => {
                             <Text>Something Went Wrong:</Text>
                         </View>
                     ) : ( data.ingredients?.map((item) => (
-                            <IngredientCard item={item} />
+                            <IngredientCard item={item} key={item.id} />
                         ))
                     
                     )
                 }
                 </View>
-                <TouchableOpacity style={{
+                <TouchableOpacity onPress={handleSave} style={{
                     width: "80%",
                     marginLeft: "auto",
                     marginRight: "auto",
@@ -97,7 +120,7 @@ const RecipeDetails = () => {
                     shadowRadius: 5.84,
                     elevation: 5,
                 }}>
-                    <Text style={{ textAlign: "center", padding: 10, backgroundColor: buttonOptions ? "red" : "blue", color: "white", borderRadius: 15 }}>{buttonOptions() ? "Save Recipe" : "Remove Recipe"}</Text>
+                    <Text style={{ textAlign: "center", padding: 10, backgroundColor: buttonOptions() ? "red" : "blue", color: "white", borderRadius: 15 }}>{buttonOptions() ? "Remove Recipe" : "Save Recipe"}</Text>
                 </TouchableOpacity>
                 {checkUserID ? 
                     <TouchableOpacity style={{

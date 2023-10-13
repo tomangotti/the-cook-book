@@ -1,5 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
+
 const getToken = async () => {
     try {
         const savedToken = await AsyncStorage.getItem('authToken');
@@ -34,7 +35,7 @@ const checkToken = async (userId, setUserId) => {
 
         if (response.ok) {
             const data = await response.json();
-            console.log(data);
+            
             setUserId(data.user_id)
             return true;
         } else {

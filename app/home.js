@@ -2,6 +2,7 @@ import { SafeAreaView, ScrollView, View, Text } from "react-native";
 import { Stack, useRouter } from "expo-router";
 
 
+
 import Feed from "../components/Feed";
 import ScreenHeaderBtn from "../components/ScreenHeaderBtn";
 import { useEffect, useState } from "react";
@@ -13,7 +14,6 @@ const Home = () => {
     const router = useRouter();
     const [loggedIn, setLoggedIn] = useState(false)
     const [userId, setUserId] = useState(null)
-    
     
     useEffect(() => {
         setLoggedIn(() => checkToken(userId, setUserId))

@@ -7,6 +7,7 @@ import RecipeCard from './RecipeCard';
 
 const Feed = ({userId}) => {
     const router = useRouter();
+    
     const { data, isLoading, error, reFetch} = getRecipes('recipes/all');
 
     return (
@@ -37,7 +38,7 @@ const Feed = ({userId}) => {
                         </TouchableOpacity>
                     </View>
                 ) : ( data?.map((item) => (
-                        <RecipeCard item={item} key={item.id} handleNavigate={() => router.push(`/recipe-details/${item.id}`, {user_id: userId, id: item.id})} />
+                        <RecipeCard item={item} key={item.id} user_id={userId} handleNavigate={() => router.push(`/recipe-details/${item.id}`)} />
                     ))
                 )}
             </View>
