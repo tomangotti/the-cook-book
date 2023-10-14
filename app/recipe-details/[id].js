@@ -6,7 +6,7 @@ import ScreenHeaderBtn from "../../components/ScreenHeaderBtn";
 import getSingleRecipe from "../../components/hooks/getSingleRecipe"
 import RecipeDetailCard from "../../components/RecipeDetailCard";
 import IngredientCard from "../../components/IngredientCard";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { TextInput, TouchableOpacity } from "react-native-gesture-handler";
 import checkToken from "../../components/hooks/checkToken";
 import SaveRecipe from "../../components/hooks/saveRecipe";
 
@@ -16,16 +16,14 @@ const RecipeDetails = () => {
     const router = useRouter();
     const { data, isLoading, error, reFetch} = getSingleRecipe(params.id)
     const [userId, setUserId] = useState(null)
-   
+    const [shareView, setShareView] = useState(false)
+    const [shareEmail, setShareEmail] = useState("")
+
 
     useEffect(() => {
         checkToken(userId, setUserId)
-
-        
     },[])
 
-    
-    
 
     function buttonOptions() {
         if(data.users) {
@@ -49,7 +47,6 @@ const RecipeDetails = () => {
 
     const handleSave = async () => {
         console.log(buttonOptions())
-        
         if(buttonOptions() === false) {
             const save = await SaveRecipe(userId, data.recipe.id, "POST")
             save ? router.back() : alert("item was not saved successfully")
@@ -100,7 +97,6 @@ const RecipeDetails = () => {
                     ) : ( data.ingredients?.map((item) => (
                             <IngredientCard item={item} key={item.id} />
                         ))
-                    
                     )
                 }
                 </View>
@@ -141,6 +137,52 @@ const RecipeDetails = () => {
                     }}>
                         <Text style={{ textAlign: "center", padding: 10, backgroundColor: "blue", color: "white", borderRadius: 15 }}>Add to Cart</Text>
                     </TouchableOpacity> : null}
+
+                    {shareView ? 
+                        <View>
+                            <View style={{alignItems: "center", width: "100%", marginTop: 25}}>
+                                <Text>Enter Recipients's Email</Text>
+                                <TextInput value={shareEmail} onChangeText={setShareEmail} style={{backgroundColor: "lightgrey", width: 200}}></TextInput>
+                            </View>
+                            <TouchableOpacity onPress={() => setShareView(!shareView)} style={{
+                                width: "50%",
+                                marginLeft: "auto",
+                                marginRight: "auto",
+                                marginTop: 15,
+                                marginBottom: 15,
+                                borderRadius: 15,
+                                shadowColor: "#000",
+                                shadowOffset: {
+                                    width: 0,
+                                    height: 2,
+                                    },
+                                shadowOpacity: 0.25,
+                                shadowRadius: 5.84,
+                                elevation: 5,
+                            }}>
+                                <Text style={{ textAlign: "center", padding: 10, backgroundColor: "green", color: "white", borderRadius: 15 }}>Send</Text>
+                            </TouchableOpacity>
+                        </View>
+                        : null}
+                    <TouchableOpacity onPress={() => setShareView(!shareView)} style={{
+                        width: "80%",
+                        marginLeft: "auto",
+                        marginRight: "auto",
+                        marginTop: 15,
+                        marginBottom: 15,
+                        borderRadius: 15,
+                        shadowColor: "#000",
+                        shadowOffset: {
+                            width: 0,
+                            height: 2,
+                            },
+                        shadowOpacity: 0.25,
+                        shadowRadius: 5.84,
+                        elevation: 5,
+                    }}>
+                        <Text style={{ textAlign: "center", padding: 10, backgroundColor: shareView ? "grey" : "green", color: "white", borderRadius: 15 }}>{shareView ? "Hide Form" : "Share"}</Text>
+                    </TouchableOpacity>
+                    
             </ScrollView>
         </SafeAreaView>
     )

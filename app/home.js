@@ -33,7 +33,7 @@ const Home = () => {
                     ),
                     headerRight: () => (
                         loggedIn ? 
-                            <ScreenHeaderBtn title={"Profile"} dimension='100%' /> :
+                            <ScreenHeaderBtn title={"Profile"} dimension='100%' handlePress={() => router.push('profile-details/profile-home')} /> :
                             <ScreenHeaderBtn title={"Log in"} dimension='100%' handlePress={() => router.push('logIn/login-signup')}/>
                     ),
                     headerTitle: "The Good Cook Book",
