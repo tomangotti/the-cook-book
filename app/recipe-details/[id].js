@@ -10,6 +10,11 @@ import { TextInput, TouchableOpacity } from "react-native-gesture-handler";
 import checkToken from "../../components/hooks/checkToken";
 import SaveRecipe from "../../components/hooks/saveRecipe";
 
+import ButtonTemplate from "../../components/buttons/buttonTemplate";
+import PostItemToCart from "../../components/hooks/postItemToCart";
+
+
+
 
 const RecipeDetails = () => {
     const params = useGlobalSearchParams();
@@ -56,6 +61,26 @@ const RecipeDetails = () => {
         }
     }
 
+    const handleAddToCart = async () => { 
+        const item = {
+            user: `${userId}`,
+            recipe: `${data.recipe.id}`
+        }
+        
+
+        const postFetch = await PostItemToCart(item)
+        if (postFetch) {
+            alert("item was added successfully.")
+        } else {
+            alert("item was not added.")
+        }
+
+    }
+
+    const handleShareViewToggle = () => {
+        setShareView(!shareView)
+    }
+
 
 
 
@@ -100,89 +125,19 @@ const RecipeDetails = () => {
                     )
                 }
                 </View>
-                <TouchableOpacity onPress={handleSave} style={{
-                    width: "80%",
-                    marginLeft: "auto",
-                    marginRight: "auto",
-                    marginTop: 15,
-                    marginBottom: 15,
-                    borderRadius: 15,
-                    shadowColor: "#000",
-                    shadowOffset: {
-                        width: 0,
-                        height: 2,
-                        },
-                    shadowOpacity: 0.25,
-                    shadowRadius: 5.84,
-                    elevation: 5,
-                }}>
-                    <Text style={{ textAlign: "center", padding: 10, backgroundColor: buttonOptions() ? "red" : "blue", color: "white", borderRadius: 15 }}>{buttonOptions() ? "Remove Recipe" : "Save Recipe"}</Text>
-                </TouchableOpacity>
-                {checkUserID ? 
-                    <TouchableOpacity style={{
-                        width: "80%",
-                        marginLeft: "auto",
-                        marginRight: "auto",
-                        marginTop: 15,
-                        marginBottom: 15,
-                        borderRadius: 15,
-                        shadowColor: "#000",
-                        shadowOffset: {
-                            width: 0,
-                            height: 2,
-                            },
-                        shadowOpacity: 0.25,
-                        shadowRadius: 5.84,
-                        elevation: 5,
-                    }}>
-                        <Text style={{ textAlign: "center", padding: 10, backgroundColor: "blue", color: "white", borderRadius: 15 }}>Add to Cart</Text>
-                    </TouchableOpacity> : null}
-
-                    {shareView ? 
-                        <View>
-                            <View style={{alignItems: "center", width: "100%", marginTop: 25}}>
-                                <Text>Enter Recipients's Email</Text>
-                                <TextInput value={shareEmail} onChangeText={setShareEmail} style={{backgroundColor: "lightgrey", width: 200}}></TextInput>
-                            </View>
-                            <TouchableOpacity onPress={() => setShareView(!shareView)} style={{
-                                width: "50%",
-                                marginLeft: "auto",
-                                marginRight: "auto",
-                                marginTop: 15,
-                                marginBottom: 15,
-                                borderRadius: 15,
-                                shadowColor: "#000",
-                                shadowOffset: {
-                                    width: 0,
-                                    height: 2,
-                                    },
-                                shadowOpacity: 0.25,
-                                shadowRadius: 5.84,
-                                elevation: 5,
-                            }}>
-                                <Text style={{ textAlign: "center", padding: 10, backgroundColor: "green", color: "white", borderRadius: 15 }}>Send</Text>
-                            </TouchableOpacity>
+                <ButtonTemplate pressed={handleSave} color={buttonOptions() ? "red" : "blue"} title={buttonOptions() ? "Remove Recipe" : "Save Recipe"} /> 
+                {checkUserID ? <ButtonTemplate title="Add to Cart" color="blue" pressed={handleAddToCart}/> : null}
+                {shareView ? 
+                    <View style={{alignItems: "center", backgroundColor: "lightgrey"}}>
+                        <View style={{alignItems: "center", width: "80%", marginTop: 25}}>
+                            <Text>Enter Recipients's Email</Text>
+                            <TextInput value={shareEmail} onChangeText={setShareEmail} style={{backgroundColor: "white", width: 200}}></TextInput>
+                            <ButtonTemplate color="green" title="Send" pressed={handleShareViewToggle} />
                         </View>
-                        : null}
-                    <TouchableOpacity onPress={() => setShareView(!shareView)} style={{
-                        width: "80%",
-                        marginLeft: "auto",
-                        marginRight: "auto",
-                        marginTop: 15,
-                        marginBottom: 15,
-                        borderRadius: 15,
-                        shadowColor: "#000",
-                        shadowOffset: {
-                            width: 0,
-                            height: 2,
-                            },
-                        shadowOpacity: 0.25,
-                        shadowRadius: 5.84,
-                        elevation: 5,
-                    }}>
-                        <Text style={{ textAlign: "center", padding: 10, backgroundColor: shareView ? "grey" : "green", color: "white", borderRadius: 15 }}>{shareView ? "Hide Form" : "Share"}</Text>
-                    </TouchableOpacity>
-                    
+                        
+                    </View>
+                : null}
+                <ButtonTemplate color={shareView ? "grey" : "green"} title={shareView ? "Hide Form" : "Share"} pressed={handleShareViewToggle}/>
             </ScrollView>
         </SafeAreaView>
     )

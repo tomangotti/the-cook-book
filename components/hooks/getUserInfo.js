@@ -63,7 +63,7 @@ const getUserInfo = () => {
         fetchUserInfo();
     }
 
-    return { userInfo, isLoading, error, refetch}; // Define the refetch function
+    return { userInfo, isLoading, error, refetch}; 
 };
 
 export default getUserInfo;
