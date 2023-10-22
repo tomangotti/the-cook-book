@@ -8,8 +8,8 @@ const ButtonTemplate = ({title, pressed, color}) => {
                 width: "80%",
                 marginLeft: "auto",
                 marginRight: "auto",
-                marginTop: 15,
-                marginBottom: 15,
+                marginTop: 5,
+                marginBottom: 5,
                 borderRadius: 15,
                 shadowColor: "#000",
                 shadowOffset: {

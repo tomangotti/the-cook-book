@@ -7,6 +7,7 @@ import { SafeAreaView, Text, View, ScrollView, ActivityIndicator, RefreshControl
 import ScreenHeaderBtn from "../../components/ScreenHeaderBtn";
 import getUserSavedRecipes from "../../components/hooks/getUserSavedRecipes";
 import RecipeCard from "../../components/RecipeCard";
+import ButtonTemplate from "../../components/buttons/buttonTemplate";
 
 
 const SavedRecipePage = () => {
@@ -27,38 +28,15 @@ const SavedRecipePage = () => {
                     headerLeft: () => (
                         <ScreenHeaderBtn title={"back"} dimension="100%" handlePress={() => router.back()} />
                     ),
-                    headerRight: () => (
-                        <ScreenHeaderBtn title={"Cart"} dimension="100%" handlePress={() => router.back()} />
-                    ),
                     headerTitle: "Saved Recipes",
                     headerTitleAlign: "center"
                 }}/>
-                <TouchableOpacity onPress={() => router.push(`/new-recipe-form/${params.id}`, {userId: params.id})} style={{
-                        width: "80%",
-                        marginLeft: "auto",
-                        marginRight: "auto",
-                        marginTop: 15,
-                        marginBottom: 15,
-                        borderRadius: 15,
-                        shadowColor: "#000",
-                        shadowOffset: {
-                            width: 0,
-                            height: 2,
-                            },
-                        shadowOpacity: 0.25,
-                        shadowRadius: 5.84,
-                        elevation: 5,
-                    }}>
-                        <Text style={{ 
-                            textAlign: "center", 
-                            padding: 10, 
-                            backgroundColor: "blue", 
-                            color: "white", 
-                            borderRadius: 15 
-                            }}>Add NEW Recipe</Text>
-                    </TouchableOpacity>
+                
                 <ScrollView showsVerticalScrollIndicator={false}>
                     <View style={{margin: 24}}>
+                        <ButtonTemplate title="Add New Recipe" color="blue" pressed={()=>{router.push(`/new-recipe-form/${params.id}`, {userId: params.id})}} />
+                        <ButtonTemplate title="View Cart" color="green" pressed={()=>{router.push(`/user-cart-page/${params.id}`)}} />
+
                         <View style={{
                             flexDirection: "row",
                             justifyContent: "space-between",
@@ -70,6 +48,7 @@ const SavedRecipePage = () => {
                                 color: "#312651"
                             }}>Your Recipes</Text>
                         </View>
+
                         <View style={{
                             marginTop: 16,
                             gap: 12
