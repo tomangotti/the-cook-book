@@ -41,17 +41,18 @@ const SavedRecipePage = () => {
                             flexDirection: "row",
                             justifyContent: "space-between",
                             alignItems: "center",
-                            marginTop: 12
+                            marginTop: 12,
                         }}>
                             <Text style={{
                                 fontSize: 16,
-                                color: "#312651"
+                                color: "#312651",
                             }}>Your Recipes</Text>
                         </View>
 
                         <View style={{
                             marginTop: 16,
-                            gap: 12
+                            gap: 12, 
+                            alignItems: "center",
                         }}>
                             {isLoading ? (
                                 <ActivityIndicator size="large" />
@@ -67,6 +68,17 @@ const SavedRecipePage = () => {
                                     <RecipeCard item={item} key={item.id} handleNavigate={() => router.push(`/recipe-details/${item.id}`)}/> 
                                 ))
                             )}
+                        </View>
+                        <View style={{
+                            flexDirection: "row",
+                            justifyContent: "space-between",
+                            alignItems: "center",
+                            marginTop: 12,
+                        }}>
+                            <Text style={{
+                                fontSize: 16,
+                                color: "#312651",
+                            }}>Your Ingredients</Text>
                         </View>
                     </View>
                 </ScrollView>

@@ -51,7 +51,7 @@ const RecipeDetails = () => {
     
 
     const handleSave = async () => {
-        console.log(buttonOptions())
+        
         if(buttonOptions() === false) {
             const save = await SaveRecipe(userId, data.recipe.id, "POST")
             save ? router.back() : alert("item was not saved successfully")
