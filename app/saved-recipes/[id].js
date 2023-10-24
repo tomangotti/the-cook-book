@@ -69,17 +69,6 @@ const SavedRecipePage = () => {
                                 ))
                             )}
                         </View>
-                        <View style={{
-                            flexDirection: "row",
-                            justifyContent: "space-between",
-                            alignItems: "center",
-                            marginTop: 12,
-                        }}>
-                            <Text style={{
-                                fontSize: 16,
-                                color: "#312651",
-                            }}>Your Ingredients</Text>
-                        </View>
                     </View>
                 </ScrollView>
         </SafeAreaView>

@@ -1,22 +1,22 @@
 import React from "react";
 import { View, Text, TouchableOpacity, Image } from 'react-native';
 
-const RecipeCard = ({item, handleNavigate, user_id}) => {
+const PopularRecipeCard = ({item, handleNavigate, user_id}) => {
     
     return(
         <>
         <TouchableOpacity onPress={handleNavigate} style={{ 
             justifyContent: "space-between",
             alignItems: "center",
-            flexDirection: "row",
+            flexDirection: "column",
             paddingBottom: 10,
-            paddingLeft: 20,
+            paddingLeft: 5,
             paddingRight: 5,
-            paddingTop:10,
+            paddingTop:15,
             borderRadius: 12,
             backgroundColor: "#FFF",
-            width: 350,
-            margin: 5,
+            width: 325,
+            margin: 10,
             shadowColor: "#000",
             shadowOffset: {
                 width: 0,
@@ -27,8 +27,8 @@ const RecipeCard = ({item, handleNavigate, user_id}) => {
             elevation: 5,
             }}>
             <TouchableOpacity style={{
-                width: 125,
-                height: 125,
+                width: 250,
+                height: 250,
                 backgroundColor: "#F3F4F8",
                 borderRadius: 16,
                 justifyContent: "center",
@@ -48,7 +48,7 @@ const RecipeCard = ({item, handleNavigate, user_id}) => {
                     }}/>
             </TouchableOpacity>
             <View style={{flex: 1, paddingLeft: 25}}>
-                <Text style={{fontSize: 16}}>{item.name}</Text>
+                <Text style={{fontSize: 16, marginTop:5}}>{item.name}</Text>
             
                 <Text style={{fontSize: 14, marginTop: 3}}>{item.description}</Text>
             </View>
@@ -58,4 +58,4 @@ const RecipeCard = ({item, handleNavigate, user_id}) => {
     )
 }
 
-export default RecipeCard
+export default PopularRecipeCard

@@ -4,6 +4,7 @@ import { useRouter } from 'expo-router';
 
 import getRecipes from './hooks/getRecipes';
 import RecipeCard from './RecipeCard';
+import PopularRecipeCard from './cards/popularRecipeCard';
 
 const Feed = ({userId}) => {
     const router = useRouter();
@@ -12,19 +13,12 @@ const Feed = ({userId}) => {
 
     return (
         <View style={{margin: 24}}>
-            <View style={{
-                flexDirection: "row",
-                justifyContent: "space-between",
-                alignItems: "center",
-                marginTop: 12
-            }}>
-                <Text style={{
-                    fontSize: 16,
-                    color: "#312651"
-                }}>Popular/New recipes</Text>
+
+            <View style={{ margin: 6}}>
+                <Text style={{fontSize: 16}}>Popular Recipes</Text>
             </View>
             <View style={{
-                marginTop: 16,
+                margin: 8,
                 gap: 12
             }}>
                 {isLoading ? (
@@ -37,11 +31,46 @@ const Feed = ({userId}) => {
                             <Text>Retry</Text>
                         </TouchableOpacity>
                     </View>
-                ) : ( data?.map((item) => (
+                ) : ( <FlatList data={data.most_saved_recipes} renderItem={({item}) => (
+                        <PopularRecipeCard item={item} key={item.id} user_id={userId} handleNavigate={() => router.push(`/recipe-details/${item.id}`)} />
+                )} 
+                keyExtractor={item => item?.id}
+                contentContainerStyle={{columnGap: 8}}
+                horizontal
+                />
+                )}
+            </View>
+
+
+
+            <View style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                alignItems: "center",
+                marginTop: 8
+            }}>
+                <Text style={{fontSize: 16}}>New Recipes</Text>
+            </View>
+            <View style={{
+                marginTop: 8,
+                gap: 1
+            }}>
+                {isLoading ? (
+                    <ActivityIndicator size="large" />
+                ) : error ? (
+                    <View>
+                        <Text>Something Went Wrong:</Text>
+                        <Text>{error}</Text>
+                        <TouchableOpacity onPress={reFetch}>
+                            <Text>Retry</Text>
+                        </TouchableOpacity>
+                    </View>
+                ) : ( data.most_recent_recipes?.map((item) => (
                         <RecipeCard item={item} key={item.id} user_id={userId} handleNavigate={() => router.push(`/recipe-details/${item.id}`)} />
                     ))
                 )}
             </View>
+
         </View>
     );
 };
