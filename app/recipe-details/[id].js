@@ -12,6 +12,7 @@ import SaveRecipe from "../../components/hooks/saveRecipe";
 
 import ButtonTemplate from "../../components/buttons/buttonTemplate";
 import PostItemToCart from "../../components/hooks/postItemToCart";
+import postShareRecipe from "../../components/hooks/postShareRecipe";
 
 
 
@@ -71,6 +72,7 @@ const RecipeDetails = () => {
         const postFetch = await PostItemToCart(item)
         if (postFetch) {
             alert("item was added successfully.")
+            setShareView(!shareView)
         } else {
             alert("item was not added.")
         }
@@ -79,6 +81,18 @@ const RecipeDetails = () => {
 
     const handleShareViewToggle = () => {
         setShareView(!shareView)
+    }
+
+    const handleShare = async () => {
+
+        const share = await postShareRecipe(shareEmail, data.recipe.id)
+        if(share === true) {
+            alert("item was shared successfully")
+        }else if(share === false){
+            alert("item was NOT shared successfully")
+        }
+
+        
     }
 
 
@@ -132,7 +146,7 @@ const RecipeDetails = () => {
                         <View style={{alignItems: "center", width: "80%", marginTop: 25}}>
                             <Text>Enter Recipients's Email</Text>
                             <TextInput value={shareEmail} onChangeText={setShareEmail} style={{backgroundColor: "white", width: 200}}></TextInput>
-                            <ButtonTemplate color="green" title="Send" pressed={handleShareViewToggle} />
+                            <ButtonTemplate color="green" title="Send" pressed={handleShare} />
                         </View>
                         
                     </View>

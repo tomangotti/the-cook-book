@@ -16,12 +16,12 @@ const SaveRecipe = async (userId, itemId, option) => {
         })
     })
     
-    if(response.ok) {
-        const resData = await response.json();
-        return true
-    } else {
-        return false;
-    }
+        if(response.ok) {
+            const resData = await response.json();
+            return true
+        } else {
+            return false;
+        }
     } catch (error) {
         return false;
     }
