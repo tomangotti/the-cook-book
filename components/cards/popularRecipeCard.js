@@ -26,7 +26,7 @@ const PopularRecipeCard = ({item, handleNavigate, user_id}) => {
             shadowRadius: 5.84,
             elevation: 5,
             }}>
-            <TouchableOpacity style={{
+            <View style={{
                 width: 250,
                 height: 250,
                 backgroundColor: "#F3F4F8",
@@ -46,7 +46,7 @@ const PopularRecipeCard = ({item, handleNavigate, user_id}) => {
                         height: "90%",
                         borderRadius: 12,
                     }}/>
-            </TouchableOpacity>
+            </View>
             <View style={{flex: 1, paddingLeft: 25}}>
                 <Text style={{fontSize: 16, marginTop:5}}>{item.name}</Text>
             

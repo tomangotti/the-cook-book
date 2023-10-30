@@ -2,11 +2,11 @@ import { Stack, useRouter } from "expo-router";
 import react, { useState } from "react";
 import { TouchableOpacity, View, Text, FlatList, ScrollView, SafeAreaView } from "react-native";
 
-import ScreenHeaderBtn from "../../components/ScreenHeaderBtn";
+
 import SignUp from "../../components/SignUp";
 import Login from "../../components/LogIn";
 
-const logInSignUp = () => {
+const LogInSignUp = ({loggedIn, setLoggedIn}) => {
     const [activeTab, setActiveTab] = useState("log-in");
     const tabs = ["log-in", "sign-up"]
     const router = useRouter();
@@ -16,9 +16,9 @@ const logInSignUp = () => {
     const displayTabContent = () => {
         switch (activeTab) {
             case "sign-up":
-                return (<SignUp />)
+                return (<SignUp loggedIn={loggedIn} setLoggedIn={setLoggedIn} />)
             case "log-in":
-                return (<Login />)
+                return (<Login loggedIn={loggedIn} setLoggedIn={setLoggedIn} />)
         }
     }
 
@@ -53,17 +53,12 @@ const logInSignUp = () => {
 
 
 
-
-
     return (
         <SafeAreaView>
             <Stack.Screen options={{
                 headerStyle: {backgroundColor: "#FAFAFC"},
                 headerShadowVisible: false,
                 headerBackVisible: false,
-                headerLeft: () => (
-                    <ScreenHeaderBtn title={"back"} dimension="100%" handlePress={() => router.back()} />
-                ),
                 headerTitle: "Sign Up or Login",
                 headerTitleAlign: "center"
             }}/>
@@ -86,4 +81,4 @@ const logInSignUp = () => {
     )
 }
 
-export default logInSignUp
+export default LogInSignUp

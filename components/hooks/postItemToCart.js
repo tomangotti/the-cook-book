@@ -3,7 +3,6 @@ import react from "react"
 
 
 const PostItemToCart = async (item) => {
-    console.log(item)
 
     const response = await fetch('http://10.0.0.106:8000/recipes/cart/add', {
         method: 'POST',

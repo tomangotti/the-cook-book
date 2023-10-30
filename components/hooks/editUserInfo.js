@@ -36,7 +36,6 @@ const EditUserInfo = async (newInfo) => {
 
         if (response.ok) {
             const data = await response.json();
-            console.log(data);
             return true;
         } else {
             console.log(response.status);

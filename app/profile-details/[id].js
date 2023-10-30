@@ -1,19 +1,22 @@
-import react, { useState } from "react";
-import { Stack, useGlobalSearchParams, useRouter } from "expo-router";
+import React, { useEffect, useState } from "react";
+import { Stack, useGlobalSearchParams, router } from "expo-router";
 
 import { TouchableOpacity, SafeAreaView, Text, View, ScrollView, ActivityIndicator, RefreshControl, Image, Button } from "react-native";
 import ScreenHeaderBtn from "../../components/ScreenHeaderBtn";
 import getUserInfo from "../../components/hooks/getUserInfo";
-import ProfileInfoCard from "../new-recipe-form/profileInfoCard";
+import ProfileInfoCard from "./profileInfoCard";
 import ButtonTemplate from "../../components/buttons/buttonTemplate";
-import ProfileEditForm from "../new-recipe-form/profileEditForm";
+import ProfileEditForm from "./profileEditForm";
+import storeToken from "../../components/tokens/storeToken";
+import removeToken from "../../components/tokens/removeToken";
 
 
 const profileHome = () => {
-    const router = useRouter();
+    // const router = useRouter();
     const params = useGlobalSearchParams();
     const { userInfo, isLoading, error, reFetch } = getUserInfo()
     const [editFormActive, setEditFormActive] = useState(false)
+
 
     const buttonOptions = () => {
         if (editFormActive) {
@@ -26,10 +29,22 @@ const profileHome = () => {
             return (
             <View>
                 <ButtonTemplate title="Edit" pressed={handleEdit} color="grey" />
+                <ButtonTemplate title="Log Out" pressed={handleLogOut} color="grey" />
             </View>
             )
         }
     }
+
+    async function handleLogOut() {
+        try{
+            const att = await removeToken();
+            router.replace('/home')
+        } catch (e) {
+            console.error(e)
+            alert('Log Out failed! Please try again later')
+        }   
+    }
+
 
     function handleEdit() {
         setEditFormActive(!editFormActive)

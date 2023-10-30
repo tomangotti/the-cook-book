@@ -26,7 +26,7 @@ const RecipeCard = ({item, handleNavigate, user_id}) => {
             shadowRadius: 5.84,
             elevation: 5,
             }}>
-            <TouchableOpacity style={{
+            <View style={{
                 width: 125,
                 height: 125,
                 backgroundColor: "#F3F4F8",
@@ -35,18 +35,18 @@ const RecipeCard = ({item, handleNavigate, user_id}) => {
                 alignItems: "center",
                 margin: 0,
             }}>
-            <Image
-                source={{
-                    uri: item.image
-                    ? item.image
-                    : "https://media.istockphoto.com/id/148013107/vector/my_plate_dinner.jpg?s=612x612&w=is&k=20&c=iuqT-RX-MxMXiuvozXktNViCK744rzn7al7DdIxkyO8="
-                    }}
-                    resizeMode="contain" style={{
-                        width: "90%",
-                        height: "90%",
-                        borderRadius: 12,
-                    }}/>
-            </TouchableOpacity>
+                <Image
+                    source={{
+                        uri: item.image
+                        ? item.image
+                        : "https://media.istockphoto.com/id/148013107/vector/my_plate_dinner.jpg?s=612x612&w=is&k=20&c=iuqT-RX-MxMXiuvozXktNViCK744rzn7al7DdIxkyO8="
+                        }}
+                        resizeMode="contain" style={{
+                            width: "90%",
+                            height: "90%",
+                            borderRadius: 12,
+                        }}/>
+            </View>
             <View style={{flex: 1, paddingLeft: 25}}>
                 <Text style={{fontSize: 16}}>{item.name}</Text>
             

@@ -1,4 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import React, {useState} from 'react';
 
 
 const getToken = async () => {
@@ -19,7 +20,7 @@ const getToken = async () => {
 const checkToken = async (userId, setUserId) => {
     const savedToken = await getToken();
 
-
+    console.log(savedToken);
     if (!savedToken) {
         console.log('Token not found. User is not authenticated.');
         return false;

@@ -4,12 +4,12 @@ import { Text, View } from "react-native";
 const ProfileInfoCard = ({userInfo}) => {
     console.log(userInfo);
     return(
-        <View>
-            <View>
-                <Text>Hello, {userInfo.username}</Text>
+        <View style={{margin: 25}}>
+            <View style={{marginBottom: 15}}>
+                <Text style={{fontSize: 24}}>Hello, {userInfo.username}</Text>
             </View>
-            <View>
-                <Text>User's Infomation</Text>
+            <View style={{marginBottom: 15}}>
+                <Text style={{fontSize: 18}}>User's Infomation</Text>
             </View>
             <View>
                 <Text>Name: {userInfo.first_name} {userInfo.last_name} </Text>
