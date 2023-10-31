@@ -1,5 +1,5 @@
 import { Stack, useGlobalSearchParams, useRouter } from "expo-router";
-import react, { useEffect, useState } from "react";
+import react, { useEffect, useState, useCallback } from "react";
 import { SafeAreaView, Text, View, ScrollView, ActivityIndicator, RefreshControl, Image, Button } from "react-native";
 import ScreenHeaderBtn from "../../components/ScreenHeaderBtn";
 
@@ -29,6 +29,7 @@ const RecipeDetails = () => {
     useEffect(() => {
         checkToken(userId, setUserId)
     },[])
+
 
 
     function buttonOptions() {

@@ -1,6 +1,6 @@
 import { Stack, useGlobalSearchParams, useRouter } from "expo-router";
-import react, {useState} from "react";  
-import { SafeAreaView, ScrollView, View, Text, ActivityIndicator } from "react-native";
+import react, {useState, useCallback} from "react";  
+import { SafeAreaView, ScrollView, View, Text, ActivityIndicator, RefreshControl } from "react-native";
 
 import ScreenHeaderBtn from "../../components/ScreenHeaderBtn";
 import getCartItems from "../../components/hooks/getCartItems";
@@ -10,8 +10,15 @@ import IngredientCard from "../../components/IngredientCard";
 const CartPage = () => {
     const params = useGlobalSearchParams();
     const router = useRouter();
-
+    const [refreshing, setRefreshing] = useState(false);
     const {data, isLoading, error, reFetch} = getCartItems(params.id)
+
+    const onRefresh = useCallback(() => {
+        setRefreshing(true);
+        reFetch()
+        setRefreshing(false)
+    }, []);
+
 
     return (
         <SafeAreaView>
@@ -25,16 +32,11 @@ const CartPage = () => {
                 headerTitle: "Cart Items",
                 headerTitleAlign: "center"
             }}/>
-            <ScrollView showsVerticalScrollIndicator={false}>
+            <ScrollView showsVerticalScrollIndicator={false} refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh}/>}>
 
-            <View style={{
-                flexDirection: "row",
-                justifyContent: "space-between",
-                alignItems: "center",
-                marginTop: 12
-            }}>
+            <View style={{ marginTop: 10, alignItems: "center", backgroundColor: "lightgrey"}}>
                 <Text style={{
-                    fontSize: 16,
+                    fontSize: 24,
                     color: "#312651",
                     alignItems: "center",
                 }}>Your Cart Items</Text>
@@ -50,14 +52,9 @@ const CartPage = () => {
                 <CartRecipeCard item={item} userId={params.id} reFetch={reFetch} key={item.id}/>
                 ))
             )}
-            <View style={{
-                flexDirection: "row",
-                justifyContent: "space-between",
-                alignItems: "center",
-                marginTop: 12
-            }}>
+            <View style={{ marginTop: 10, alignItems: "center", backgroundColor: "lightgrey"}}>
                 <Text style={{
-                    fontSize: 16,
+                    fontSize: 24,
                     color: "#312651",
                     alignItems: "center",
                 }}>Your Ingredient List</Text>

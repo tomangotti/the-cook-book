@@ -1,5 +1,5 @@
 import { Stack, useGlobalSearchParams, useRouter } from "expo-router";
-import react, { useEffect } from "react";
+import react, { useEffect, useCallback, useState } from "react";
 
 import { SafeAreaView, Text, View, ScrollView, ActivityIndicator, RefreshControl, TouchableOpacity } from "react-native";
 
@@ -13,9 +13,14 @@ import ButtonTemplate from "../../components/buttons/buttonTemplate";
 const SavedRecipePage = () => {
     const params = useGlobalSearchParams();
     const router = useRouter();
-
+    const [refreshing, setRefreshing] = useState(false);
     const {data, isLoading, error, reFetch} = getUserSavedRecipes(params.id)
 
+    const onRefresh = useCallback(() => {
+        setRefreshing(true);
+        reFetch()
+        setRefreshing(false)
+    }, []);
 
 
     return (
@@ -32,7 +37,7 @@ const SavedRecipePage = () => {
                     headerTitleAlign: "center"
                 }}/>
                 
-                <ScrollView showsVerticalScrollIndicator={false}>
+                <ScrollView showsVerticalScrollIndicator={false} refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh}/>}>
                     <View style={{margin: 24}}>
                         <ButtonTemplate title="Add New Recipe" color="blue" pressed={()=>{router.push(`/new-recipe-form/${params.id}`, {userId: params.id})}} />
                         <ButtonTemplate title="View Cart" color="green" pressed={()=>{router.push(`/user-cart-page/${params.id}`)}} />

@@ -1,7 +1,18 @@
 import React from "react";
-import { View, Text } from 'react-native';
+import { View, Text, Linking, TouchableOpacity } from 'react-native';
+import ButtonTemplate from "./buttons/buttonTemplate";
 
 const IngredientCard = ({item}) => {
+
+    const searchQuery = item.name;
+    const encodedQuery = encodeURIComponent(searchQuery);
+    const walmartSearchURL = `https://www.walmart.com/search/?query=${encodedQuery}`;
+
+
+    function walmartSearch() {
+        Linking.openURL(walmartSearchURL)
+    }
+
     return(
         <>
         <View  style={{ 
@@ -28,7 +39,24 @@ const IngredientCard = ({item}) => {
             <View style={{alignSelf: "center"}}>
                 <Text style={{fontSize: 20, margin: 20}}>{item.quantity} : {item.quantity_type} X {item.name}</Text>
             </View>
-            
+            <TouchableOpacity onPress={walmartSearch}
+            style={{
+                width: "20%",
+                marginRight: 5,
+                marginTop: 5,
+                marginBottom: 5,
+                borderRadius: 15,
+                shadowColor: "#000",
+                shadowOffset: {
+                    width: 0,
+                    height: 2,
+                    },
+                shadowOpacity: 0.25,
+                shadowRadius: 5.84,
+                elevation: 5,
+            }}>
+            <Text style={{ textAlign: "center", padding: 5, backgroundColor: "blue", color: "white", borderRadius: 15, fontSize: 12}}>Find on Walmart</Text>
+        </TouchableOpacity>
         </View>
         </>
     )

@@ -1,9 +1,11 @@
 import react from "react";
-import { View, Text, TouchableOpacity, Image } from 'react-native';
+import { View, Text, TouchableOpacity, Image, Linking } from 'react-native';
 import RemoveCartItem from "../hooks/removeCartItem";
 
 const CartRecipeCard = ({item, userId, reFetch}) => {
-    
+
+
+
     const handleRemoveRecipe = async () => {
         const cartItem = {
             recipe: item.id,

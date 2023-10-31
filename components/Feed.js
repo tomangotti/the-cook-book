@@ -1,5 +1,5 @@
-import React from 'react';
-import {  SafeAreaView, View, Text, TouchableOpacity, FlatList, ActivityIndicator, Image, ScrollView } from 'react-native';
+import React, {useCallback, useState} from 'react';
+import {  SafeAreaView, View, Text, TouchableOpacity, FlatList, ActivityIndicator, Image, ScrollView, RefreshControl } from 'react-native';
 import {Stack, useRouter } from 'expo-router';
 
 import getRecipes from './hooks/getRecipes';
@@ -10,9 +10,16 @@ import ScreenHeaderBtn from './ScreenHeaderBtn';
 
 const Feed = ({userId, loggedIn, setLoggedIn}) => {
     const router = useRouter();
-    
+    const [refreshing, setRefreshing] = useState(false);
     const { data, isLoading, error, reFetch} = getRecipes('recipes/all');
 
+    const onRefresh = useCallback(() => {
+        setRefreshing(true);
+        reFetch()
+        setRefreshing(false)
+    }, []);
+
+    
     return (
         <SafeAreaView style={{flex: 1}}>
                 <Stack.Screen 
@@ -33,7 +40,7 @@ const Feed = ({userId, loggedIn, setLoggedIn}) => {
                         headerTitleAlign: "center",
                     }}
                 />
-            <ScrollView showsVerticalScrollIndicator={false}>
+            <ScrollView showsVerticalScrollIndicator={false}  refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh}/>}>
                 <View style={{margin: 0}}>
                     <View style={{ marginTop: 10, alignItems: "center", backgroundColor: "lightgrey"}}>
                         <Text style={{fontSize: 24}}>Popular Recipes</Text>
