@@ -2,7 +2,7 @@ import react from "react";
 
 const addNewRecipe = async (formData, token) => {
     try {
-        const response = await fetch('http://10.0.0.106:8000/recipes/addNew', {
+        const response = await fetch('http://10.0.0.106:8000/recipes/recipe-saved', {
             method: 'POST',
             headers: {
                 'Content-Type': 'multipart/form-data',
@@ -10,7 +10,7 @@ const addNewRecipe = async (formData, token) => {
             },
             body: formData,
         });
-  
+
         if (response.ok) {
             const responseData = await response.json();
             return responseData;

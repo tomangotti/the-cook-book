@@ -7,17 +7,17 @@ import SignUp from "../../components/SignUp";
 import Login from "../../components/LogIn";
 
 const LogInSignUp = ({loggedIn, setLoggedIn}) => {
-    const [activeTab, setActiveTab] = useState("log-in");
-    const tabs = ["log-in", "sign-up"]
+    const [activeTab, setActiveTab] = useState("Log-In");
+    const tabs = ["Log-In", "Sign-Up"]
     const router = useRouter();
 
 
 
     const displayTabContent = () => {
         switch (activeTab) {
-            case "sign-up":
+            case "Sign-Up":
                 return (<SignUp loggedIn={loggedIn} setLoggedIn={setLoggedIn} />)
-            case "log-in":
+            case "Log-In":
                 return (<Login loggedIn={loggedIn} setLoggedIn={setLoggedIn} />)
         }
     }
@@ -31,7 +31,7 @@ const LogInSignUp = ({loggedIn, setLoggedIn}) => {
                 paddingHorizontal: 24,
                 backgroundColor: name === activeTab ? "#312651" : "#F3F4F8",
                 borderRadius: 16,
-                marginLeft: 2,
+                marginLeft: 10,
                 shadowColor: "#000",
                 shadowOffset: {
                 width: 0,
@@ -43,7 +43,7 @@ const LogInSignUp = ({loggedIn, setLoggedIn}) => {
                 shadowColor: "#F3F4F8",
             }}>
                 <Text style={{
-                    fontSize: 12,
+                    fontSize: 18,
                     color: name === activeTab ? "#C3BFCC" : "#AAA9B8",
                 }}
                     >{name}</Text>
@@ -63,6 +63,10 @@ const LogInSignUp = ({loggedIn, setLoggedIn}) => {
                 headerTitleAlign: "center"
             }}/>
             <ScrollView showsVerticalScrollIndicator={false} >
+                <View style={{alignItems: "center", margin: 15}}>
+                    <Text style={{fontSize: 18}}>Welcome to The Cook Book</Text>
+                    <Text style={{fontSize: 16}}>Please Log in OR Sign Up</Text>
+                </View>
                 <View style={{alignItems: 'center', marginTop: 25}}>
                     <FlatList 
                         data={tabs}

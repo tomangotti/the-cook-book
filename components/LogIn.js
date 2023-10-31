@@ -28,13 +28,13 @@ const Login = ({loggedIn, setLoggedIn}) => {
 
     return (
         <View style={{alignItems: "center", width: "100%", marginTop: 25}}>
-            <View>
-                <Text>username</Text>
-                <TextInput  value={username} onChangeText={setUsername} style={{backgroundColor: "lightgrey", width: 200}}></TextInput>
+            <View style={{margin: 5}}>
+                <Text style={{fontSize: 18}}>Username</Text>
+                <TextInput  value={username} onChangeText={setUsername} style={{backgroundColor: "lightgrey", width: 250}}></TextInput>
             </View>
-            <View>
-                <Text>Password</Text>
-                <TextInput  value={password} onChangeText={setPassword} style={{backgroundColor: "lightgrey", width: 200}}></TextInput>
+            <View style={{margin: 5}}>
+                <Text style={{fontSize: 18}}>Password</Text>
+                <TextInput  value={password} onChangeText={setPassword} secureTextEntry={true} style={{backgroundColor: "lightgrey", width: 250}}></TextInput>
             </View>
             <View style={{width: "80%", margin:15}}>
                 <ButtonTemplate title="Login" color="blue" pressed={handleLogin} />

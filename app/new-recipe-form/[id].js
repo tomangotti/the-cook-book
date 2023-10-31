@@ -70,7 +70,7 @@ const newRecipeForm = () => {
 
 
         if (image) {
-            const imageUri = image; // Replace with the actual image file URI.
+            const imageUri = image; 
             const uriParts = imageUri.split(".");
             const fileType = uriParts[uriParts.length - 1];
             formData.append("image", {
@@ -116,43 +116,43 @@ const newRecipeForm = () => {
 
             
             <View style={{alignItems: "center", width: "100%", marginTop: 25}}>
-                <View>
-                    <Text>Recipe Name</Text>
-                    <TextInput  value={name} onChangeText={setName} style={{backgroundColor: "lightgrey", width: 200}}></TextInput>
+                <View style={{margin: 5}}>
+                    <Text style={{fontSize: 18}} >Recipe Name</Text>
+                    <TextInput  value={name} onChangeText={setName} style={{backgroundColor: "lightgrey", width: 250}}></TextInput>
                 </View>
-                <View>
+                <View style={{margin: 5}}>
                     <Button title="Pick an image from camera roll" onPress={pickImage} />
                     {image && <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
                 </View>
-                <View>
-                    <Text>Description</Text>
-                    <TextInput  value={description} onChangeText={setDescription} style={{backgroundColor: "lightgrey", width: 200}}></TextInput>
+                <View style={{margin: 5}}>
+                    <Text style={{fontSize: 18}}>Description</Text>
+                    <TextInput  multiline={true} numberOfLines={6} value={description} onChangeText={setDescription} style={{backgroundColor: "lightgrey", width: 250}}></TextInput>
                 </View>
-                <View>
-                    <Text>Instructions</Text>
-                    <TextInput  value={instructions} onChangeText={setInstructions} style={{backgroundColor: "lightgrey", width: 200}}></TextInput>
+                <View style={{margin: 5}}>
+                    <Text style={{fontSize: 18}}>Instructions</Text>
+                    <TextInput   multiline={true} numberOfLines={16} value={instructions} onChangeText={setInstructions} style={{backgroundColor: "lightgrey", width: 250}}></TextInput>
                 </View>
-                <View>
-                    <Text>Ingredients</Text>
+                <View style={{margin: 5}}>
+                    <Text style={{fontSize: 18}}>Ingredients</Text>
                     {ingredients.map((ingredient, index) => (
-                        <View key={index} style={{marginTop: 15}}>
+                        <View key={index} style={{margin: 15}}>
                             <TextInput
                                 placeholder="Name"
                                 value={ingredient.name}
                                 onChangeText={(text) => updateIngredient(text, index, "name")}
-                                style={{ backgroundColor: "lightgrey", width: 200 }}
+                                style={{ backgroundColor: "lightgrey", width: 200, marginTop: 5 }}
                             />
                             <TextInput
                                 placeholder="Quantity"
                                 value={ingredient.quantity}
                                 onChangeText={(text) => updateIngredient(text, index, "quantity")}
-                                style={{ backgroundColor: "lightgrey", width: 200 }}
+                                style={{ backgroundColor: "lightgrey", width: 200, marginTop: 5 }}
                             />
                             <TextInput
                                 placeholder="Quantity Type"
                                 value={ingredient.quantity_type}
                                 onChangeText={(text) => updateIngredient(text, index, "quantity_type")}
-                                style={{ backgroundColor: "lightgrey", width: 200 }}
+                                style={{ backgroundColor: "lightgrey", width: 200, marginTop: 5 }}
                             />
                             <Button title="Remove" onPress={() => removeIngredient(index)} />
                         </View>

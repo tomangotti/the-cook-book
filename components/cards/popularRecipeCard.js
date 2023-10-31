@@ -12,7 +12,7 @@ const PopularRecipeCard = ({item, handleNavigate, user_id}) => {
             paddingBottom: 10,
             paddingLeft: 5,
             paddingRight: 5,
-            paddingTop:15,
+            paddingTop:0,
             borderRadius: 12,
             backgroundColor: "#FFF",
             width: 325,
@@ -27,13 +27,14 @@ const PopularRecipeCard = ({item, handleNavigate, user_id}) => {
             elevation: 5,
             }}>
             <View style={{
-                width: 250,
-                height: 250,
+                width: 325,
+                height: 325,
                 backgroundColor: "#F3F4F8",
-                borderRadius: 16,
+                borderRadius: 12,
                 justifyContent: "center",
                 alignItems: "center",
                 margin: 0,
+                padding:0,
             }}>
             <Image
                 source={{
@@ -42,15 +43,13 @@ const PopularRecipeCard = ({item, handleNavigate, user_id}) => {
                     : "https://media.istockphoto.com/id/148013107/vector/my_plate_dinner.jpg?s=612x612&w=is&k=20&c=iuqT-RX-MxMXiuvozXktNViCK744rzn7al7DdIxkyO8="
                     }}
                     resizeMode="contain" style={{
-                        width: "90%",
-                        height: "90%",
+                        width: "100%",
+                        height: "100%",
                         borderRadius: 12,
                     }}/>
             </View>
-            <View style={{flex: 1, paddingLeft: 25}}>
-                <Text style={{fontSize: 16, marginTop:5}}>{item.name}</Text>
-            
-                <Text style={{fontSize: 14, marginTop: 3}}>{item.description}</Text>
+            <View style={{flex: 1, alignItems:"center"}}>
+                <Text style={{fontSize: 24, marginTop:5}}>{item.name}</Text>
             </View>
             
         </TouchableOpacity>

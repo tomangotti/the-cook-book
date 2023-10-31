@@ -34,14 +34,14 @@ const Feed = ({userId, loggedIn, setLoggedIn}) => {
                     }}
                 />
             <ScrollView showsVerticalScrollIndicator={false}>
-                <View style={{margin: 24}}>
-                    <View style={{ margin: 6}}>
-                        <Text style={{fontSize: 16}}>Popular Recipes</Text>
+                <View style={{margin: 0}}>
+                    <View style={{ marginTop: 10, alignItems: "center", backgroundColor: "lightgrey"}}>
+                        <Text style={{fontSize: 24}}>Popular Recipes</Text>
                     </View>
 
                     <View style={{
-                        margin: 8,
-                        gap: 12
+                        margin: 5,
+                        gap: 0
                     }}>
                         {isLoading ? (
                             <ActivityIndicator size="large" />
@@ -63,17 +63,13 @@ const Feed = ({userId, loggedIn, setLoggedIn}) => {
                         )}
                     </View>
 
-                    <View style={{
-                        flexDirection: "row",
-                        justifyContent: "space-between",
-                        alignItems: "center",
-                        marginTop: 8
-                    }}>
-                        <Text style={{fontSize: 16}}>New Recipes</Text>
+                    <View style={{alignItems: "center", marginTop: 15, backgroundColor: "lightgrey"}}>
+                        <Text style={{fontSize: 24}}>New Recipes</Text>
                     </View>
                     <View style={{
                         marginTop: 8,
-                        gap: 1
+                        gap: 1,
+                        alignItems: "center",
                     }}>
                         {isLoading ? (
                             <ActivityIndicator size="large" />

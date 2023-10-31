@@ -20,7 +20,7 @@ const ButtonTemplate = ({title, pressed, color}) => {
                 shadowRadius: 5.84,
                 elevation: 5,
             }}>
-            <Text style={{ textAlign: "center", padding: 10, backgroundColor: color, color: "white", borderRadius: 15 }}>{title}</Text>
+            <Text style={{ textAlign: "center", padding: 10, backgroundColor: color, color: "white", borderRadius: 15, fontSize: 18}}>{title}</Text>
         </TouchableOpacity>
     )
 }

@@ -9,11 +9,11 @@ const RecipeCard = ({item, handleNavigate, user_id}) => {
             justifyContent: "space-between",
             alignItems: "center",
             flexDirection: "row",
-            paddingBottom: 10,
-            paddingLeft: 20,
+            paddingBottom: 0,
+            paddingLeft: 0,
             paddingRight: 5,
-            paddingTop:10,
-            borderRadius: 12,
+            paddingTop:0,
+            borderRadius: 16,
             backgroundColor: "#FFF",
             width: 350,
             margin: 5,
@@ -27,8 +27,8 @@ const RecipeCard = ({item, handleNavigate, user_id}) => {
             elevation: 5,
             }}>
             <View style={{
-                width: 125,
-                height: 125,
+                width: 150,
+                height: 150,
                 backgroundColor: "#F3F4F8",
                 borderRadius: 16,
                 justifyContent: "center",
@@ -42,13 +42,13 @@ const RecipeCard = ({item, handleNavigate, user_id}) => {
                         : "https://media.istockphoto.com/id/148013107/vector/my_plate_dinner.jpg?s=612x612&w=is&k=20&c=iuqT-RX-MxMXiuvozXktNViCK744rzn7al7DdIxkyO8="
                         }}
                         resizeMode="contain" style={{
-                            width: "90%",
-                            height: "90%",
-                            borderRadius: 12,
+                            width: "100%",
+                            height: "100%",
+                            borderRadius: 16,
                         }}/>
             </View>
-            <View style={{flex: 1, paddingLeft: 25}}>
-                <Text style={{fontSize: 16}}>{item.name}</Text>
+            <View style={{flex: 1, paddingLeft: 25, alignItems: "center"}}>
+                <Text style={{fontSize: 20}}>{item.name}</Text>
             
                 <Text style={{fontSize: 14, marginTop: 3}}>{item.description}</Text>
             </View>
