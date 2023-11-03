@@ -3,7 +3,7 @@ import storeToken from "../tokens/storeToken"
 
 const postNewUser = async (body) => {
 
-    const response = await fetch('http://10.0.0.106:8000/users/create', {
+    const response = await fetch('https://mysite-p4xg.onrender.com/users/create', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(body)

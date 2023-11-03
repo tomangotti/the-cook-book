@@ -7,7 +7,7 @@ const getUserSavedRecipes = (endPoint) => {
 
     const getData = () => {
         setIsLoading(true);
-        fetch(`http://10.0.0.106:8000/recipes/saved/${endPoint}`)
+        fetch(`https://mysite-p4xg.onrender.com/recipes/saved/${endPoint}`)
             .then((r) => {
                 if (r.ok) {
                     r.json().then((data) => {

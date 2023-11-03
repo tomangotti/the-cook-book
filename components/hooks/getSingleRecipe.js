@@ -7,7 +7,7 @@ const getSingleRecipe = (endpoint) => {
     
     const getData = () => {
         setIsLoading(true);
-        fetch(`http://10.0.0.106:8000/recipes/${endpoint}`)
+        fetch(`https://mysite-p4xg.onrender.com/recipes/${endpoint}`)
             .then((r) => {
                 if (r.ok) {
                     r.json().then((data) => {

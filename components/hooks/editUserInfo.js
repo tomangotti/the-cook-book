@@ -25,7 +25,7 @@ const EditUserInfo = async (newInfo) => {
     }
 
     try {
-        const response = await fetch(`http://10.0.0.106:8000/users/${newInfo.id}/update`, {
+        const response = await fetch(`https://mysite-p4xg.onrender.com/users/${newInfo.id}/update`, {
             method: 'PATCH',
             headers: {
                 'Authorization': `Token ${savedToken}`,

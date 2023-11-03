@@ -31,7 +31,7 @@ const SavedRecipePage = () => {
                     headerShadowVisible: false,
                     headerBackVisible: false,
                     headerLeft: () => (
-                        <ScreenHeaderBtn title={"back"} dimension="100%" handlePress={() => router.back()} />
+                        <ScreenHeaderBtn title={"<-- Back"} dimension="100%" handlePress={() => router.back()} />
                     ),
                     headerTitle: "Saved Recipes",
                     headerTitleAlign: "center"

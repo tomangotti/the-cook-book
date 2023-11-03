@@ -26,7 +26,7 @@ const checkToken = async (userId, setUserId) => {
         return false;
     }
     try {
-        const response = await fetch('http://10.0.0.106:8000/users/check-logged-in', {
+        const response = await fetch('https://mysite-p4xg.onrender.com/users/check-logged-in', {
             method: 'GET',
             headers: {
                 'Authorization': `Token ${savedToken}`,
