@@ -8,6 +8,20 @@
       "expo-router"
     ],
     "name": "the-cook-book",
-    "slug": "the-cook-book"
+    "slug": "the-cook-book",
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "63e519e7-0bc1-4fee-a793-33166de7cd57"
+      }
+    },
+    "android": {
+      "package": "com.tomangotti.thecookbook"
+    },
+    "ios": {
+      "bundleIdentifier": "com.tomangotti.thecookbook"
+    }
   }
 }

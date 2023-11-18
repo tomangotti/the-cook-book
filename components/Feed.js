@@ -6,6 +6,7 @@ import getRecipes from './hooks/getRecipes';
 import RecipeCard from './RecipeCard';
 import PopularRecipeCard from './cards/popularRecipeCard';
 import ScreenHeaderBtn from './ScreenHeaderBtn';
+import ButtonTemplate from './buttons/buttonTemplate';
 
 
 const Feed = ({userId, loggedIn, setLoggedIn}) => {
@@ -18,6 +19,10 @@ const Feed = ({userId, loggedIn, setLoggedIn}) => {
         reFetch()
         setRefreshing(false)
     }, []);
+
+    function handleAskBot() {
+        router.push('/chat-bot/chatBot')
+    }
 
     
     return (
@@ -41,6 +46,7 @@ const Feed = ({userId, loggedIn, setLoggedIn}) => {
                     }}
                 />
             <ScrollView showsVerticalScrollIndicator={false}  refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh}/>}>
+                <ButtonTemplate title="Ask Chief" color="blue" pressed={handleAskBot} />
                 <View style={{margin: 0}}>
                     <View style={{ marginTop: 10, alignItems: "center", backgroundColor: "lightgrey"}}>
                         <Text style={{fontSize: 24}}>Popular Recipes</Text>
