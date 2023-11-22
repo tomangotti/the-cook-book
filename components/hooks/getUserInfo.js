@@ -32,7 +32,7 @@ const getUserInfo = () => {
         }
 
         try {
-            const response = await fetch(`https://mysite-p4xg.onrender.com/users/getUserInfo`, {
+            const response = await fetch(`http://10.0.0.106:8000/users/getUserInfo`, {
                 method: 'GET',
                 headers: {
                     'Authorization': `Token ${savedToken}`,

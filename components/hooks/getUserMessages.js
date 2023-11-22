@@ -1,19 +1,21 @@
-import { useState, useEffect } from "react";
+import React, {useState, useEffect} from "react";
 
-const getUserSavedRecipes = (endPoint) => {
-    const [data, setData] = useState([])
-    const [isLoading, setIsLoading] = useState(false)
-    const [error, setError] = useState(null)
+const getUserMessages = (endpoint) => {
+    const [data, setData] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState(null);
 
     const getData = () => {
+        console.log("fetching data");
         setIsLoading(true);
-        fetch(`http://10.0.0.106:8000/recipes/saved/${endPoint}`)
+        fetch(`http://10.0.0.106:8000/messaging/get/${endpoint}`)
             .then((r) => {
                 if (r.ok) {
                     r.json().then((data) => {
+                        console.log(data)
                         setData(data);
                         setIsLoading(false);
-                    })
+                    });
                 } else {
                     setError("Request failed");
                     setIsLoading(false);
@@ -23,7 +25,7 @@ const getUserSavedRecipes = (endPoint) => {
                 setError(err.message);
                 setIsLoading(false);
             });
-    }
+    };
 
     useEffect(() => {
         getData();
@@ -34,8 +36,7 @@ const getUserSavedRecipes = (endPoint) => {
         getData();
     };
 
-    return {data, isLoading, error, reFetch}
-
+    return { data, isLoading, error, reFetch };
 }
 
-export default getUserSavedRecipes
+export default getUserMessages;

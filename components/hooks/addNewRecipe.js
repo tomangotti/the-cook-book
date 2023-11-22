@@ -2,7 +2,7 @@ import react from "react";
 
 const addNewRecipe = async (formData, token) => {
     try {
-        const response = await fetch('https://mysite-p4xg.onrender.com/recipes/recipe-saved', {
+        const response = await fetch('http://10.0.0.106:8000/recipes/recipe-saved', {
             method: 'POST',
             headers: {
                 'Content-Type': 'multipart/form-data',

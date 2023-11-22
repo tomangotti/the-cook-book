@@ -9,7 +9,7 @@ const getCartItems = (endpoint) => {
 
     const getData = () => {
         setIsLoading(true);
-        fetch(`https://mysite-p4xg.onrender.com/recipes/cart/userItems/${endpoint}`)
+        fetch(`http://10.0.0.106:8000/recipes/cart/userItems/${endpoint}`)
         .then((response) => {
             if(response.ok) {
                 response.json().then((data) => { 

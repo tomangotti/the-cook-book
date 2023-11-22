@@ -1,60 +1,79 @@
-import React, { useEffect, useState } from "react";
-import { Stack, useRouter } from "expo-router";
-import { View, Text, ScrollView, SafeAreaView, TextInput, TouchableOpacity } from "react-native";
-import ScreenHeaderBtn from "../../components/ScreenHeaderBtn";
+import React, { useEffect, useState, useCallback } from "react";
+import { Stack, useGlobalSearchParams, useRouter } from "expo-router";
+import { View, Text, ScrollView, SafeAreaView, TextInput, TouchableOpacity, ActivityIndicator, RefreshControl } from "react-native";
 
+import ScreenHeaderBtn from "../../components/ScreenHeaderBtn";
+import getUserMessages from "../../components/hooks/getUserMessages";
+import postNewMessage from "../../components/hooks/postNewMessage";
 const ChatBot = () => {
     const [inputMessage, setInputMessage] = useState("");
-    const [messages, setMessages] = useState([
-        { text: "Hello, Chef Bot!", fromUser: true },
-        { text: "Hi there! How can I help you today?", fromUser: false },
-        { text: "I'd like a recipe for spaghetti.", fromUser: true },
-        { text: "Sure! Here's a simple spaghetti recipe:", fromUser: false },
-        { text: "Ingredients:", fromUser: false },
-        { text: "- 1 pound spaghetti", fromUser: false },
-        { text: "- 2 cups tomato sauce", fromUser: false },
-        { text: "- 1/2 cup grated Parmesan cheese", fromUser: false },
-        { text: "Instructions:", fromUser: false },
-        { text: "1. Boil the spaghetti according to package instructions.", fromUser: false },
-        { text: "2. Heat the tomato sauce in a pan.", fromUser: false },
-        { text: "3. Drain the spaghetti and mix it with the sauce.", fromUser: false },
-        { text: "4. Serve with grated Parmesan cheese on top.", fromUser: false },
-        { text: "Enjoy your meal!", fromUser: false },
-    ]);
+    const router = useRouter();
+    const params = useGlobalSearchParams();
+    const [refreshing, setRefreshing] = useState(false);
+    const {data, isLoading, error, reFetch} = getUserMessages(params.id);
+    const [messages, setMessages] = useState([]);
+    
 
-    useEffect(() => {
-        
+    const onRefresh = useCallback(() => {
+        setRefreshing(true);
+        reFetch();
+        setRefreshing(false);
     },[])
+
 
     function handleClearChat() {
         setMessages([]);
     }
 
-    function handleSendMessage() {
+    async function handleSendMessage() {
         if (inputMessage.trim() !== "") {
-            setMessages([...messages, { text: inputMessage, fromUser: true }]);
-            setInputMessage("");
-            // You can add logic here to handle the response from the other side (e.g., Chef Bot).
+
+            const newMessage = { 
+                content: inputMessage, 
+                role: 'user', 
+                user: params.id 
+            }
+            const response = await postNewMessage(newMessage);
+            if(response) {
+                setMessages([...messages, newMessage]);
+                setInputMessage("");
+            } else{
+                alert("Message failed to send. Try again")
+            }
+
         }
     }
 
     const renderMessages = () => {
+        if (isLoading) {
+            return (
+                <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+                    <ActivityIndicator size="large" color="#312651" />
+                </View>
+            );
+        }
+
+        if (messages.length === 0) {
+            return <Text>No messages yet.</Text>;
+        }
+
         return messages.map((message, index) => (
             <View
                 key={index}
                 style={{
-                    alignSelf: message.fromUser ? "flex-end" : "flex-start",
-                    backgroundColor: message.fromUser ? "#312651" : "lightgrey",
+                    alignSelf: message.role === 'user' ? "flex-end" : "flex-start",
+                    backgroundColor: message.role === 'user' ? "#312651" : "lightgrey",
                     borderRadius: 10,
                     padding: 10,
                     margin: 5,
-                    maxWidth: "80%", // Limiting the width of the message box
+                    maxWidth: "80%"
                 }}
             >
-                <Text style={{ color: message.fromUser ? "white" : "black" }}>{message.text}</Text>
+                <Text style={{ color: message.role === 'user' ? "white" : "black" }}>{message.content}</Text>
             </View>
         ));
     };
+
 
     const styles = {
         container: {
@@ -71,7 +90,7 @@ const ChatBot = () => {
             shadowOffset: { width: 0, height: 0 },
             shadowOpacity: 1,
             shadowRadius: 10,
-            elevation: 2, // Android shadow
+            elevation: 2,
         },
         chatHeader: {
             height: 50,
@@ -89,8 +108,8 @@ const ChatBot = () => {
             margin: 10,
         },
         chatFooter: {
-            flexDirection: "row", // Set flexDirection to row
-            alignItems: "center", // Align items in the center vertically
+            flexDirection: "row", 
+            alignItems: "center", 
             height: 50,
             backgroundColor: "lightgrey",
             borderRadius: 10,
@@ -98,10 +117,10 @@ const ChatBot = () => {
             margin: 10,
         },
         textInput: {
-            flex: 1, // Take up the available space
+            flex: 1, 
         },
         sendButton: {
-            marginLeft: 10, // Add some space between text input and button
+            marginLeft: 10, 
             backgroundColor: "#312651",
             padding: 10,
             borderRadius: 5,
@@ -127,13 +146,13 @@ const ChatBot = () => {
                 headerTitleAlign: "center",
             
             }}/>
-            <ScrollView showsVerticalScrollIndicator={false} style={styles.chatWindow}>
+            <ScrollView showsVerticalScrollIndicator={false} style={styles.chatWindow} refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh}/>}>
                 <View>
                     <View style={styles.chatHeader}>
                         <Text style={{fontSize: 24}}>Live Chat</Text>
                     </View>
                     <View style={styles.chatBody}>{renderMessages()}</View>
-                </View>
+                </View> 
             </ScrollView>
             <View style={styles.chatFooter}>
                 <TextInput

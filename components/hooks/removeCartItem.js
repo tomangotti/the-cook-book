@@ -2,7 +2,7 @@ import react from "react";
 
 const RemoveCartItem = async (item) => {
     
-    const response = await fetch('https://mysite-p4xg.onrender.com/recipes/cart/remove', {
+    const response = await fetch('http://10.0.0.106:8000/recipes/cart/remove', {
         method: 'DELETE',
         headers: { 'Content-Type':'application/json'},
         body: JSON.stringify(item)

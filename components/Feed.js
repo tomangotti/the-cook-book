@@ -21,7 +21,7 @@ const Feed = ({userId, loggedIn, setLoggedIn}) => {
     }, []);
 
     function handleAskBot() {
-        router.push('/chat-bot/chatBot')
+        router.push(`/chat-bot/${userId}`)
     }
 
     
