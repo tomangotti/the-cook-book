@@ -5,13 +5,15 @@ import { View, Text, ScrollView, SafeAreaView, TextInput, TouchableOpacity, Acti
 import ScreenHeaderBtn from "../../components/ScreenHeaderBtn";
 import getUserMessages from "../../components/hooks/getUserMessages";
 import postNewMessage from "../../components/hooks/postNewMessage";
+
+
 const ChatBot = () => {
     const [inputMessage, setInputMessage] = useState("");
     const router = useRouter();
     const params = useGlobalSearchParams();
     const [refreshing, setRefreshing] = useState(false);
     const {data, isLoading, error, reFetch} = getUserMessages(params.id);
-    const [messages, setMessages] = useState([]);
+    
     
 
     const onRefresh = useCallback(() => {
@@ -22,7 +24,7 @@ const ChatBot = () => {
 
 
     function handleClearChat() {
-        setMessages([]);
+        reFetch()
     }
 
     async function handleSendMessage() {
@@ -35,7 +37,7 @@ const ChatBot = () => {
             }
             const response = await postNewMessage(newMessage);
             if(response) {
-                setMessages([...messages, newMessage]);
+                reFetch();
                 setInputMessage("");
             } else{
                 alert("Message failed to send. Try again")
@@ -53,11 +55,20 @@ const ChatBot = () => {
             );
         }
 
-        if (messages.length === 0) {
+        if(error) {
+            return (
+                <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+                    <Text>Something went wrong</Text>
+                    <Text>{error}</Text>
+                </View>
+            )
+        }
+
+        if (!data || data.length === 0) {
             return <Text>No messages yet.</Text>;
         }
 
-        return messages.map((message, index) => (
+        return data.map((message, index) => (
             <View
                 key={index}
                 style={{
