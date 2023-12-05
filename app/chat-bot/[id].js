@@ -5,6 +5,7 @@ import { View, Text, ScrollView, SafeAreaView, TextInput, TouchableOpacity, Acti
 import ScreenHeaderBtn from "../../components/ScreenHeaderBtn";
 import getUserMessages from "../../components/hooks/getUserMessages";
 import postNewMessage from "../../components/hooks/postNewMessage";
+import ClearChat from "../../components/hooks/clearChat";
 
 
 const ChatBot = () => {
@@ -23,8 +24,13 @@ const ChatBot = () => {
     },[])
 
 
-    function handleClearChat() {
-        reFetch()
+    async function handleClearChat() {
+        const res = await ClearChat(params.id);
+        if(res) {
+            reFetch();
+        } else{
+            alert("Something went wrong. Try again")
+        }
     }
 
     async function handleSendMessage() {
@@ -73,7 +79,7 @@ const ChatBot = () => {
                 key={index}
                 style={{
                     alignSelf: message.role === 'user' ? "flex-end" : "flex-start",
-                    backgroundColor: message.role === 'user' ? "#312651" : "lightgrey",
+                    backgroundColor: message.role === 'user' ? "#312651" : "white",
                     borderRadius: 10,
                     padding: 10,
                     margin: 5,
