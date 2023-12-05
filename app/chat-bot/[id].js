@@ -14,6 +14,7 @@ const ChatBot = () => {
     const params = useGlobalSearchParams();
     const [refreshing, setRefreshing] = useState(false);
     const {data, isLoading, error, reFetch} = getUserMessages(params.id);
+    const [sending, setSending] = useState(false);
     
     
 
@@ -41,11 +42,19 @@ const ChatBot = () => {
                 role: 'user', 
                 user: params.id 
             }
+
+            setInputMessage("Sending...");
+            data.push(newMessage);
+            setSending(true);
+
             const response = await postNewMessage(newMessage);
             if(response) {
-                reFetch();
+                data.push(response);
                 setInputMessage("");
+                setSending(false);
             } else{
+                setInputMessage("");
+                setSending(false);
                 alert("Message failed to send. Try again")
             }
 
@@ -173,12 +182,14 @@ const ChatBot = () => {
             </ScrollView>
             <View style={styles.chatFooter}>
                 <TextInput
+                    editable={!sending}
                     style={styles.textInput}
                     placeholder="Type a message..."
                     value={inputMessage}
                     onChangeText={(text) => setInputMessage(text)}
                 />
                 <TouchableOpacity
+                    disabled={sending}
                     style={styles.sendButton}
                     onPress={() => handleSendMessage()}
                 >

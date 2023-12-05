@@ -11,9 +11,9 @@ const postNewMessage = async (message) => {
             })
 
             if(response.ok) {
-                return true
+                return response.json()
             } else {
-                return false
+                return ""
             }
         } catch(err){
             console.log(err)
