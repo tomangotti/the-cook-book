@@ -11,6 +11,7 @@ const getSingleRecipe = (endpoint) => {
             .then((r) => {
                 if (r.ok) {
                     r.json().then((data) => {
+                        console.log(data.recipe)
                         setData(data);
                         setIsLoading(false);
                     });
