@@ -8,8 +8,9 @@ import Constants from 'expo-constants';
 import { ScrollView, View, Text, TextInput, TouchableOpacity, SafeAreaView, Platform, Button, Image} from 'react-native';
 
 import ScreenHeaderBtn from "../../components/ScreenHeaderBtn";
-import addNewRecipe from "../../components/hooks/addNewRecipe";
+import editRecipe from "../../components/hooks/editRecipe";
 import getSingleRecipe from "../../components/hooks/getSingleRecipe";
+import ButtonTemplate from "../../components/buttons/buttonTemplate";
 
 
 const editRecipeForm = () => {
@@ -21,6 +22,7 @@ const editRecipeForm = () => {
     const [instructions, setInstructions] = useState("")
     const [ingredients, setIngredients] = useState([])
     const [image, setImage] = useState(null);
+    const [deleteStatus, setDeleteStatus] = useState(false)
 
     useEffect(()=> {
         if(data.recipe) {
@@ -28,9 +30,8 @@ const editRecipeForm = () => {
             setDescription(data.recipe.description)
             setInstructions(data.recipe.instructions)
             setIngredients(data.recipe.ingredients)
-            setImage(data.recipe.image)
         }
-    },[])
+    },[data])
 
     
 
@@ -78,7 +79,7 @@ const editRecipeForm = () => {
         }
     };
 
-    const handleSubmit = async () => {
+    const handleEdit = async () => {
         const formData = new FormData();
 
 
@@ -91,29 +92,35 @@ const editRecipeForm = () => {
                 name: `image.${fileType}`,
                 type: `image/${fileType}`,
             });
-}
+        }
         
 
         formData.append("name", name);
         formData.append("description", description);
         formData.append("instructions", instructions);
-        formData.append("user", params.id);
 
         const ingredientsJSON = JSON.stringify(ingredients)
         formData.append("ingredients", ingredientsJSON);
-        console.log(formData)
         const token = await getToken();
 
-        const sendData = await addNewRecipe(formData, token)
+        const sendData = await editRecipe(formData, token, params.id)
         if(!sendData) {
             alert("error saving recipe. try again")
         } else {
-            router.push(`/saved-recipes/${params.id}`)
+            router.replace(`/recipe-details/${params.id}`)
         }
     }
 
-    return (
 
+    const handleDelete = async () => {
+        console.log("delete")
+    }
+
+    const updateDeleteStatus = () => {
+        setDeleteStatus(!deleteStatus)
+    }
+
+    return (
         <SafeAreaView>
             <Stack.Screen options={{
                 headerStyle: {backgroundColor: "#FAFAFC"},
@@ -122,7 +129,7 @@ const editRecipeForm = () => {
                 headerLeft: () => (
                     <ScreenHeaderBtn title={"<-- Back"} dimension="100%" handlePress={() => router.back()} />
                 ),
-                headerTitle: "New Recipe",
+                headerTitle: "Edit Recipe",
                 headerTitleAlign: "center"
             }}/>
             <ScrollView showsVerticalScrollIndicator={false}>
@@ -131,7 +138,7 @@ const editRecipeForm = () => {
             <View style={{alignItems: "center", width: "100%", marginTop: 25}}>
                 <View style={{margin: 5}}>
                     <Text style={{fontSize: 18}} >Recipe Name</Text>
-                    <TextInput  value={name} onChangeText={setName} style={{backgroundColor: "lightgrey", width: 250}}></TextInput>
+                    <TextInput value={name}  onChangeText={setName} style={{backgroundColor: "lightgrey", width: 250}}></TextInput>
                 </View>
                 <View style={{margin: 5}}>
                     <Button title="Pick an image from camera roll" onPress={pickImage} />
@@ -173,26 +180,13 @@ const editRecipeForm = () => {
                     <Button title="Add Ingredient" onPress={addIngredient} />
                 </View>
             </View>
-            
-            <TouchableOpacity onPress={handleSubmit}
-                    style={{
-                        width: "80%",
-                        marginLeft: "auto",
-                        marginRight: "auto",
-                        marginTop: 45,
-                        marginBottom: 15,
-                        borderRadius: 15,
-                        shadowColor: "#000",
-                        shadowOffset: {
-                            width: 0,
-                            height: 2,
-                            },
-                        shadowOpacity: 0.25,
-                        shadowRadius: 5.84,
-                        elevation: 5,
-                }}>
-                    <Text style={{ textAlign: "center", padding: 10, backgroundColor: "blue", color: "white", borderRadius: 15 }}>Add Recipe</Text>
-                </TouchableOpacity>
+            <View>
+                <ButtonTemplate title="Update Recipe" pressed={handleEdit} color="blue" />
+                {deleteStatus ? <View style={{width: "50%", alignSelf: "center"}}><Text style={{alignSelf: "center"}}>Are you sure?</Text><ButtonTemplate title="Confirm Delete" pressed={handleDelete} color="red" /></View> : null}
+                <ButtonTemplate title={!deleteStatus ? "Delete Recipe" : "Cancel"} pressed={updateDeleteStatus} color={deleteStatus ? "grey" : "red"} />
+            </View>
+                
+                
             </ScrollView>
         </SafeAreaView>
     )    

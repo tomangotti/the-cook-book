@@ -4,7 +4,6 @@ const getToken = async () => {
     try {
         const savedToken = await AsyncStorage.getItem('authToken');
     if(savedToken) {
-        console.log(savedToken)
         return savedToken
     }else{
         return false
