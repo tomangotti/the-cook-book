@@ -1,8 +1,7 @@
 import react from "react";
-import getToken from "../tokens/getToken";
+
 
 const SaveRecipe = async (userId, itemId, option) => {
-    const token = await getToken();
     
     try{
         const response = await fetch(`http://10.0.0.106:8000/recipes/addNew`, {

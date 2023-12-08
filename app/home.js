@@ -5,8 +5,6 @@ import checkToken from "../components/hooks/checkToken";
 import LogInSignUp from "./logIn/login-signup";
 
 
-
-
 const Home = () => {
     const [loggedIn, setLoggedIn] = useState(false)
     const [userId, setUserId] = useState(null)

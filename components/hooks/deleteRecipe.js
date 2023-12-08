@@ -18,3 +18,5 @@ const deleteRecipe = async (token, id) => {
     }
 
 }
+
+export default deleteRecipe

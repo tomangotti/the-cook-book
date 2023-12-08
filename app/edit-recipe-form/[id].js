@@ -11,7 +11,7 @@ import ScreenHeaderBtn from "../../components/ScreenHeaderBtn";
 import editRecipe from "../../components/hooks/editRecipe";
 import getSingleRecipe from "../../components/hooks/getSingleRecipe";
 import ButtonTemplate from "../../components/buttons/buttonTemplate";
-
+import deleteRecipe from "../../components/hooks/deleteRecipe";
 
 const editRecipeForm = () => {
     const router = useRouter();
@@ -113,7 +113,13 @@ const editRecipeForm = () => {
 
 
     const handleDelete = async () => {
-        console.log("delete")
+        const token = await getToken();
+        const deleteData = await deleteRecipe(token, params.id)
+        if(!deleteData) {
+            alert("error deleting recipe. try again")
+        } else {
+            router.replace(`/`)
+        }
     }
 
     const updateDeleteStatus = () => {
