@@ -11,7 +11,6 @@ const getRecipes = (endpoint) => {
             .then((r) => {
                 if (r.ok) {
                     r.json().then((data) => {
-                        
                         setData(data);
                         setIsLoading(false);
                     });

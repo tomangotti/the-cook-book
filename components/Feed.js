@@ -27,24 +27,24 @@ const Feed = ({userId, loggedIn, setLoggedIn}) => {
     
     return (
         <SafeAreaView style={{flex: 1}}>
-                <Stack.Screen 
-                    options={{
-                        headerShadowVisible: false,
-                        headerStyle: {backgroundColor: "#FAFAFC"},
-                        headerLeft: () => (
-                            loggedIn ? 
-                            <ScreenHeaderBtn title={"Saved Recipes"} dimension='75%' handlePress={() => router.push(`/saved-recipes/${userId}`)} /> :
-                            null
-                        ),
-                        headerRight: () => (
-                            loggedIn ? 
-                                <ScreenHeaderBtn title={"Profile Info"} dimension='100%' handlePress={() => router.push('profile-details/profile-home')} /> :
-                                <ScreenHeaderBtn title={"Log in"} dimension='100%' handlePress={() => router.push('logIn/login-signup')}/>
-                        ),
-                        headerTitle: "The Good Cook Book",
-                        headerTitleAlign: "center",
-                    }}
-                />
+            <Stack.Screen 
+                options={{
+                    headerShadowVisible: false,
+                    headerStyle: {backgroundColor: "#FAFAFC"},
+                    headerLeft: () => (
+                        loggedIn ? 
+                        <ScreenHeaderBtn title={"Saved Recipes"} dimension='75%' handlePress={() => router.push(`/saved-recipes/${userId}`)} /> :
+                        null
+                    ),
+                    headerRight: () => (
+                        loggedIn ? 
+                            <ScreenHeaderBtn title={"Profile Info"} dimension='100%' handlePress={() => router.push('profile-details/profile-home')} /> :
+                            <ScreenHeaderBtn title={"Log in"} dimension='100%' handlePress={() => router.push('logIn/login-signup')}/>
+                    ),
+                    headerTitle: "The Good Cook Book",
+                    headerTitleAlign: "center",
+                }}
+            />
             <ScrollView showsVerticalScrollIndicator={false}  refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh}/>}>
                 <ButtonTemplate title="Ask Chef" color="blue" pressed={handleAskBot} />
                 <View style={{margin: 0}}>
