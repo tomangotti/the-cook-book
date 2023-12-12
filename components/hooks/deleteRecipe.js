@@ -2,7 +2,7 @@ import React from "react";
 
 const deleteRecipe = async (token, id) => {
     try {
-        const response = await fetch(`http://10.0.0.106:8000/recipes/delete/${id}`, {
+        const response = await fetch(`https://mysite-p4xg.onrender.com/recipes/delete/${id}`, {
             method: 'DELETE',
         })
         if (response.ok) {

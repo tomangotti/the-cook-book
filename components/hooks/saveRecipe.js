@@ -4,7 +4,7 @@ import react from "react";
 const SaveRecipe = async (userId, itemId, option) => {
     
     try{
-        const response = await fetch(`http://10.0.0.106:8000/recipes/addNew`, {
+        const response = await fetch(`https://mysite-p4xg.onrender.com/recipes/addNew`, {
         method: `${option}`,
         headers: {
             'Content-Type': 'application/json'

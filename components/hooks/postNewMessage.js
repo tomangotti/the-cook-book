@@ -4,7 +4,7 @@ import React, {useState, useEffect} from "react";
 const postNewMessage = async (message) => {
     
         try{
-            const response = await fetch(`http://10.0.0.106:8000/messaging/post-new-message`, {
+            const response = await fetch(`https://mysite-p4xg.onrender.com/messaging/post-new-message`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json'},
             body: JSON.stringify(message)

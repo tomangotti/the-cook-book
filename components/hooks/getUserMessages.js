@@ -8,7 +8,7 @@ const getUserMessages = (endpoint) => {
     const getData = () => {
         console.log("fetching data");
         setIsLoading(true);
-        fetch(`http://10.0.0.106:8000/messaging/get/${endpoint}`)
+        fetch(`https://mysite-p4xg.onrender.com/messaging/get/${endpoint}`)
             .then((r) => {
                 if (r.ok) {
                     r.json().then((data) => {

@@ -2,7 +2,7 @@ import React from "react";
 
 const editRecipe = async (formData, token, id) => {
     try {
-        const response = await fetch(`http://10.0.0.106:8000/recipes/edit/${id}`, {
+        const response = await fetch(`https://mysite-p4xg.onrender.com/recipes/edit/${id}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'multipart/form-data',

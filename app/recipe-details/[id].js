@@ -96,7 +96,8 @@ const RecipeDetails = () => {
     }
 
     const checkOwner = () => {
-        if(data && userId === data.recipe.user) {
+        console.log(userId)
+        if(data.recipe && userId === data.recipe.user) {
             return true
         } else {
             return false
@@ -158,7 +159,7 @@ const RecipeDetails = () => {
                     </View>
                 : null}
                 <ButtonTemplate color={shareView ? "grey" : "green"} title={shareView ? "Hide Form" : "Share"} pressed={handleShareViewToggle}/>
-                {checkOwner ? <ButtonTemplate color="red" title="Edit Recipe" pressed={() => router.push(`/edit-recipe-form/${params.id}`)} /> : null}
+                {checkOwner() ? <ButtonTemplate color="red" title="Edit Recipe" pressed={() => router.push(`/edit-recipe-form/${params.id}`)} /> : null}
             </ScrollView>
         </SafeAreaView>
     )

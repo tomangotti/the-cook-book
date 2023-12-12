@@ -3,7 +3,7 @@ import storeToken from "../tokens/storeToken";
 const postLogin = async (info) => {
     
     
-    const response = await fetch('http://10.0.0.106:8000/users/login', {
+    const response = await fetch('https://mysite-p4xg.onrender.com/users/login', {
         method: "POST",
         headers: {
             'Content-Type': 'application/json'

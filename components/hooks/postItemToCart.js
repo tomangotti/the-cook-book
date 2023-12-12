@@ -4,7 +4,7 @@ import react from "react"
 
 const PostItemToCart = async (item) => {
 
-    const response = await fetch('http://10.0.0.106:8000/recipes/cart/add', {
+    const response = await fetch('https://mysite-p4xg.onrender.com/recipes/cart/add', {
         method: 'POST',
         headers: { 'Content-Type':'application/json'},
         body: JSON.stringify(item)
