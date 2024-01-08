@@ -4,11 +4,13 @@
     "web": {
       "bundler": "metro"
     },
+    "version": "1.1.0",
     "plugins": [
       "expo-router"
     ],
     "name": "the-cook-book",
     "slug": "the-cook-book",
+    "icon": "./assets/images/icon.png",
     "extra": {
       "router": {
         "origin": false

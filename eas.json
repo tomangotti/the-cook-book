@@ -1,6 +1,7 @@
 {
   "cli": {
-    "version": ">= 5.3.0"
+    "version": ">= 5.3.0",
+    "appVersionSource": "remote"
   },
   "build": {
     "development": {
@@ -10,9 +11,18 @@
     "preview": {
       "distribution": "internal"
     },
-    "production": {}
+    "production": {
+      "autoIncrement": true
+    }
   },
   "submit": {
-    "production": {}
+    "production": {
+      "ios": {
+        "appleId": "tom.angotti11@gmail.com",
+        "ascAppId": "6474798876",
+        "appleTeamId": "S9VQJAJCY7"
+      }
+    }
   }
 }
+
