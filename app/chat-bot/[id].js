@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { Stack, useGlobalSearchParams, useRouter } from "expo-router";
 import { View, Text, ScrollView, SafeAreaView, TextInput, TouchableOpacity, ActivityIndicator, RefreshControl } from "react-native";
+import { KeyboardAvoidingView, Platform } from 'react-native';
 
 import ScreenHeaderBtn from "../../components/ScreenHeaderBtn";
 import getUserMessages from "../../components/hooks/getUserMessages";
@@ -159,43 +160,49 @@ const ChatBot = () => {
 
     return (
         <SafeAreaView style={styles.container}>
-            <Stack.Screen options={{
-                headerShadowVisible: false,
-                headerStyle: {backgroundColor: "#FAFAFC"},
-                headerLeft: () => (
-                    <ScreenHeaderBtn title={"<-- Back"} dimension='100%' handlePress={() => router.back()} />
-                ),
-                headerRight: () => (
-                    <ScreenHeaderBtn title={"Clear Chat"} dimension='100%' handlePress={() => handleClearChat()} />
-                ),
-                headerTitle: "Chef Bot",
-                headerTitleAlign: "center",
-            
-            }}/>
-            <ScrollView showsVerticalScrollIndicator={false} style={styles.chatWindow} refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh}/>}>
-                <View>
-                    <View style={styles.chatHeader}>
-                        <Text style={{fontSize: 24}}>Live Chat</Text>
-                    </View>
-                    <View style={styles.chatBody}>{renderMessages()}</View>
-                </View> 
-            </ScrollView>
-            <View style={styles.chatFooter}>
-                <TextInput
-                    editable={!sending}
-                    style={styles.textInput}
-                    placeholder="Type a message..."
-                    value={inputMessage}
-                    onChangeText={(text) => setInputMessage(text)}
-                />
-                <TouchableOpacity
-                    disabled={sending}
-                    style={styles.sendButton}
-                    onPress={() => handleSendMessage()}
+            <KeyboardAvoidingView 
+                style={{flex: 1}}
+                behavior={Platform.OS === "ios" ? "padding" : undefined} 
+                keyboardVerticalOffset={Platform.OS === 'ios' ? 40 : 0}
                 >
-                    <Text style={styles.sendButtonText}>Send</Text>
-                </TouchableOpacity>
-            </View>
+                <Stack.Screen options={{
+                    headerShadowVisible: false,
+                    headerStyle: {backgroundColor: "#FAFAFC"},
+                    headerLeft: () => (
+                        <ScreenHeaderBtn title={"<-- Back"} dimension='100%' handlePress={() => router.back()} />
+                    ),
+                    headerRight: () => (
+                        <ScreenHeaderBtn title={"Clear Chat"} dimension='100%' handlePress={() => handleClearChat()} />
+                    ),
+                    headerTitle: "Chef Bot",
+                    headerTitleAlign: "center",
+                
+                }}/>
+                <ScrollView showsVerticalScrollIndicator={false} style={styles.chatWindow} refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh}/>}>
+                    <View>
+                        <View style={styles.chatHeader}>
+                            <Text style={{fontSize: 24}}>Live Chat</Text>
+                        </View>
+                        <View style={styles.chatBody}>{renderMessages()}</View>
+                    </View> 
+                </ScrollView>
+                <View style={styles.chatFooter}>
+                    <TextInput
+                        editable={!sending}
+                        style={styles.textInput}
+                        placeholder="Type a message..."
+                        value={inputMessage}
+                        onChangeText={(text) => setInputMessage(text)}
+                    />
+                    <TouchableOpacity
+                        disabled={sending}
+                        style={styles.sendButton}
+                        onPress={() => handleSendMessage()}
+                    >
+                        <Text style={styles.sendButtonText}>Send</Text>
+                    </TouchableOpacity>
+                </View>
+            </KeyboardAvoidingView>
         </SafeAreaView>
     );
 };
