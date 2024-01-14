@@ -2,7 +2,30 @@ import React from "react";
 import { View, Text, TouchableOpacity, Image } from 'react-native';
 
 const RecipeDetailCard = ({item}) => {
-    console.log(item.image)
+
+    const rating = () => {
+
+        if(item.ratings === undefined) return (
+        <View> </View>
+            )
+
+        if(item.ratings.length > 1) {
+            const average = item.ratings.reduce((a, b) => a + b, 0) / item.ratings.length 
+            return (<View>
+                <Text style={{fontSize: 16, margin: "auto", backgroundColor: "#F3F4F8", marginTop: 10}}>Rating: {average}</Text>
+            </View>)
+        } else if(item.ratings.length === 1){
+            return (<View>
+                <Text style={{fontSize: 16, margin: "auto", backgroundColor: "#F3F4F8", marginTop: 10}}>Rating: {item.ratings[0]}</Text>
+            </View>)
+        } else if(item.ratings.length === 0){
+            return (<View>
+                <Text style={{fontSize: 16, margin: "auto", backgroundColor: "#F3F4F8", marginTop: 10}}>Rating: No ratings yet</Text>
+            </View>)
+        }
+    }
+
+    
     return(
         <>
         <View  style={{ 
@@ -45,8 +68,15 @@ const RecipeDetailCard = ({item}) => {
                         borderRadius: 12,
                     }}/>
             </View>
+            {rating()}
+            <View>
+                <Text style={{fontSize: 16, margin: "auto", backgroundColor: "#F3F4F8", marginTop: 10}}>Cook Time: {item.cook_time}</Text>
+            </View>
+            <View>
+                <Text style={{fontSize: 16, margin: "auto", backgroundColor: "#F3F4F8", marginTop: 10}}>Servings {item.servings}</Text>
+            </View>
             <View style={{flex: 1}}>
-                <Text style={{fontSize: 20, margin: 20}}>{item.description}</Text>
+                <Text style={{fontSize: 20, margin: "auto", textAlign: "center", marginTop: 10}}>{item.description}</Text>
                 <Text style={{fontSize: 16, margin: 20, backgroundColor: "#F3F4F8",}}>{item.instructions}</Text>
             </View>
             

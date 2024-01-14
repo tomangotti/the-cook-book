@@ -73,7 +73,7 @@ const RecipeDetails = () => {
         const postFetch = await PostItemToCart(item)
         if (postFetch) {
             alert("item was added successfully.")
-            setShareView(!shareView)
+            
         } else {
             alert("item was not added.")
         }
