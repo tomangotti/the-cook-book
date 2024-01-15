@@ -6,6 +6,7 @@ import * as ImagePicker from 'expo-image-picker';
 import Constants from 'expo-constants';
 
 import { ScrollView, View, Text, TextInput, TouchableOpacity, SafeAreaView, Platform, Button, Image} from 'react-native';
+import { Picker } from '@react-native-picker/picker';
 
 import ScreenHeaderBtn from "../../components/ScreenHeaderBtn";
 import addNewRecipe from "../../components/hooks/addNewRecipe";
@@ -15,12 +16,29 @@ const newRecipeForm = () => {
     const [name, setName] = useState("")
     const [description, setDescription] = useState("")
     const [instructions, setInstructions] = useState("")
+    const [servings, setServings] = useState("")
+    const [cookTime, setCookTime] = useState("")
     const [ingredients, setIngredients] = useState([])
+    const [tags, setTags] = useState([])
+    const [tagText, setTagText] = useState("")
+    const [category, setCategory] = useState("")
+
     const [image, setImage] = useState(null);
     const router = useRouter();
     const params = useGlobalSearchParams()
     
 
+
+    const categoryOptions = [
+        "Breakfast",
+        "Lunch",
+        "Dinner",
+        "Dessert",
+        "Snack",
+        "Appetizer",
+        "Drink",
+        "Other"
+    ]
     const pickImage = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -33,6 +51,23 @@ const newRecipeForm = () => {
             setImage(result.uri);
         }
     };
+
+    const addTag = () => {
+        setTags([...tags, tagText]);
+        setTagText("")
+    }
+
+    // const updateTag = (text, index) => {
+    //     const updatedTags = [...tags];
+    //     updatedTags[index] = text;
+    //     setTags(updatedTags);
+    // }
+
+    const removeTag = (index) => {
+        const updatedTags = [...tags];
+        updatedTags.splice(index, 1);
+        setTags(updatedTags);
+    }
 
     const addIngredient = () => {
         setIngredients([...ingredients, { name: "", quantity: "", quantity_type: "" }]);
@@ -85,6 +120,9 @@ const newRecipeForm = () => {
         formData.append("description", description);
         formData.append("instructions", instructions);
         formData.append("user", params.id);
+        formData.append("servings", servings);
+        formData.append("cook_time", cookTime);
+        formData.append("category", category);
 
         const ingredientsJSON = JSON.stringify(ingredients)
         formData.append("ingredients", ingredientsJSON);
@@ -129,8 +167,44 @@ const newRecipeForm = () => {
                     <TextInput  multiline={true} numberOfLines={6} value={description} onChangeText={setDescription} style={{backgroundColor: "lightgrey", width: 250}}></TextInput>
                 </View>
                 <View style={{margin: 5}}>
+                    <Text style={{fontSize: 18}}>Servings</Text>
+                    <TextInput  value={servings} onChangeText={setServings} style={{backgroundColor: "lightgrey", width: 250}}></TextInput>
+                </View>
+                <View style={{margin: 5}}>
+                    <Text style={{fontSize: 18}}>Cook Time</Text>
+                    <TextInput  value={cookTime} onChangeText={setCookTime} style={{backgroundColor: "lightgrey", width: 250}}></TextInput>
+                </View>
+                <View style={{margin: 5}}>
+                    <Text style={{fontSize: 18}}>Category</Text>
+                    <Picker selectedValue={category} onValueChange={setCategory} style={{backgroundColor: "lightgrey", width: 250}}>
+                        {categoryOptions.map((option, index) => (
+                            <Picker.Item key={index} label={option} value={option} />
+                        ))}
+                    </Picker>
+                </View>
+                <View style={{margin: 5}}>
                     <Text style={{fontSize: 18}}>Instructions</Text>
                     <TextInput   multiline={true} numberOfLines={16} value={instructions} onChangeText={setInstructions} style={{backgroundColor: "lightgrey", width: 250}}></TextInput>
+                </View>
+                <View style={{margin: 5}}>
+                    <Text style={{fontSize: 18}}>Tags</Text>
+                    <View style={{width: 250, margin: "auto", marginTop: 5, }}>
+                        <TextInput
+                            placeholder="Tag"
+                            value={tagText}
+                            onChangeText={(text) => setTagText(text)}
+                            style={{ backgroundColor: "lightgrey", }}
+                        />
+                        <Button title="Add Tag" onPress={addTag}/>
+                    </View>
+                    <View style={{flexDirection: 'row', flexWrap: 'wrap', marginTop: 5}} >
+                        {tags.map((tag, index) => (
+                            <View key={index} style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: 'lightgrey', borderRadius: 10, marginRight: 5, marginBottom: 5 }}>
+                                <Text style={{margin: 3, padding: 3}}>{tag}</Text>
+                                <TouchableOpacity onPress={() => removeTag(index)}><Text style={{ backgroundColor: 'red', borderRadius: 10, marginLeft: 5, padding: 5, textAlign: 'center', color: 'white' }}>X</Text></TouchableOpacity>
+                            </View>
+                        ))}
+                    </View>
                 </View>
                 <View style={{margin: 5}}>
                     <Text style={{fontSize: 18}}>Ingredients</Text>

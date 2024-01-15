@@ -1,6 +1,5 @@
 import { Stack, useGlobalSearchParams, useRouter } from "expo-router";
 import react, { useEffect, useCallback, useState } from "react";
-
 import { SafeAreaView, Text, View, ScrollView, ActivityIndicator, RefreshControl, TouchableOpacity } from "react-native";
 
 
