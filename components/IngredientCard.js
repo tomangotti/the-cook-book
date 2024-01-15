@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, Linking, TouchableOpacity } from 'react-native';
 import ButtonTemplate from "./buttons/buttonTemplate";
 
-const IngredientCard = ({item}) => {
+const IngredientCard = ({item, recipeName}) => {
 
     const searchQuery = item.name;
     const encodedQuery = encodeURIComponent(searchQuery);
@@ -37,7 +37,8 @@ const IngredientCard = ({item}) => {
             elevation: 5,
             }}>
             <View style={{alignSelf: "center"}}>
-                <Text style={{fontSize: 20, margin: 20}}>{item.quantity} : {item.quantity_type} X {item.name}</Text>
+                <Text style={{fontSize: 16, margin: 10}}>{item.quantity} {item.quantity_type} - {item.name}</Text>
+                {recipeName ? <Text style={{marginBottom: 5, marginLeft: 5}}>{recipeName}</Text> : null}
             </View>
             <TouchableOpacity onPress={walmartSearch}
             style={{
@@ -55,8 +56,8 @@ const IngredientCard = ({item}) => {
                 shadowRadius: 5.84,
                 elevation: 5,
             }}>
-            <Text style={{ textAlign: "center", padding: 5, backgroundColor: "blue", color: "white", borderRadius: 15, fontSize: 12}}>Find on Walmart</Text>
-        </TouchableOpacity>
+                <Text style={{ textAlign: "center", padding: 5, backgroundColor: "blue", color: "white", borderRadius: 15, fontSize: 12}}>Find on Walmart</Text>
+            </TouchableOpacity>
         </View>
         </>
     )

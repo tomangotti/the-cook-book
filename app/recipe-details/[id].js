@@ -141,7 +141,7 @@ const RecipeDetails = () => {
                             <Text>Something Went Wrong:</Text>
                         </View>
                     ) : ( data.ingredients?.map((item) => (
-                            <IngredientCard item={item} key={item.id} />
+                            <IngredientCard item={item} recipeName={data.recipe.name} key={item.id} />
                         ))
                     )
                 }

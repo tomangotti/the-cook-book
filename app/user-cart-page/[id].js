@@ -68,7 +68,7 @@ const CartPage = () => {
                     </TouchableOpacity>
                 </View>) : data?.map((recipe) => (
                     recipe.ingredients?.map((item) => (
-                        <IngredientCard item={item} key={item.key}/>
+                        <IngredientCard item={item} recipeName={recipe.name} key={item.key}/>
                     ))
                 ))}
             </ScrollView>

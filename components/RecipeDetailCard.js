@@ -4,23 +4,24 @@ import { View, Text, TouchableOpacity, Image } from 'react-native';
 const RecipeDetailCard = ({item}) => {
 
     const rating = () => {
-
         if(item.ratings === undefined) return (
-        <View> </View>
-            )
+            <View>
+                <Text style={{fontSize: 16, margin: "auto", backgroundColor: "#F3F4F8", marginTop: 20}}>Rating Unavailable</Text>
+            </View>
+        )
 
         if(item.ratings.length > 1) {
             const average = item.ratings.reduce((a, b) => a + b, 0) / item.ratings.length 
             return (<View>
-                <Text style={{fontSize: 16, margin: "auto", backgroundColor: "#F3F4F8", marginTop: 10}}>Rating: {average}</Text>
+                <Text style={{fontSize: 16, margin: "auto", backgroundColor: "#F3F4F8", marginTop: 20}}>Rating: {average}</Text>
             </View>)
         } else if(item.ratings.length === 1){
             return (<View>
-                <Text style={{fontSize: 16, margin: "auto", backgroundColor: "#F3F4F8", marginTop: 10}}>Rating: {item.ratings[0]}</Text>
+                <Text style={{fontSize: 16, margin: "auto", backgroundColor: "#F3F4F8", marginTop: 20}}>Rating: {item.ratings[0]}</Text>
             </View>)
         } else if(item.ratings.length === 0){
             return (<View>
-                <Text style={{fontSize: 16, margin: "auto", backgroundColor: "#F3F4F8", marginTop: 10}}>Rating: No ratings yet</Text>
+                <Text style={{fontSize: 16, margin: "auto", backgroundColor: "#F3F4F8", marginTop: 20}}>Rating: No ratings yet</Text>
             </View>)
         }
     }
@@ -48,8 +49,8 @@ const RecipeDetailCard = ({item}) => {
             }}>
             <Text style={{fontSize: 32, marginTop: 5, marginBottom: 15}}>{item.name}</Text>
             <View style={{
-                width: 300,
-                height: 300,
+                width: 350,
+                height: 350,
                 backgroundColor: "#F3F4F8",
                 borderRadius: 16,
                 justifyContent: "center",
@@ -63,10 +64,13 @@ const RecipeDetailCard = ({item}) => {
                     : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ83aBZygUGIMqHLcMhhY9VhE283tGv61pOf-boYo9WnQ&s"
                     }}
                     resizeMode="contain" style={{
-                        width: "90%",
-                        height: "90%",
+                        width: "95%",
+                        height: "95%",
                         borderRadius: 12,
                     }}/>
+            </View>
+            <View>
+                <Text style={{fontSize: 20, margin: "auto", textAlign: "center", marginTop: 10}}>{item.description}</Text>
             </View>
             {rating()}
             <View>
@@ -76,8 +80,8 @@ const RecipeDetailCard = ({item}) => {
                 <Text style={{fontSize: 16, margin: "auto", backgroundColor: "#F3F4F8", marginTop: 10}}>Servings {item.servings}</Text>
             </View>
             <View style={{flex: 1}}>
-                <Text style={{fontSize: 20, margin: "auto", textAlign: "center", marginTop: 10}}>{item.description}</Text>
-                <Text style={{fontSize: 16, margin: 20, backgroundColor: "#F3F4F8",}}>{item.instructions}</Text>
+                <Text style={{fontSize: 25, margin: "auto", textAlign: "center", marginTop: 35}}>Instructions</Text>
+                <Text style={{fontSize: 20, margin: "auto", backgroundColor: "#F3F4F8", textAlign: "left", marginTop: 15}}>{item.instructions}</Text>
             </View>
             
         </View>
