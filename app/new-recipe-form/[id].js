@@ -19,7 +19,7 @@ const newRecipeForm = () => {
     const [servings, setServings] = useState("")
     const [cookTime, setCookTime] = useState("")
     const [ingredients, setIngredients] = useState([])
-    const [tags, setTags] = useState([])
+    const [tags, setTags] = useState(["pizza", "pasta", "italian", "dinner"])
     const [tagText, setTagText] = useState("")
     const [category, setCategory] = useState("")
 
@@ -57,11 +57,6 @@ const newRecipeForm = () => {
         setTagText("")
     }
 
-    // const updateTag = (text, index) => {
-    //     const updatedTags = [...tags];
-    //     updatedTags[index] = text;
-    //     setTags(updatedTags);
-    // }
 
     const removeTag = (index) => {
         const updatedTags = [...tags];
@@ -113,9 +108,8 @@ const newRecipeForm = () => {
                 name: `image.${fileType}`,
                 type: `image/${fileType}`,
             });
-}
+        }
         
-
         formData.append("name", name);
         formData.append("description", description);
         formData.append("instructions", instructions);
@@ -156,7 +150,7 @@ const newRecipeForm = () => {
             <View style={{alignItems: "center", width: "100%", marginTop: 25}}>
                 <View style={{margin: 5}}>
                     <Text style={{fontSize: 18}} >Recipe Name</Text>
-                    <TextInput  value={name} onChangeText={setName} style={{backgroundColor: "lightgrey", width: 250}}></TextInput>
+                    <TextInput  value={name} onChangeText={setName} style={{backgroundColor: "lightgrey", width: 300}}></TextInput>
                 </View>
                 <View style={{margin: 5}}>
                     <Button title="Pick an image from camera roll" onPress={pickImage} />
@@ -164,19 +158,19 @@ const newRecipeForm = () => {
                 </View>
                 <View style={{margin: 5}}>
                     <Text style={{fontSize: 18}}>Description</Text>
-                    <TextInput  multiline={true} numberOfLines={6} value={description} onChangeText={setDescription} style={{backgroundColor: "lightgrey", width: 250}}></TextInput>
+                    <TextInput  multiline={true} numberOfLines={6} value={description} onChangeText={setDescription} style={{backgroundColor: "lightgrey", width: 300}}></TextInput>
                 </View>
                 <View style={{margin: 5}}>
                     <Text style={{fontSize: 18}}>Servings</Text>
-                    <TextInput  value={servings} onChangeText={setServings} style={{backgroundColor: "lightgrey", width: 250}}></TextInput>
+                    <TextInput  value={servings} onChangeText={setServings} style={{backgroundColor: "lightgrey", width: 300}}></TextInput>
                 </View>
                 <View style={{margin: 5}}>
                     <Text style={{fontSize: 18}}>Cook Time</Text>
-                    <TextInput  value={cookTime} onChangeText={setCookTime} style={{backgroundColor: "lightgrey", width: 250}}></TextInput>
+                    <TextInput  value={cookTime} onChangeText={setCookTime} style={{backgroundColor: "lightgrey", width: 300}}></TextInput>
                 </View>
                 <View style={{margin: 5}}>
                     <Text style={{fontSize: 18}}>Category</Text>
-                    <Picker selectedValue={category} onValueChange={setCategory} style={{backgroundColor: "lightgrey", width: 250}}>
+                    <Picker selectedValue={category} onValueChange={setCategory} style={{backgroundColor: "lightgrey", width: 300}}>
                         {categoryOptions.map((option, index) => (
                             <Picker.Item key={index} label={option} value={option} />
                         ))}
@@ -184,23 +178,23 @@ const newRecipeForm = () => {
                 </View>
                 <View style={{margin: 5}}>
                     <Text style={{fontSize: 18}}>Instructions</Text>
-                    <TextInput   multiline={true} numberOfLines={16} value={instructions} onChangeText={setInstructions} style={{backgroundColor: "lightgrey", width: 250}}></TextInput>
+                    <TextInput   multiline={true} numberOfLines={16} value={instructions} onChangeText={setInstructions} style={{backgroundColor: "lightgrey", width: 300}}></TextInput>
                 </View>
                 <View style={{margin: 5}}>
                     <Text style={{fontSize: 18}}>Tags</Text>
-                    <View style={{width: 250, margin: "auto", marginTop: 5, }}>
+                    <View style={{ marginTop: 5, width: 300, margin: "auto" }}>
                         <TextInput
                             placeholder="Tag"
                             value={tagText}
                             onChangeText={(text) => setTagText(text)}
-                            style={{ backgroundColor: "lightgrey", }}
+                            style={{ backgroundColor: "lightgrey", width: 300,}}
                         />
                         <Button title="Add Tag" onPress={addTag}/>
                     </View>
-                    <View style={{flexDirection: 'row', flexWrap: 'wrap', marginTop: 5}} >
+                    <View style={{flexDirection: 'row', flexWrap: 'wrap', marginTop: 5, width: 300}} >
                         {tags.map((tag, index) => (
                             <View key={index} style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: 'lightgrey', borderRadius: 10, marginRight: 5, marginBottom: 5 }}>
-                                <Text style={{margin: 3, padding: 3}}>{tag}</Text>
+                                <Text style={{margin: 3, padding: 3, textAlign: "center"}}>{tag}</Text>
                                 <TouchableOpacity onPress={() => removeTag(index)}><Text style={{ backgroundColor: 'red', borderRadius: 10, marginLeft: 5, padding: 5, textAlign: 'center', color: 'white' }}>X</Text></TouchableOpacity>
                             </View>
                         ))}
