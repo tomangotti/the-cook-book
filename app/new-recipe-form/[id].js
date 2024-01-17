@@ -19,7 +19,7 @@ const newRecipeForm = () => {
     const [servings, setServings] = useState("")
     const [cookTime, setCookTime] = useState("")
     const [ingredients, setIngredients] = useState([])
-    const [tags, setTags] = useState(["pizza", "pasta", "italian", "dinner"])
+    const [tags, setTags] = useState([])
     const [tagText, setTagText] = useState("")
     const [category, setCategory] = useState("")
 
@@ -39,6 +39,7 @@ const newRecipeForm = () => {
         "Drink",
         "Other"
     ]
+
     const pickImage = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
             mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -117,6 +118,9 @@ const newRecipeForm = () => {
         formData.append("servings", servings);
         formData.append("cook_time", cookTime);
         formData.append("category", category);
+        
+        const tagsJSON = JSON.stringify(tags)
+        formData.append("tags", tagsJSON);
 
         const ingredientsJSON = JSON.stringify(ingredients)
         formData.append("ingredients", ingredientsJSON);

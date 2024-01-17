@@ -1,5 +1,6 @@
 import react, { useEffect, useState } from "react";
 import { Stack, router, useGlobalSearchParams, useRouter } from "expo-router";
+import { Picker } from "@react-native-picker/picker";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import * as ImagePicker from 'expo-image-picker';
@@ -23,6 +24,22 @@ const editRecipeForm = () => {
     const [ingredients, setIngredients] = useState([])
     const [image, setImage] = useState(null);
     const [deleteStatus, setDeleteStatus] = useState(false)
+    const [tags, setTags] = useState([])
+    const [tagText, setTagText] = useState("")
+    const [category, setCategory] = useState("")
+    const [servings, setServings] = useState("")
+    const [cookTime, setCookTime] = useState("")
+
+    const categoryOptions = [
+        "Breakfast",
+        "Lunch",
+        "Dinner",
+        "Dessert",
+        "Snack",
+        "Appetizer",
+        "Drink",
+        "Other"
+    ]
 
     useEffect(()=> {
         if(data.recipe) {
@@ -30,6 +47,18 @@ const editRecipeForm = () => {
             setDescription(data.recipe.description)
             setInstructions(data.recipe.instructions)
             setIngredients(data.recipe.ingredients)
+            setCookTime(data.recipe.cook_time)
+            setServings(data.recipe.servings)
+            setCategory(data.recipe.category)
+
+            if(data.recipe.tags){
+                const tagList = []
+                data.recipe.tags.forEach(tag => {
+                    tagList.push(tag.name)
+                })
+                setTags(tagList)
+            }
+            
         }
     },[data])
 
@@ -47,6 +76,18 @@ const editRecipeForm = () => {
             setImage(result.uri);
         }
     };
+
+    const addTag = () => {
+        setTags([...tags, tagText]);
+        setTagText("")
+    }
+
+
+    const removeTag = (index) => {
+        const updatedTags = [...tags];
+        updatedTags.splice(index, 1);
+        setTags(updatedTags);
+    }
 
     const addIngredient = () => {
         setIngredients([...ingredients, { name: "", quantity: "", quantity_type: "" }]);
@@ -98,6 +139,12 @@ const editRecipeForm = () => {
         formData.append("name", name);
         formData.append("description", description);
         formData.append("instructions", instructions);
+        formData.append("servings", servings);
+        formData.append("cook_time", cookTime);
+        formData.append("category", category);
+
+        const tagsJSON = JSON.stringify(tags)
+        formData.append("tags", tagsJSON);
 
         const ingredientsJSON = JSON.stringify(ingredients)
         formData.append("ingredients", ingredientsJSON);
@@ -155,8 +202,44 @@ const editRecipeForm = () => {
                     <TextInput  multiline={true} numberOfLines={6} value={description} onChangeText={setDescription} style={{backgroundColor: "lightgrey", width: 250}}></TextInput>
                 </View>
                 <View style={{margin: 5}}>
+                    <Text style={{fontSize: 18}}>Servings</Text>
+                    <TextInput  value={servings} onChangeText={setServings} style={{backgroundColor: "lightgrey", width: 300}}></TextInput>
+                </View>
+                <View style={{margin: 5}}>
+                    <Text style={{fontSize: 18}}>Cook Time</Text>
+                    <TextInput  value={cookTime} onChangeText={setCookTime} style={{backgroundColor: "lightgrey", width: 300}}></TextInput>
+                </View>
+                <View style={{margin: 5}}>
+                    <Text style={{fontSize: 18}}>Category</Text>
+                    <Picker selectedValue={category} onValueChange={setCategory} style={{backgroundColor: "lightgrey", width: 300}}>
+                        {categoryOptions.map((option, index) => (
+                            <Picker.Item key={index} label={option} value={option} />
+                        ))}
+                    </Picker>
+                </View>
+                <View style={{margin: 5}}>
                     <Text style={{fontSize: 18}}>Instructions</Text>
                     <TextInput   multiline={true} numberOfLines={16} value={instructions} onChangeText={setInstructions} style={{backgroundColor: "lightgrey", width: 250}}></TextInput>
+                </View>
+                <View style={{margin: 5}}>
+                    <Text style={{fontSize: 18}}>Tags</Text>
+                    <View style={{ marginTop: 5, width: 300, margin: "auto" }}>
+                        <TextInput
+                            placeholder="Tag"
+                            value={tagText}
+                            onChangeText={(text) => setTagText(text)}
+                            style={{ backgroundColor: "lightgrey", width: 300,}}
+                        />
+                        <Button title="Add Tag" onPress={addTag}/>
+                    </View>
+                    <View style={{flexDirection: 'row', flexWrap: 'wrap', marginTop: 5, width: 300}} >
+                        {tags.map((tag, index) => (
+                            <View key={index} style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: 'lightgrey', borderRadius: 10, marginRight: 5, marginBottom: 5 }}>
+                                <Text style={{margin: 3, padding: 3, textAlign: "center"}}>{tag}</Text>
+                                <TouchableOpacity onPress={() => removeTag(index)}><Text style={{ backgroundColor: 'red', borderRadius: 10, marginLeft: 5, padding: 5, textAlign: 'center', color: 'white' }}>X</Text></TouchableOpacity>
+                            </View>
+                        ))}
+                    </View>
                 </View>
                 <View style={{margin: 5}}>
                     <Text style={{fontSize: 18}}>Ingredients</Text>
