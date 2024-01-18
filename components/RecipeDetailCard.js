@@ -1,29 +1,22 @@
 import React from "react";
 import { View, Text, TouchableOpacity, Image } from 'react-native';
 
-const RecipeDetailCard = ({item}) => {
+import HorizontalLine from "./styleComponents/HorizontalLine";
+import RatingCard from "./cards/ratingCard";
+
+const RecipeDetailCard = ({item, userId}) => {
 
     const rating = () => {
-        if(item.ratings === undefined) return (
+        if(item.average_rating === undefined) return (
             <View>
                 <Text style={{fontSize: 16, margin: "auto", backgroundColor: "#F3F4F8", marginTop: 20}}>Rating Unavailable</Text>
             </View>
         )
-
-        if(item.ratings.length > 1) {
-            const average = item.ratings.reduce((a, b) => a + b, 0) / item.ratings.length 
-            return (<View>
-                <Text style={{fontSize: 16, margin: "auto", backgroundColor: "#F3F4F8", marginTop: 20}}>Rating: {average}</Text>
-            </View>)
-        } else if(item.ratings.length === 1){
-            return (<View>
-                <Text style={{fontSize: 16, margin: "auto", backgroundColor: "#F3F4F8", marginTop: 20}}>Rating: {item.ratings[0]}</Text>
-            </View>)
-        } else if(item.ratings.length === 0){
-            return (<View>
-                <Text style={{fontSize: 16, margin: "auto", backgroundColor: "#F3F4F8", marginTop: 20}}>Rating: No ratings yet</Text>
-            </View>)
-        }
+        else return (
+            <View>
+                <Text style={{fontSize: 16, margin: "auto", backgroundColor: "#F3F4F8", marginTop: 20}}>Rating: {item.average_rating}</Text>
+            </View>
+        )
     }
 
     
@@ -33,7 +26,6 @@ const RecipeDetailCard = ({item}) => {
             justifyContent: "space-between",
             alignItems: "center",
             padding: 20,
-
             borderRadius: 12,
             backgroundColor: "#FFF",
             width: "90%",
@@ -71,15 +63,23 @@ const RecipeDetailCard = ({item}) => {
             </View>
             <View>
                 <Text style={{fontSize: 20, margin: "auto", textAlign: "center", marginTop: 10}}>{item.description}</Text>
+                <HorizontalLine />
             </View>
-            {rating()}
+        
+                {rating()}
+                <View>
+                    <Text style={{fontSize: 16, margin: "auto", backgroundColor: "#F3F4F8", marginTop: 10}}>Cook Time: {item.cook_time}</Text>
+                </View>
+                <View>
+                    <Text style={{fontSize: 16, margin: "auto", backgroundColor: "#F3F4F8", marginTop: 10}}>Servings: {item.servings}</Text>
+                </View>
             <View>
-                <Text style={{fontSize: 16, margin: "auto", backgroundColor: "#F3F4F8", marginTop: 10}}>Cook Time: {item.cook_time}</Text>
+                <HorizontalLine />
+                <RatingCard userId={userId} recipeId={item.id}/>
             </View>
-            <View>
-                <Text style={{fontSize: 16, margin: "auto", backgroundColor: "#F3F4F8", marginTop: 10}}>Servings {item.servings}</Text>
-            </View>
+            
             <View style={{flex: 1}}>
+                <HorizontalLine />
                 <Text style={{fontSize: 25, margin: "auto", textAlign: "center", marginTop: 35}}>Instructions</Text>
                 <Text style={{fontSize: 20, margin: "auto", backgroundColor: "#F3F4F8", textAlign: "left", marginTop: 15}}>{item.instructions}</Text>
             </View>

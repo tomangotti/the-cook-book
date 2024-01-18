@@ -131,7 +131,7 @@ const RecipeDetails = () => {
                             </TouchableOpacity>
                         </View>
                     ) : ( data.recipe ? 
-                        <RecipeDetailCard item={data.recipe} /> : null)
+                        <RecipeDetailCard item={data.recipe} userId={userId} /> : null)
                 }
                 <Text style={{fontSize: 24, alignSelf: "center"}}>Ingredients</Text>
                 {isLoading ? (

@@ -45,11 +45,15 @@ const PopularRecipeCard = ({item, handleNavigate, user_id}) => {
                     resizeMode="contain" style={{
                         width: "100%",
                         height: "100%",
-                        borderRadius: 12,
+                        borderTopLeftRadius: 12,
+                        borderTopRightRadius: 12,
                     }}/>
             </View>
             <View style={{flex: 1, alignItems:"center"}}>
-                <Text style={{fontSize: 24, marginTop:5}}>{item.name}</Text>
+                <Text style={{fontSize: 24, marginTop:5, textAlign: "center"}}>{item.name}</Text>
+            </View>
+            <View style={{flex: 1, alignItems:"center"}}>
+                <Text style={{fontSize: 16, marginTop:5}}>Rating: {item.average_rating}</Text>
             </View>
             
         </TouchableOpacity>
