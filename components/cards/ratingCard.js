@@ -7,18 +7,18 @@ import postNewRating from '../hooks/postNewRating';
 const RatingCard = ({userId, recipeId}) => {
     const [rating, setRating] = useState(0);
 
-    const handleRating = (value) => {
+    const handleRating = async (value) => {
         setRating(value);
         const newRating = {
             rating: value,
             user: userId,
             recipe: recipeId,
         }
-
-        const postRating = async () => {
-            const response = await postNewRating(newRating);
-            console.log(response);
-        }
+        
+        
+        const response = await postNewRating(newRating);
+        console.log(response);
+        
     };
 
     return (

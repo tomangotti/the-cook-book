@@ -81,7 +81,7 @@ const RecipeDetailCard = ({item, userId}) => {
             <View style={{flex: 1}}>
                 <HorizontalLine />
                 <Text style={{fontSize: 25, margin: "auto", textAlign: "center", marginTop: 35}}>Instructions</Text>
-                <Text style={{fontSize: 20, margin: "auto", backgroundColor: "#F3F4F8", textAlign: "left", marginTop: 15}}>{item.instructions}</Text>
+                <Text style={{fontSize: 20, margin: "auto", backgroundColor: "#F3F4F8", textAlign: "left", marginTop: 15, lineHeight: 35, padding: 10, borderRadius: 10 }}>{item.instructions}</Text>
             </View>
             
         </View>

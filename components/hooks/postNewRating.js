@@ -1,12 +1,15 @@
 
-const postNewRating = async ({rating}) => {
+const postNewRating = async (rating) => {
+    console.log(rating);
     try {
-        const response = await fetch('/api/ratings', {
+        const response = await fetch(`https://mysite-p4xg.onrender.com/recipes/ratings/new`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(rating),
+            body: JSON.stringify(
+                rating
+            ),
         });
 
         if (!response.ok) {
@@ -22,4 +25,4 @@ const postNewRating = async ({rating}) => {
 };
 
 // Call the function to post the new rating
-postNewRating();
+export default postNewRating;
