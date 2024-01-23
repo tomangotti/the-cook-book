@@ -1,12 +1,33 @@
 import React from 'react';
-import { View, Text, FlatList } from 'react-native';
+import { View, Text, FlatList, SafeAreaView } from 'react-native';
+import { Stack, useGlobalSearchParams } from 'expo-router';
 
-const ProfilePage = ({ route }) => {
-    const { id } = route.params;
-    const user = getUserById(id); // Replace with your own logic to fetch user data
+import getProfileInformation from '../../components/hooks/getProfileInformation';
 
+const ProfilePage = () => {
+    const params = useGlobalSearchParams();
+    const {data, isLoading, error, reFetch} = getProfileInformation(params.id)
+
+    const userName = () => {
+        if (data.profile.name) {
+            return user.name;
+        } else {
+            return "Profile Name";
+        }
+    }
     return (
-        <View>
+        <SafeAreaView>
+            <Stack.Screen options={{
+                headerStyle: {backgroundColor: "#FAFAFC"},
+                headerShadowVisible: false,
+                headerBackVisible: false,
+                headerLeft: () => (
+                    <ScreenHeaderBtn title={"<-- Back"} dimension="100%" handlePress={() => router.back()} />
+                ),
+                headerTitle: userName(),
+                headerTitleAlign: "center"
+            }} />
+            <View>
             <Text>Followers: {user.followers}</Text>
             <Text>Recipes: {user.recipes.length}</Text>
             <FlatList
@@ -17,6 +38,8 @@ const ProfilePage = ({ route }) => {
                 )}
             />
         </View>
+        </SafeAreaView>
+        
     );
 };
 
