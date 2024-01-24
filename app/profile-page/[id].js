@@ -7,8 +7,8 @@ import getProfileInformation from '../../components/hooks/getProfileInformation'
 
 const ProfilePage = () => {
     const params = useGlobalSearchParams();
-    // const {data, isLoading, error, reFetch} = getProfileInformation(params.id)
-
+    const {data, isLoading, error, reFetch} = getProfileInformation(params.id)
+    
     // const userName = () => {
     //     if (data.profile.name) {
     //         return user.name;
