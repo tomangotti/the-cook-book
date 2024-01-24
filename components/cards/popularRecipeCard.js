@@ -1,7 +1,9 @@
 import React from "react";
 import { View, Text, TouchableOpacity, Image } from 'react-native';
 
+
 const PopularRecipeCard = ({item, handleNavigate, user_id}) => {
+
     
     return(
         <>
@@ -50,10 +52,13 @@ const PopularRecipeCard = ({item, handleNavigate, user_id}) => {
                     }}/>
             </View>
             <View style={{flex: 1, alignItems:"center"}}>
-                <Text style={{fontSize: 24, marginTop:5, textAlign: "center"}}>{item.name}</Text>
+                <Text style={{fontSize: 24, margin:2, textAlign: "center"}}>{item.name}</Text>
             </View>
             <View style={{flex: 1, alignItems:"center"}}>
-                <Text style={{fontSize: 16, marginTop:5}}>Rating: {item.average_rating}</Text>
+                <Text style={{fontSize: 16, margin:0}}>Rating: {item.average_rating}</Text>
+            </View>
+            <View style={{flex: 1, alignItems:"center"}}>
+                <Text style={{fontSize: 12, margin:0}}>Cook: {item.user_username}</Text>
             </View>
             
         </TouchableOpacity>

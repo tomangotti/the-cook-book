@@ -1,20 +1,21 @@
 import React from 'react';
 import { View, Text, FlatList, SafeAreaView } from 'react-native';
-import { Stack, useGlobalSearchParams } from 'expo-router';
+import { Stack, useGlobalSearchParams, router } from 'expo-router';
 
+import ScreenHeaderBtn from "../../components/ScreenHeaderBtn";
 import getProfileInformation from '../../components/hooks/getProfileInformation';
 
 const ProfilePage = () => {
     const params = useGlobalSearchParams();
-    const {data, isLoading, error, reFetch} = getProfileInformation(params.id)
+    // const {data, isLoading, error, reFetch} = getProfileInformation(params.id)
 
-    const userName = () => {
-        if (data.profile.name) {
-            return user.name;
-        } else {
-            return "Profile Name";
-        }
-    }
+    // const userName = () => {
+    //     if (data.profile.name) {
+    //         return user.name;
+    //     } else {
+    //         return "Profile Name";
+    //     }
+    // }
     return (
         <SafeAreaView>
             <Stack.Screen options={{
@@ -24,11 +25,12 @@ const ProfilePage = () => {
                 headerLeft: () => (
                     <ScreenHeaderBtn title={"<-- Back"} dimension="100%" handlePress={() => router.back()} />
                 ),
-                headerTitle: userName(),
+                headerTitle: "profile page",
                 headerTitleAlign: "center"
             }} />
             <View>
-            <Text>Followers: {user.followers}</Text>
+                <Text>Profile Page</Text>
+            {/* <Text>Followers: {user.followers}</Text>
             <Text>Recipes: {user.recipes.length}</Text>
             <FlatList
                 data={user.recipes}
@@ -36,7 +38,7 @@ const ProfilePage = () => {
                 renderItem={({ item }) => (
                     <Text>{item.title}</Text>
                 )}
-            />
+            /> */}
         </View>
         </SafeAreaView>
         

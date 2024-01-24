@@ -33,12 +33,12 @@ const Feed = ({userId, loggedIn, setLoggedIn}) => {
                     headerStyle: {backgroundColor: "#FAFAFC"},
                     headerLeft: () => (
                         loggedIn ? 
-                        <ScreenHeaderBtn title={"Saved Recipes"} dimension='75%' handlePress={() => router.push(`/saved-recipes/${userId}`)} /> :
+                        <ScreenHeaderBtn title={"Your Recipes"} dimension='75%' handlePress={() => router.push(`/saved-recipes/${userId}`)} /> :
                         null
                     ),
                     headerRight: () => (
                         loggedIn ? 
-                            <ScreenHeaderBtn title={"Profile Info"} dimension='100%' handlePress={() => router.push('profile-details/profile-home')} /> :
+                            <ScreenHeaderBtn title={"Profile Page"} dimension='100%' handlePress={() => router.push(`/profile-page/${userId}`)} /> :
                             <ScreenHeaderBtn title={"Log in"} dimension='100%' handlePress={() => router.push('logIn/login-signup')}/>
                     ),
                     headerTitle: "The Good Cook Book",
