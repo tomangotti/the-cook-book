@@ -21,11 +21,9 @@ const getProfileInformation = (endpoint) => {
     const [error, setError] = useState(null)
 
     
-
     const getData =  async () => {
         const savedToken = await getToken();
         setIsLoading(true);
-
 
         if (!savedToken) {
             setError("Token not found");
@@ -45,7 +43,7 @@ const getProfileInformation = (endpoint) => {
             if (response.ok) {
                 const data = await response.json();
                 console.log(data)
-                setUserInfo(data);
+                setdata(data);
             } else {
                 console.log(response.status)    
                 setError(response.status);
