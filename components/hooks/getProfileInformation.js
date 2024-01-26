@@ -16,7 +16,8 @@ const getToken = async () => {
 };
 
 const getProfileInformation = (endpoint) => {
-    const [data, setdata] = useState([])
+    const [profileData, setProfileData] = useState([])
+    const [recipeData, setRecipeData] = useState([])
     const [isLoading, setIsLoading] = useState(false)
     const [error, setError] = useState(null)
 
@@ -42,8 +43,8 @@ const getProfileInformation = (endpoint) => {
 
             if (response.ok) {
                 const data = await response.json();
-                console.log(data)
-                setdata(data);
+                setProfileData(data[0])
+                setRecipeData(data[1])
             } else {
                 console.log(response.status)    
                 setError(response.status);
@@ -66,7 +67,7 @@ const getProfileInformation = (endpoint) => {
         getData();
     };
 
-    return {data, isLoading, error, reFetch}
+    return {profileData, recipeData, isLoading, error, reFetch}
 }
 
 export default getProfileInformation;
