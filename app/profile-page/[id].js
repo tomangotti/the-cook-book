@@ -7,12 +7,31 @@ import ScreenHeaderBtn from "../../components/ScreenHeaderBtn";
 import getProfileInformation from '../../components/hooks/getProfileInformation';
 import getUserInfo from '../../components/hooks/getUserInfo';
 import RecipeCard from '../../components/RecipeCard';
+import ButtonTemplate from '../../components/buttons/buttonTemplate';
+import followingCheck from '../../components/hooks/followingCheck';
+import followUser from '../../components/hooks/followUser';
+import unFollowUser from '../../components/hooks/unFollowUser';
+
 
 const ProfilePage = () => {
     const router = useRouter();
     const params = useGlobalSearchParams();
     const {profileData, recipeData, isLoading, error, reFetch} = getProfileInformation(params.id)
     const {userInfo} = getUserInfo();
+    const {isFollowing, setIsFollowing} = followingCheck(params.id)
+
+    const handleFollowPressed = async () => {
+        console.log(isFollowing)
+        
+        if(isFollowing === true){
+            const response = await unFollowUser(params.id)
+            setIsFollowing(false)
+        }
+        else if(isFollowing === false){
+            const response = await followUser(params.id)
+            setIsFollowing(true)
+        }
+    }
     
 
     return (
@@ -39,7 +58,7 @@ const ProfilePage = () => {
                     <View>
                         <Text style={{fontSize: 32, textAlign: "center", margin: 15}}>{profileData.username}</Text>
                     </View>
-
+                    
                     <View style={{flexDirection: 'row', alignItems: 'center'}}>
                         <View style={{flex: 1, borderRightWidth: 1, borderColor: 'black', padding: 20}}>
                             <Text style={{fontSize: 16}}>Followers: {profileData.followers_count}</Text>
@@ -52,10 +71,16 @@ const ProfilePage = () => {
                         </View>
                     </View>
                     
+                    {userInfo.id != profileData.id ? (
+                        <View style={{flexDirection: 'row', justifyContent: 'center', margin: 10}}>
+                            <ButtonTemplate title={isFollowing ? "Unfollow" : "Follow"} color={isFollowing ? "red" : "green"} pressed={handleFollowPressed} />
+                        </View>
+                    ) : null}
+
                     <View style={{ marginTop: 10, alignItems: "center", backgroundColor: "lightgrey"}}>
                             <Text style={{fontSize: 24}}>Groups</Text>
                     </View>
-                    
+
                     <View style={{ marginTop: 10, alignItems: "center", backgroundColor: "lightgrey"}}>
                             <Text style={{fontSize: 24}}>Recipes</Text>
                     </View>
