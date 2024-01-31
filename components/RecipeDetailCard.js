@@ -4,6 +4,7 @@ import { useRouter } from "expo-router";
 
 import HorizontalLine from "./styleComponents/HorizontalLine";
 import RatingCard from "./cards/ratingCard";
+import FavoriteCard from "./cards/favoriteCard";
 
 const RecipeDetailCard = ({item, userId}) => {
     const router = useRouter();
@@ -21,7 +22,6 @@ const RecipeDetailCard = ({item, userId}) => {
         )
     }
 
-    console.log(item)
     return(
         <>
         <View  style={{ 
@@ -57,7 +57,7 @@ const RecipeDetailCard = ({item, userId}) => {
                     ? item.image
                     : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ83aBZygUGIMqHLcMhhY9VhE283tGv61pOf-boYo9WnQ&s"
                     }}
-                    resizeMode="contain" style={{
+                    resizeMode="cover" style={{
                         width: "95%",
                         height: "95%",
                         borderRadius: 12,
@@ -68,6 +68,9 @@ const RecipeDetailCard = ({item, userId}) => {
                     <TouchableOpacity style={{backgroundColor: "#F3F4F8", borderRadius: 10, marginTop: 10, marginHorizontal: 30}} onPress={() => router.push(`/profile-page/${item.user}`)}>
                         <Text style={{fontSize: 16, textAlign: "center"}}>By: {item.user_username}</Text>
                     </TouchableOpacity>
+                    <View style={{alignItems: "center"}}>
+                        <FavoriteCard recipeId={item.id} userId={userId}/>
+                    </View>
                 <HorizontalLine />
             </View>
         
@@ -78,10 +81,9 @@ const RecipeDetailCard = ({item, userId}) => {
                 <View>
                     <Text style={{fontSize: 16, margin: "auto", backgroundColor: "#F3F4F8", marginTop: 10}}>Servings: {item.servings}</Text>
                 </View>
-            <View>
-                <HorizontalLine />
-                <RatingCard userId={userId} recipeId={item.id}/>
-            </View>
+                <View style={{marginTop: 35}}>
+                    <RatingCard userId={userId} recipeId={item.id}/>
+                </View>
             
             <View style={{flex: 1}}>
                 <HorizontalLine />
