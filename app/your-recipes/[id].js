@@ -1,90 +1,3 @@
-// import { Stack, useGlobalSearchParams, useRouter } from "expo-router";
-// import react, { useEffect, useCallback, useState } from "react";
-// import { SafeAreaView, Text, View, ScrollView, ActivityIndicator, RefreshControl, TouchableOpacity, FlatList } from "react-native";
-
-// import ScreenHeaderBtn from "../../components/ScreenHeaderBtn";
-// import RecipeCard from "../../components/RecipeCard";
-// import SmallRecipeCard from "../../components/cards/smallRecipeCard";
-// import ButtonTemplate from "../../components/buttons/buttonTemplate";
-
-// import getUsersRecipes from "../../components/hooks/getUsersRecipes";
-
-
-// const YourRecipePage = () => {
-//     const params = useGlobalSearchParams();
-//     const router = useRouter();
-//     const [refreshing, setRefreshing] = useState(false);
-//     const {userRecipes, isLoading, error, reFetch} = getUsersRecipes(params.id)
-
-//     const onRefresh = useCallback(() => {
-//         setRefreshing(true);
-//         reFetch()
-//         setRefreshing(false)
-//     }, []);
-
-//     const userRecipeCards = () => {
-//         if(isLoading) {
-//             return(
-//                 <ActivityIndicator size="large" color="#0000ff" />
-//             )
-//         }else if(error) {
-//             return(
-//                 <Text>{error}</Text>
-//             )
-//         } else if(userRecipes.length === 0) {
-//             return(
-//                 <Text>You have no recipes yet!</Text>
-//             )
-//         } else {
-//             return(
-//                 <FlatList data={userRecipes} 
-//                         keyExtractor={(item) => item.id.toString()} 
-//                         numColumns={2}
-//                         contentContainerStyle={{padding: 20}}
-//                         renderItem={({item}) => (
-//                     <SmallRecipeCard item={item} handleNavigate={() => router.push(`/recipe-details/${item.id}`)}/>
-//                 )} />
-//             )
-//         }
-//     } 
-
-//     return(
-//         <SafeAreaView>
-//             <Stack.Screen options={{
-//                     headerStyle: {backgroundColor: "#FAFAFC"},
-//                     headerShadowVisible: false,
-//                     headerBackVisible: false,
-//                     headerLeft: () => (
-//                         <ScreenHeaderBtn title={"<-- Back"} dimension="100%" handlePress={() => router.back()} />
-//                     ),
-//                     headerTitle: "Recipes",
-//                     headerTitleAlign: "center"
-//                 }}/>
-//             <ScrollView showsVerticalScrollIndicator={false} refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh}/>}>
-//                 <View style={{ marginTop: 10, alignItems: "center", backgroundColor: "lightgrey"}}>
-//                         <Text style={{fontSize: 24}}>Your Recipes</Text>
-//                 </View>
-//                 <View>
-//                     {userRecipeCards()}
-//                 </View>
-//                 <View style={{ marginTop: 10, alignItems: "center", backgroundColor: "lightgrey"}}>
-//                         <Text style={{fontSize: 24}}>Your Collections</Text>
-//                 </View>
-//             </ScrollView>
-//         </SafeAreaView>
-//     )
-
-
-// }
-
-// export default YourRecipePage
-
-// import React, { useEffect, useCallback, useState } from "react";
-// import { SafeAreaView, Text, View, ActivityIndicator, RefreshControl, FlatList } from "react-native";
-
-// import ScreenHeaderBtn from "../../components/ScreenHeaderBtn";
-// import SmallRecipeCard from "../../components/cards/smallRecipeCard";
-// import getUsersRecipes from "../../components/hooks/getUsersRecipes";
 import { Stack, useGlobalSearchParams, useRouter } from "expo-router";
 import react, { useEffect, useCallback, useState } from "react";
 import { SafeAreaView, Text, View, ScrollView, ActivityIndicator, RefreshControl, TouchableOpacity, FlatList } from "react-native";
@@ -93,25 +6,33 @@ import ScreenHeaderBtn from "../../components/ScreenHeaderBtn";
 import SmallRecipeCard from "../../components/cards/smallRecipeCard";
 import ButtonTemplate from "../../components/buttons/buttonTemplate";
 import getUsersRecipes from "../../components/hooks/getUsersRecipes";
-
+import getUsersCollections from "../../components/hooks/getUsersCollections";
+import getFavoriteRecipes from "../../components/hooks/getFavoriteRecipes";
+import getFavoriteCollections from "../../components/hooks/getFavoriteCollections";
 
 const YourRecipePage = () => {
     const params = useGlobalSearchParams();
     const router = useRouter();
     const [refreshing, setRefreshing] = useState(false);
-    const { userRecipes, isLoading, error, reFetch } = getUsersRecipes(params.id);
+    const { userRecipes, recipesIsLoading, recipeError, reFetchRecipes } = getUsersRecipes(params.id);
+    const { usersCollections, collectionIsLoading, collectionError, reFetchCollection } = getUsersCollections(params.id);
+    const { favoriteRecipes, favRecipesIsLoading, favRecipesError, reFetchFavRecipes} = getFavoriteRecipes(params.id);
+    const { favoriteCollections, favCollectionsIsLoading, favCollectionsError, reFetchFavCollections } = getFavoriteCollections(params.id);
 
     const onRefresh = useCallback(() => {
         setRefreshing(true);
-        reFetch();
+        reFetchRecipes();
+        reFetchCollection();
+        reFetchFavRecipes();
+        reFetchFavCollections();
         setRefreshing(false);
     }, []);
 
     const userRecipeCards = () => {
-        if (isLoading) {
+        if (recipesIsLoading) {
             return <ActivityIndicator size="large" color="#0000ff" />;
-        } else if (error) {
-            return <Text>{error}</Text>;
+        } else if (recipeError) {
+            return <Text>{recipeError}</Text>;
         } else if (userRecipes.length === 0) {
             return <Text>You have no recipes yet!</Text>;
         } else {
@@ -128,6 +49,72 @@ const YourRecipePage = () => {
             );
         }
     };
+
+    const userCollectionsCards = () => {
+        if (collectionIsLoading) {
+            return <ActivityIndicator size="large" color="#0000ff" />;
+        } else if (collectionError) {
+            return <Text>{collectionError}</Text>;
+        } else if (usersCollections.length === 0) {
+            return <Text>You have no collections yet!</Text>;
+        } else {
+            return (
+                <FlatList
+                    data={usersCollections}
+                    keyExtractor={(item) => item.id.toString()}
+                    numColumns={2}
+                    contentContainerStyle={{ padding: 20 }}
+                    renderItem={({ item }) => (
+                        <SmallRecipeCard item={item} handleNavigate={() => router.push(`/recipe-details/${item.id}`)} />
+                )}
+                />
+            );
+        }
+    }
+
+    const usersFavoriteRecipesCards = () => {
+        if (favRecipesIsLoading) {
+            return <ActivityIndicator size="large" color="#0000ff" />;
+        } else if (favRecipesError) {
+            return <Text>{favRecipesError}</Text>;
+        } else if (favoriteRecipes.length === 0) {
+            return <Text>You have no favorite recipes yet!</Text>;
+        } else {
+            return (
+                <FlatList
+                    data={favoriteRecipes}
+                    keyExtractor={(item) => item.id.toString()}
+                    numColumns={2}
+                    contentContainerStyle={{ padding: 20 }}
+                    renderItem={({ item }) => (
+                        <SmallRecipeCard item={item} handleNavigate={() => router.push(`/recipe-details/${item.id}`)} />
+                )}
+                />
+            );
+        }
+    }
+
+    const usersFavoriteCollectionsCards = () => {
+        if (favCollectionsIsLoading) {
+            return <ActivityIndicator size="large" color="#0000ff" />;
+        } else if (favCollectionsError) {
+            return <Text>{favCollectionsError}</Text>;
+        } else if (favoriteCollections.length === 0) {
+            return <Text>You have no favorite collections yet!</Text>;
+        } else {
+            return (
+                <FlatList
+                    data={favoriteCollections}
+                    keyExtractor={(item) => item.id.toString()}
+                    numColumns={2}
+                    contentContainerStyle={{ padding: 20 }}
+                    renderItem={({ item }) => (
+                        <SmallRecipeCard item={item} handleNavigate={() => router.push(`/recipe-details/${item.id}`)} />
+                )}
+                />
+            );
+        }
+    }
 
     return (
         <SafeAreaView style={{ flex: 1 }}>
@@ -147,6 +134,8 @@ const YourRecipePage = () => {
             refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
             ListHeaderComponent={
             <>
+                <ButtonTemplate title="Add New Recipe" color="blue" pressed={()=>{router.push(`/new-recipe-form/${params.id}`, {userId: params.id})}} />
+                <ButtonTemplate title="View Cart" color="green" pressed={()=>{router.push(`/user-cart-page/${params.id}`)}} />
                 <View style={{ marginTop: 10, alignItems: "center", backgroundColor: "lightgrey" }}>
                     <Text style={{ fontSize: 24 }}>Your Recipes</Text>
                 </View>
@@ -154,12 +143,15 @@ const YourRecipePage = () => {
                 <View style={{ marginTop: 10, alignItems: "center", backgroundColor: "lightgrey" }}>
                     <Text style={{ fontSize: 24 }}>Your Collections</Text>
                 </View>
+                {userCollectionsCards()}
                 <View style={{ marginTop: 10, alignItems: "center", backgroundColor: "lightgrey" }}>
                     <Text style={{ fontSize: 24 }}>Favorite Recipes</Text>
                 </View>
+                {usersFavoriteRecipesCards()}
                 <View style={{ marginTop: 10, alignItems: "center", backgroundColor: "lightgrey" }}>
                     <Text style={{ fontSize: 24 }}>Favorite Collections</Text>
                 </View>
+                {usersFavoriteCollectionsCards()}
             </>
             }
         />

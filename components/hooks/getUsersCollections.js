@@ -2,26 +2,27 @@ import { useState, useEffect } from "react";
 
 const getUsersCollections = (endPoint) => {
     const [usersCollections, setusersCollections] = useState([])
-    const [isLoading, setIsLoading] = useState(false)
-    const [error, setError] = useState(null)
+    const [collectionIsLoading, setCollectionIsLoading] = useState(false)
+    const [collectionError, setCollectionError] = useState(null)
 
     const getData = () => {
-        setIsLoading(true);
+        setCollectionIsLoading(true);
         fetch(`https://mysite-p4xg.onrender.com/recipe-collections/user/get/${endPoint}`)
             .then((r) => {
                 if (r.ok) {
                     r.json().then((data) => {
+                        console.log(data)
                         setusersCollections(data);
-                        setIsLoading(false);
+                        setCollectionIsLoading(false);
                     })
                 } else {
-                    setError("Request failed");
-                    setIsLoading(false);
+                    setCollectionError("Request failed");
+                    setCollectionIsLoading(false);
                 }
             })
             .catch((err) => {
-                setError(err.message);
-                setIsLoading(false);
+                setCollectionError(err.message);
+                setCollectionIsLoading(false);
             });
     }
 
@@ -29,12 +30,12 @@ const getUsersCollections = (endPoint) => {
         getData();
     }, []);
 
-    const reFetch = () => {
-        setIsLoading(true);
+    const reFetchCollection = () => {
+        setCollectionIsLoading(true);
         getData();
     };
 
-    return {usersCollections, isLoading, error, reFetch}
+    return {usersCollections, collectionIsLoading, collectionError, reFetchCollection}
 }
 
 

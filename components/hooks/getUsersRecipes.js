@@ -2,27 +2,26 @@ import { useState, useEffect } from "react";
 
 const getUsersRecipes = (endPoint) => {
     const [userRecipes, setUserRecipes] = useState([])
-    const [isLoading, setIsLoading] = useState(false)
-    const [error, setError] = useState(null)
+    const [recipesIsLoading, setRecipesIsLoading] = useState(false)
+    const [recipeError, setRecipeError] = useState(null)
 
     const getData = () => {
-        setIsLoading(true);
+        setRecipesIsLoading(true);
         fetch(`https://mysite-p4xg.onrender.com/recipes/users/${endPoint}`)
             .then((r) => {
                 if (r.ok) {
                     r.json().then((data) => {
                         setUserRecipes(data);
-                        setIsLoading(false);
+                        setRecipesIsLoading(false);
                     })
                 } else {
-                    console.log(err.message)
-                    setError("Request failed");
-                    setIsLoading(false);
+                    setRecipeError("Request failed");
+                    setRecipesIsLoading(false);
                 }
             })
-            .catch((err) => {
-                setError(err.message);
-                setIsLoading(false);
+            .catch((error) => {
+                setRecipeError(error);
+                setRecipesIsLoading(false);
             });
     }
 
@@ -30,12 +29,12 @@ const getUsersRecipes = (endPoint) => {
         getData();
     }, []);
 
-    const reFetch = () => {
-        setIsLoading(true);
+    const reFetchRecipes = () => {
+        setRecipesIsLoading(true);
         getData();
     };
 
-    return {userRecipes, isLoading, error, reFetch}
+    return {userRecipes, recipesIsLoading, recipeError, reFetchRecipes}
 }
 
 
