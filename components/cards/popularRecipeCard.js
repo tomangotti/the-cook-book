@@ -44,7 +44,7 @@ const PopularRecipeCard = ({item, handleNavigate, user_id}) => {
                     ? item.image
                     : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ83aBZygUGIMqHLcMhhY9VhE283tGv61pOf-boYo9WnQ&s"
                     }}
-                    resizeMode="contain" style={{
+                    resizeMode="cover" style={{
                         width: "100%",
                         height: "100%",
                         borderTopLeftRadius: 12,

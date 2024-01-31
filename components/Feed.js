@@ -34,7 +34,7 @@ const Feed = ({userId, loggedIn, setLoggedIn}) => {
                     headerStyle: {backgroundColor: "#FAFAFC"},
                     headerLeft: () => (
                         loggedIn ? 
-                        <ScreenHeaderBtn title={"Your Recipes"} dimension='75%' handlePress={() => router.push(`/saved-recipes/${userId}`)} /> :
+                        <ScreenHeaderBtn title={"Your Recipes"} dimension='75%' handlePress={() => router.push(`/your-recipes/${userId}`)} /> :
                         null
                     ),
                     headerRight: () => (
