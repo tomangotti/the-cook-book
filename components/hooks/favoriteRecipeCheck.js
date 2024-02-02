@@ -1,22 +1,19 @@
 import { useEffect, useState } from "react"
 
 
-const GetUserRecipeRating = (userId, recipeId) => {
-    const [data, setData] = useState(0);
+const FavoriteRecipeCheck = (userId, recipeId) => {
+    const [data, setData] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
 
     const getData = () => {
-        
-        console.log(`user id before fetch: ${userId}`)
         setIsLoading(true);
-        fetch(`https://mysite-p4xg.onrender.com/recipes/${recipeId}/ratings/${userId}`)
+        fetch(`https://mysite-p4xg.onrender.com/favorites/recipes/check/${userId}/${recipeId}`)
             .then((r) => {
                 if (r.ok) {
-                    r.json().then((data) => {
-                        setData(data);
-                        setIsLoading(false);
-                    });
+                    console.log("ok")
+                    setData(true);
+                    setIsLoading(false);
                 } else {
                     setError("Request failed");
                     setIsLoading(false);
@@ -37,4 +34,4 @@ const GetUserRecipeRating = (userId, recipeId) => {
 }
 
 
-export default GetUserRecipeRating
+export default FavoriteRecipeCheck

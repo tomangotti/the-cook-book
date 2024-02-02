@@ -31,7 +31,6 @@ const RecipeDetails = () => {
     },[])
 
 
-
     function buttonOptions() {
         if(data.users) {
             for(let i=0; i < data.users.length; i++) {  
@@ -53,7 +52,6 @@ const RecipeDetails = () => {
     
 
     const handleSave = async () => {
-        
         if(buttonOptions() === false) {
             const save = await SaveRecipe(userId, data.recipe.id, "POST")
             save ? router.back() : alert("item was not saved successfully")
@@ -69,7 +67,6 @@ const RecipeDetails = () => {
             recipe: `${data.recipe.id}`
         }
         
-
         const postFetch = await PostItemToCart(item)
         if (postFetch) {
             alert("item was added successfully.")
@@ -96,7 +93,6 @@ const RecipeDetails = () => {
     }
 
     const checkOwner = () => {
-        console.log(userId)
         if(data.recipe && userId === data.recipe.user) {
             return true
         } else {

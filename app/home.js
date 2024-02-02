@@ -17,8 +17,10 @@ const Home = () => {
             setLoggedIn(check)
         }
     }
-        
-    checkLogin()
+    
+    useEffect(() => {
+        checkLogin()
+    },[])
     
     if(loggedIn === false) {
         return(

@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity, Image } from 'react-native';
 
 const RecipeCard = ({item, handleNavigate, user_id}) => {
 
+    
     return(
         <>
         <TouchableOpacity onPress={handleNavigate} style={{ 
