@@ -16,7 +16,6 @@ const postNewRating = async (rating) => {
             throw new Error('Failed to post new rating');
         }
 
-        // Handle the response if needed
         const data = await response.json();
         console.log(data);
     } catch (error) {
@@ -24,5 +23,4 @@ const postNewRating = async (rating) => {
     }
 };
 
-// Call the function to post the new rating
 export default postNewRating;

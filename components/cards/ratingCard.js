@@ -1,12 +1,21 @@
-import React, { useState } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Text, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 import postNewRating from '../hooks/postNewRating';
+import GetUserRecipeRating from '../hooks/getUserRecipeRating';
 
 const RatingCard = ({userId, recipeId}) => {
-    const [rating, setRating] = useState(0);
+    const {data, isLoading, error} = GetUserRecipeRating(userId, recipeId);
+    const [rating, setRating] = useState(0)
 
+
+    useEffect(()=> {
+        if(data.rating){
+            console.log(`rating ${data}`)
+            setRating(data.rating)
+        }
+    },[data])
     const handleRating = async (value) => {
         setRating(value);
         const newRating = {
@@ -14,7 +23,6 @@ const RatingCard = ({userId, recipeId}) => {
             user: userId,
             recipe: recipeId,
         }
-        
         
         const response = await postNewRating(newRating);
         console.log(response);
