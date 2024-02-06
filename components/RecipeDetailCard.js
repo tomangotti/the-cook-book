@@ -69,7 +69,7 @@ const RecipeDetailCard = ({item, userId}) => {
                         <Text style={{fontSize: 16, textAlign: "center"}}>By: {item.user_username}</Text>
                     </TouchableOpacity>
                     <View style={{alignItems: "center"}}>
-                        {userId ? <FavoriteCard recipeId={item.id} userId={userId}/> : null}
+                        {userId && userId !== item.id ? <FavoriteCard recipeId={item.id} userId={userId}/> : null}
                     </View>
                 <HorizontalLine />
             </View>

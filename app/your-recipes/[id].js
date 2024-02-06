@@ -87,7 +87,7 @@ const YourRecipePage = () => {
                     numColumns={2}
                     contentContainerStyle={{ padding: 20 }}
                     renderItem={({ item }) => (
-                        <SmallRecipeCard item={item} handleNavigate={() => router.push(`/recipe-details/${item.id}`)} />
+                        <SmallRecipeCard item={item.recipe} handleNavigate={() => router.push(`/recipe-details/${item.recipe.id}`)} />
                 )}
                 />
             );
@@ -134,15 +134,16 @@ const YourRecipePage = () => {
             refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
             ListHeaderComponent={
             <>
-                <ButtonTemplate title="Add New Recipe" color="blue" pressed={()=>{router.push(`/new-recipe-form/${params.id}`, {userId: params.id})}} />
                 <ButtonTemplate title="View Cart" color="green" pressed={()=>{router.push(`/user-cart-page/${params.id}`)}} />
                 <View style={{ marginTop: 10, alignItems: "center", backgroundColor: "lightgrey" }}>
                     <Text style={{ fontSize: 24 }}>Your Recipes</Text>
                 </View>
+                <ButtonTemplate title="Add New Recipe" color="blue" pressed={()=>{router.push(`/new-recipe-form/${params.id}`, {userId: params.id})}} />
                 {userRecipeCards()}
                 <View style={{ marginTop: 10, alignItems: "center", backgroundColor: "lightgrey" }}>
                     <Text style={{ fontSize: 24 }}>Your Collections</Text>
                 </View>
+                <ButtonTemplate title="Add New Collection" color="blue" pressed={()=>{router.push(`/collection-form/${params.id}`, {userId: params.id})}} />
                 {userCollectionsCards()}
                 <View style={{ marginTop: 10, alignItems: "center", backgroundColor: "lightgrey" }}>
                     <Text style={{ fontSize: 24 }}>Favorite Recipes</Text>
