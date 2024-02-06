@@ -151,7 +151,21 @@ const newRecipeForm = () => {
             <ScrollView showsVerticalScrollIndicator={false}>
 
             
-            <View style={{alignItems: "center", width: "100%", marginTop: 25}}>
+            <View style={{backgroundColor: 'white',
+                borderBlockColor: 'white',
+                borderRadius: 15,
+                padding: 15,
+                marginHorizontal: 15,
+                marginTop: 15,
+                shadowColor: 'black',
+                shadowOffset: {
+                    width: 0,
+                    height: 2,
+                    },
+                shadowOpacity: 0.25,
+                shadowRadius: 5.84,
+                elevation: 5,
+                alignItems: "center"}}>
                 <View style={{margin: 5}}>
                     <Text style={{fontSize: 18}} >Recipe Name</Text>
                     <TextInput  value={name} onChangeText={setName} style={{backgroundColor: "lightgrey", width: 300}}></TextInput>

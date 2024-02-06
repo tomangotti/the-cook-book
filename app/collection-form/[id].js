@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, TextInput, Button, FlatList, ScrollView } from 'react-native';
+import { View, TextInput, Button, FlatList, ScrollView, Text, TouchableOpacity } from 'react-native';
 import { Stack, router, useGlobalSearchParams, useRouter } from "expo-router";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 
@@ -52,62 +52,111 @@ const CreateCollectionForm = () => {
             }} />
             
             <ScrollView showsVerticalScrollIndicator={false}>
-            <View>
-                <TextInput
-                    placeholder="Name"
-                    value={name}
-                    onChangeText={setName}
-                />
-                <TextInput
-                    placeholder="Description"
-                    value={description}
-                    onChangeText={setDescription}
-                />
-                <FlatList
-                    data={userRecipes}
-                    keyExtractor={(item) => item.id.toString()}
-                    renderItem={({ item }) => (
-                        <View style={{
-                            margin: 10
-                        }}>
-                            <BouncyCheckbox
-                                size={25}
-                                fillColor="red"
-                                unfillColor="#FFFFFF"
-                                iconStyle={{ borderColor: "red" }}
-                                innerIconStyle={{ borderWidth: 2 }}
-                                onPress={() => handleRecipeSelection(item.id)}
-                                text={item.name}
-                            />
+            <View style={{
+                backgroundColor: 'white',
+                borderBlockColor: 'white',
+                borderRadius: 15,
+                padding: 15,
+                marginHorizontal: 15,
+                shadowColor: 'black',
+                shadowOffset: {
+                    width: 0,
+                    height: 2,
+                    },
+                shadowOpacity: 0.25,
+                shadowRadius: 5.84,
+                elevation: 5,
+                }}>
+                <View style={{alignItems: "center", width: "100%"}} >
+                    <View style={{margin: 5}}>
+                        <Text style={{fontSize: 18}}>Collection Name</Text>
+                        <TextInput
+                            style={{backgroundColor: "lightgrey", width: 300}}
+                            placeholder="Name"
+                            value={name}
+                            onChangeText={setName}
+                        />
+                    </View> 
+                    <View style={{margin: 5}}>
+                        <Text style={{fontSize: 18}}>Description</Text>
+                        <TextInput
+                            style={{backgroundColor: "lightgrey", width: 300}}
+                            multiline={true} numberOfLines={6}
+                            placeholder="Description"
+                            value={description}
+                            onChangeText={setDescription}
+                        />
+                    </View>
+                </View>
+                <View style={{margin: 10}}>
+                    <Text style={{textAlign: 'center', fontSize: 16}}>Your Recipes</Text>
+                    <FlatList
+                        data={userRecipes}
+                        contentContainerStyle={{
+                            paddingHorizontal: 50,
+                            paddingVertical: 10,
+                        }}
+                        keyExtractor={(item) => item.id.toString()}
+                        renderItem={({ item }) => (
                             
-                        </View>
-                    )}
-                />
-                <FlatList
-                    data={favoriteRecipes}
-                    keyExtractor={(item) => item.id.toString()}
-                    renderItem={({ item }) => (
-                        <View style={{
-                            margin: 10
-                        }}>
-                            <BouncyCheckbox
-                                size={25}
-                                fillColor="red"
-                                unfillColor="#FFFFFF"
-                                iconStyle={{ borderColor: "red" }}
-                                innerIconStyle={{ borderWidth: 2 }}
-                                text={item.recipe.name}
-                                onPress={()=> handleRecipeSelection(item.recipe.id)}
-                            />
+                                <BouncyCheckbox
+                                    size={30}
+                                    fillColor="blue"
+                                    unfillColor="#FFFFFF"
+                                    iconStyle={{ borderColor: "blue" }}
+                                    innerIconStyle={{ borderWidth: 2 }}
+                                    onPress={() => handleRecipeSelection(item.id)}
+                                    text={item.name}
+                                />
                             
-                        </View>
-                    )}
-                />
-                <Button
-                    title="Create Collection"
-                    onPress={handleCreateCollection}
-                />
+                        )}
+                    /> 
+                </View>
+                <View style={{margin: 10}}>
+                    <Text style={{textAlign: 'center', fontSize: 16}}>Favorite Recipes</Text>
+                    <FlatList
+                        data={favoriteRecipes}
+                        contentContainerStyle={{
+                            paddingHorizontal: 50,
+                            paddingVertical: 10,
+                        }}
+                        keyExtractor={(item) => item.id.toString()}
+                        renderItem={({ item }) => (
+                                <BouncyCheckbox
+                                    size={30}
+                                    fillColor="blue"
+                                    unfillColor="#FFFFFF"
+                                    iconStyle={{ borderColor: "blue" }}
+                                    innerIconStyle={{ borderWidth: 2 }}
+                                    text={item.recipe.name}
+                                    onPress={()=> handleRecipeSelection(item.recipe.id)}
+                                />
+                            
+                        )}
+                    />
+                </View>
+                
+                
             </View>
+            <TouchableOpacity onPress={handleCreateCollection}
+                    style={{
+                        width: "80%",
+                        marginLeft: "auto",
+                        marginRight: "auto",
+                        marginTop: 45,
+                        marginBottom: 15,
+                        borderRadius: 15,
+                        shadowColor: "#000",
+                        shadowOffset: {
+                            width: 0,
+                            height: 2,
+                            },
+                        shadowOpacity: 0.25,
+                        shadowRadius: 5.84,
+                        elevation: 5,
+                }}>
+                    <Text style={{ textAlign: "center", padding: 10, backgroundColor: "blue", color: "white", borderRadius: 15 }}>Create Collection</Text>
+                </TouchableOpacity>
             </ScrollView>
         </SafeAreaView>
     );

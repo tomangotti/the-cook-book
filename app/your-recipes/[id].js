@@ -34,7 +34,7 @@ const YourRecipePage = () => {
         } else if (recipeError) {
             return <Text>{recipeError}</Text>;
         } else if (userRecipes.length === 0) {
-            return <Text>You have no recipes yet!</Text>;
+            return <Text style={{textAlign: 'center', margin: 10}}>You have no recipes yet!</Text>;
         } else {
             return (
                 <FlatList
@@ -56,7 +56,7 @@ const YourRecipePage = () => {
         } else if (collectionError) {
             return <Text>{collectionError}</Text>;
         } else if (usersCollections.length === 0) {
-            return <Text>You have no collections yet!</Text>;
+            return <Text style={{textAlign: 'center', margin: 10}}>You have no collections yet!</Text>;
         } else {
             return (
                 <FlatList
@@ -78,7 +78,7 @@ const YourRecipePage = () => {
         } else if (favRecipesError) {
             return <Text>{favRecipesError}</Text>;
         } else if (favoriteRecipes.length === 0) {
-            return <Text>You have no favorite recipes yet!</Text>;
+            return <Text style={{textAlign: 'center', margin: 10}}>You have no favorite recipes yet!</Text>;
         } else {
             return (
                 <FlatList
@@ -100,7 +100,7 @@ const YourRecipePage = () => {
         } else if (favCollectionsError) {
             return <Text>{favCollectionsError}</Text>;
         } else if (favoriteCollections.length === 0) {
-            return <Text>You have no favorite collections yet!</Text>;
+            return <Text style={{textAlign: 'center', margin: 10}}>You have no favorite collections yet!</Text>;
         } else {
             return (
                 <FlatList
@@ -134,22 +134,21 @@ const YourRecipePage = () => {
             refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
             ListHeaderComponent={
             <>
-                <ButtonTemplate title="View Cart" color="green" pressed={()=>{router.push(`/user-cart-page/${params.id}`)}} />
-                <View style={{ marginTop: 10, alignItems: "center", backgroundColor: "lightgrey" }}>
+                <View style={{ marginVertical: 10, alignItems: "center", backgroundColor: "lightgrey" }}>
                     <Text style={{ fontSize: 24 }}>Your Recipes</Text>
                 </View>
                 <ButtonTemplate title="Add New Recipe" color="blue" pressed={()=>{router.push(`/new-recipe-form/${params.id}`, {userId: params.id})}} />
                 {userRecipeCards()}
-                <View style={{ marginTop: 10, alignItems: "center", backgroundColor: "lightgrey" }}>
+                <View style={{ marginVertical: 10, alignItems: "center", backgroundColor: "lightgrey" }}>
                     <Text style={{ fontSize: 24 }}>Your Collections</Text>
                 </View>
                 <ButtonTemplate title="Add New Collection" color="blue" pressed={()=>{router.push(`/collection-form/${params.id}`, {userId: params.id})}} />
                 {userCollectionsCards()}
-                <View style={{ marginTop: 10, alignItems: "center", backgroundColor: "lightgrey" }}>
+                <View style={{ marginVertical: 10, alignItems: "center", backgroundColor: "lightgrey" }}>
                     <Text style={{ fontSize: 24 }}>Favorite Recipes</Text>
                 </View>
                 {usersFavoriteRecipesCards()}
-                <View style={{ marginTop: 10, alignItems: "center", backgroundColor: "lightgrey" }}>
+                <View style={{ marginVertical: 10, alignItems: "center", backgroundColor: "lightgrey" }}>
                     <Text style={{ fontSize: 24 }}>Favorite Collections</Text>
                 </View>
                 {usersFavoriteCollectionsCards()}
