@@ -9,6 +9,7 @@ import getUsersRecipes from "../../components/hooks/getUsersRecipes";
 import getUsersCollections from "../../components/hooks/getUsersCollections";
 import getFavoriteRecipes from "../../components/hooks/getFavoriteRecipes";
 import getFavoriteCollections from "../../components/hooks/getFavoriteCollections";
+import SmallCollectionCard from "../../components/cards/smallCollectionCard";
 
 const YourRecipePage = () => {
     const params = useGlobalSearchParams();
@@ -65,7 +66,7 @@ const YourRecipePage = () => {
                     numColumns={2}
                     contentContainerStyle={{ padding: 20 }}
                     renderItem={({ item }) => (
-                        <SmallRecipeCard item={item} handleNavigate={() => router.push(`/recipe-details/${item.id}`)} />
+                        <SmallCollectionCard item={item} handleNavigate={() => router.push(`/recipe-details/${item.id}`)} />
                 )}
                 />
             );
@@ -109,7 +110,7 @@ const YourRecipePage = () => {
                     numColumns={2}
                     contentContainerStyle={{ padding: 20 }}
                     renderItem={({ item }) => (
-                        <SmallRecipeCard item={item} handleNavigate={() => router.push(`/recipe-details/${item.id}`)} />
+                        <SmallCollectionCard item={item} handleNavigate={() => router.push(`/recipe-details/${item.id}`)} />
                 )}
                 />
             );

@@ -7,7 +7,7 @@ import getUsersRecipes from "../../components/hooks/getUsersRecipes";
 import getFavoriteRecipes from "../../components/hooks/getFavoriteRecipes";
 import { SafeAreaView } from 'react-native-safe-area-context';
 import ScreenHeaderBtn from "../../components/ScreenHeaderBtn";
-
+import postNewCollection from '../../components/hooks/postNewCollection';
 
 const CreateCollectionForm = () => {
     const router = useRouter();
@@ -30,12 +30,20 @@ const CreateCollectionForm = () => {
         }
     };
 
-    const handleCreateCollection = () => {
-        // Perform the logic to create the collection using the name, description, and selectedRecipes
-        // You can make an API call or update the state accordingly
-        console.log("Name:", name);
-        console.log("Description:", description);
-        console.log("Selected Recipes:", selectedRecipes);
+    const handleCreateCollection = async () => {
+        const collection = {
+            name: name,
+            user: params.id,
+            description: description,
+            recipes: selectedRecipes
+        }
+        console.log(collection);
+        const response = await postNewCollection(collection, params.id);
+        if(!response) {
+            alert('error saving collection')
+        } else {
+            router.push(`/your-recipes/${params.id}`)
+        }
     };
 
     return (

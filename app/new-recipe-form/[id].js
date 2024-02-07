@@ -131,7 +131,7 @@ const newRecipeForm = () => {
         if(!sendData) {
             alert("error saving recipe. try again")
         } else {
-            router.push(`/saved-recipes/${params.id}`)
+            router.push(`/your-recipes/${params.id}`)
         }
     }
 
