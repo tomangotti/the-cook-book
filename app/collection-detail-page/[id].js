@@ -3,13 +3,13 @@ import react, { useEffect, useState, useCallback } from "react";
 import { SafeAreaView, Text, View, ScrollView, ActivityIndicator, RefreshControl, Image, Button } from "react-native";
 import ScreenHeaderBtn from "../../components/ScreenHeaderBtn";
 
-
+import getSingleCollection from "../../components/hooks/getSingleCollection";
 import checkToken from "../../components/hooks/checkToken";
 
 const CollectionDetails = () => {
     const params = useGlobalSearchParams();
     const router = useRouter();
-    const { data, isLoading, error, refetch} = null;
+    const { data, isLoading, error, refetch} = getSingleCollection(params.id);
     const [userId, setUserId] = useState(null)
 
     useEffect(() => {
@@ -30,9 +30,21 @@ const CollectionDetails = () => {
                     headerTitleAlign: "center"
                 }}/>
             <ScrollView showsVerticalScrollIndicator={false}>
-                <View>
-                    <Text>{}</Text>
-                </View>
+                {isLoading ? (
+                    <ActivityIndicator size="large" />
+                ) : error ? (
+                    <View>
+                        <Text>Something Went Wrong:</Text>
+                        <Text>{error}</Text>
+                        <Button title="Retry" onPress={refetch} />
+                    </View>
+                ) : data ? (
+                    <View>
+                        <Text>{data.name}</Text>
+                        <Text>{data.description}</Text>
+                    </View>
+                ) :
+                null}
             </ScrollView>
         </SafeAreaView>
     )
