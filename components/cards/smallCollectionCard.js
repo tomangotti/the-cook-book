@@ -11,41 +11,28 @@ const SmallCollectionCard = ({item, handleNavigate}) => {
                 flexDirection: "column",
                 margin: 15,
                 borderRadius: 16,
-                backgroundColor: "#FFF",
+                backgroundColor: "blue",
                 width: 175,
                 shadowColor: "#000",
                 shadowOffset: {
                     width: 0,
                     height: 2,
-                    },
+                },
                 shadowOpacity: 0.25,
                 shadowRadius: 5.84,
                 elevation: 5,
-                }}>
-                {/* <View style={{
+            }}>
+                <View style={{ 
+                    padding: 10, 
                     width: 175,
                     height: 150,
-                    backgroundColor: "#F3F4F8",
+                    justifyContent: "center", // Added to center the text vertically
                     borderRadius: 16,
-                    justifyContent: "center",
-                    alignItems: "center",
-                    margin: 0,
+                    borderColor: '#FFF',
+                    borderWidth: 3,
+
                 }}>
-                    <Image
-                        source={{
-                            uri: item.image
-                            ? item.image
-                            : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ83aBZygUGIMqHLcMhhY9VhE283tGv61pOf-boYo9WnQ&s"
-                            }}
-                            resizeMode="cover" style={{
-                                width: "100%",
-                                height: "100%",
-                                borderTopLeftRadius: 16,
-                                borderTopRightRadius: 16,
-                            }}/>
-                </View> */}
-                <View style={{ padding: 10, alignItems: "center"}}>
-                    <Text style={{fontSize: 28, textAlign: "center"}}>{item.name}</Text>
+                    <Text style={{fontSize: 28, textAlign: "center", color: "#FFF"}}>{item.name}</Text>
                 </View>
                 
             </TouchableOpacity>
