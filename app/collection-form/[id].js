@@ -37,6 +37,7 @@ const CreateCollectionForm = () => {
             description: description,
             recipes: selectedRecipes
         }
+        
         console.log(collection);
         const response = await postNewCollection(collection, params.id);
         if(!response) {

@@ -29,7 +29,7 @@ const SmallCollectionCard = ({item, handleNavigate}) => {
                     justifyContent: "center", // Added to center the text vertically
                     borderRadius: 16,
                     borderColor: '#FFF',
-                    borderWidth: 3,
+                    borderWidth: 5,
 
                 }}>
                     <Text style={{fontSize: 28, textAlign: "center", color: "#FFF"}}>{item.name}</Text>

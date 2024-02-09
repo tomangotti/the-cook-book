@@ -5,6 +5,7 @@ import ScreenHeaderBtn from "../../components/ScreenHeaderBtn";
 
 import getSingleCollection from "../../components/hooks/getSingleCollection";
 import checkToken from "../../components/hooks/checkToken";
+import CollectionCardDetails from "../../components/cards/collectionCardDetails";
 
 const CollectionDetails = () => {
     const params = useGlobalSearchParams();
@@ -29,7 +30,7 @@ const CollectionDetails = () => {
                     headerTitle: "Collection Details",
                     headerTitleAlign: "center"
                 }}/>
-            <ScrollView showsVerticalScrollIndicator={false}>
+            
                 {isLoading ? (
                     <ActivityIndicator size="large" />
                 ) : error ? (
@@ -39,13 +40,12 @@ const CollectionDetails = () => {
                         <Button title="Retry" onPress={refetch} />
                     </View>
                 ) : data ? (
-                    <View>
-                        <Text>{data.name}</Text>
-                        <Text>{data.description}</Text>
-                    </View>
+                    <CollectionCardDetails item={data} userId={userId} />
                 ) :
                 null}
-            </ScrollView>
+            
         </SafeAreaView>
     )
 }
+
+export default CollectionDetails 

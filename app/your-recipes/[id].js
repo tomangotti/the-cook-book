@@ -66,7 +66,7 @@ const YourRecipePage = () => {
                     numColumns={2}
                     contentContainerStyle={{ padding: 20 }}
                     renderItem={({ item }) => (
-                        <SmallCollectionCard item={item} handleNavigate={() => router.push(`/recipe-details/${item.id}`)} />
+                        <SmallCollectionCard item={item} handleNavigate={() => router.push(`/collection-detail-page/${item.id}`)} />
                 )}
                 />
             );
@@ -110,7 +110,7 @@ const YourRecipePage = () => {
                     numColumns={2}
                     contentContainerStyle={{ padding: 20 }}
                     renderItem={({ item }) => (
-                        <SmallCollectionCard item={item} handleNavigate={() => router.push(`/recipe-details/${item.id}`)} />
+                        <SmallCollectionCard item={item} handleNavigate={() => router.push(`/collection-detail-page/${item.id}`)} />
                 )}
                 />
             );
