@@ -6,7 +6,8 @@ import { Stack, useGlobalSearchParams, useRouter, ActivityIndicator } from 'expo
 import ScreenHeaderBtn from "../../components/ScreenHeaderBtn";
 import getProfileInformation from '../../components/hooks/getProfileInformation';
 import getUserInfo from '../../components/hooks/getUserInfo';
-import RecipeCard from '../../components/RecipeCard';
+import SmallRecipeCard from '../../components/cards/smallRecipeCard';
+import SmallCollectionCard from '../../components/cards/smallCollectionCard';
 import ButtonTemplate from '../../components/buttons/buttonTemplate';
 import followingCheck from '../../components/hooks/followingCheck';
 import followUser from '../../components/hooks/followUser';
@@ -16,7 +17,7 @@ import unFollowUser from '../../components/hooks/unFollowUser';
 const ProfilePage = () => {
     const router = useRouter();
     const params = useGlobalSearchParams();
-    const {profileData, recipeData, isLoading, error, reFetch} = getProfileInformation(params.id)
+    const {profileData, recipeData, collectionData, isLoading, error, reFetch} = getProfileInformation(params.id)
     const {userInfo} = getUserInfo();
     const {isFollowing, setIsFollowing} = followingCheck(params.id)
 
@@ -32,10 +33,29 @@ const ProfilePage = () => {
             setIsFollowing(true)
         }
     }
+
+    const renderRecipeItem = ({ item }) => (
+        <SmallRecipeCard
+            item={item}
+            key={item.id}
+            user_id={userInfo.id}
+            handleNavigate={() => router.push(`/recipe-details/${item.id}`)}
+            />
+    );
+
+    const renderCollectionItem = ({ item }) => (
+        <SmallCollectionCard
+            item={item}
+            key={item.id}
+            user_id={userInfo.id}
+            handleNavigate={() => router.push(`/collection-detail-page/${item.id}`)}
+            />
+    );
     
 
     return (
         <SafeAreaView>
+
             <Stack.Screen options={{
                 headerStyle: {backgroundColor: "#FAFAFC"},
                 headerShadowVisible: false,
@@ -53,6 +73,7 @@ const ProfilePage = () => {
                 headerTitle: "Profile Page",
                 headerTitleAlign: "center"
             }} />
+            
             <ScrollView showsVerticalScrollIndicator={false}>
                 <View>
                     <View>
@@ -78,21 +99,28 @@ const ProfilePage = () => {
                     ) : null}
 
                     <View style={{ marginTop: 10, alignItems: "center", backgroundColor: "lightgrey"}}>
-                            <Text style={{fontSize: 24}}>Groups</Text>
+                            <Text style={{fontSize: 24}}>Collections</Text>
                     </View>
+                    <FlatList
+                        data={collectionData}
+                        keyExtractor={(item) => item.id.toString()}
+                        renderItem={renderCollectionItem}
+                        numColumns={2} 
+                        contentContainerStyle={{ marginTop: 8, gap: 1, alignItems: 'center' }}
+                    />
 
                     <View style={{ marginTop: 10, alignItems: "center", backgroundColor: "lightgrey"}}>
                             <Text style={{fontSize: 24}}>Recipes</Text>
                     </View>
-                    
-                    <View style={{marginTop: 8, gap: 1, alignItems: "center",}}>
-                        {recipeData?.map((item) => (  
-                            <RecipeCard item={item} key={item.id} user_id={userInfo.id} handleNavigate={() => router.push(`/recipe-details/${item.id}`)} />
-                        ))}
-                    </View>
-
+                    <FlatList
+                        data={recipeData}
+                        keyExtractor={(item) => item.id.toString()}
+                        renderItem={renderRecipeItem}
+                        numColumns={2} 
+                        contentContainerStyle={{ marginTop: 8, gap: 1, alignItems: 'center' }}
+                    />
                 </View>
-            </ScrollView>
+                </ScrollView>
         </SafeAreaView>
     );
 };
