@@ -22,6 +22,7 @@ const RecipeDetailCard = ({item, userId}) => {
         )
     }
 
+    
     return(
         <>
         <View  style={{ 

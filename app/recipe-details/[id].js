@@ -20,8 +20,6 @@ const RecipeDetails = () => {
     const router = useRouter();
     const { data, isLoading, error, reFetch} = getSingleRecipe(params.id)
     const [userId, setUserId] = useState(null)
-    const [shareView, setShareView] = useState(false)
-    const [shareEmail, setShareEmail] = useState("")
 
 
     useEffect(() => {
@@ -29,66 +27,26 @@ const RecipeDetails = () => {
     },[])
 
 
-    function buttonOptions() {
-        if(data.users) {
-            for(let i=0; i < data.users.length; i++) {  
-                if(data.users[i].user === userId){
-                    return true
-                }
-            }
-            return false
-        }
-    }
+    // function buttonOptions() {
+    //     if(data.users) {
+    //         for(let i=0; i < data.users.length; i++) {  
+    //             if(data.users[i].user === userId){
+    //                 return true
+    //             }
+    //         }
+    //         return false
+    //     }
+    // }
 
-    function checkUserID() {
-        if(userId) {
-            return true
-        } else {
-            return false
-        }
-    }
+    // function checkUserID() {
+    //     if(userId) {
+    //         return true
+    //     } else {
+    //         return false
+    //     }
+    // }
     
 
-    const handleSave = async () => {
-        if(buttonOptions() === false) {
-            const save = await SaveRecipe(userId, data.recipe.id, "POST")
-            save ? router.back() : alert("item was not saved successfully")
-        } else {
-            const remove = await SaveRecipe(userId, data.recipe.id, "DELETE")
-            remove ? router.back() : alert("item was not removed successfully") 
-        }
-    }
-
-    const handleAddToCart = async () => { 
-        const item = {
-            user: `${userId}`,
-            recipe: `${data.recipe.id}`
-        }
-        
-        const postFetch = await PostItemToCart(item)
-        if (postFetch) {
-            alert("item was added successfully.")
-            
-        } else {
-            alert("item was not added.")
-        }
-
-    }
-
-    const handleShareViewToggle = () => {
-        setShareView(!shareView)
-    }
-
-    const handleShare = async () => {
-
-        const share = await postShareRecipe(shareEmail, data.recipe.id)
-        if(share === true) {
-            alert("item was shared successfully")
-        }else if(share === false){
-            alert("item was NOT shared successfully")
-        }
-
-    }
 
     const checkOwner = () => {
         if(data.recipe && userId === data.recipe.user) {
@@ -109,6 +67,9 @@ const RecipeDetails = () => {
                     headerLeft: () => (
                         <ScreenHeaderBtn title={"<-- Back"} dimension="100%" handlePress={() => router.back()} />
                     ),
+                    headerRight: () => (
+                        checkOwner() ? <ScreenHeaderBtn title={"Edit Recipe"} dimension="100%" handlePress={() => router.push(`/edit-recipe-form/${params.id}`)} /> : null
+                    ),
                     headerTitle: "Recipe Details",
                     headerTitleAlign: "center"
                 }}/>
@@ -127,6 +88,7 @@ const RecipeDetails = () => {
                     ) : ( data.recipe ? 
                         <RecipeDetailCard item={data.recipe} userId={userId} /> : null)
                 }
+                
                 <Text style={{fontSize: 24, alignSelf: "center"}}>Ingredients</Text>
                 {isLoading ? (
                         <ActivityIndicator size="large" />
@@ -140,20 +102,6 @@ const RecipeDetails = () => {
                     )
                 }
                 </View>
-                <ButtonTemplate pressed={handleSave} color={buttonOptions() ? "red" : "blue"} title={buttonOptions() ? "Remove Recipe" : "Save Recipe"} /> 
-                {checkUserID ? <ButtonTemplate title="Add to Cart" color="blue" pressed={handleAddToCart}/> : null}
-                {shareView ? 
-                    <View style={{alignItems: "center", backgroundColor: "lightgrey"}}>
-                        <View style={{alignItems: "center", width: "80%", marginTop: 25}}>
-                            <Text>Enter Recipients's Email</Text>
-                            <TextInput value={shareEmail} onChangeText={setShareEmail} style={{backgroundColor: "white", width: 200}}></TextInput>
-                            <ButtonTemplate color="green" title="Send" pressed={handleShare} />
-                        </View>
-                        
-                    </View>
-                : null}
-                <ButtonTemplate color={shareView ? "grey" : "green"} title={shareView ? "Hide Form" : "Share"} pressed={handleShareViewToggle}/>
-                {checkOwner() ? <ButtonTemplate color="red" title="Edit Recipe" pressed={() => router.push(`/edit-recipe-form/${params.id}`)} /> : null}
             </ScrollView>
         </SafeAreaView>
     )

@@ -31,7 +31,9 @@ const CollectionCardDetails = ({item, userId}) => {
             }}>
                 <Text style={{fontSize: 32, marginTop: 5, marginBottom: 15}}>{item.name}</Text>
                 <Text style={{fontSize: 16, marginBottom: 15}}>{item.description}</Text>
-                <Text style={{fontSize: 16, marginBottom: 15}}>By: {item.user_username}</Text>
+                <TouchableOpacity style={{backgroundColor: "#F3F4F8", borderRadius: 10, marginTop: 10, marginHorizontal: 30}} onPress={() => router.push(`/profile-page/${item.user}`)}>
+                        <Text style={{fontSize: 16, textAlign: "center"}}>By: {item.user_username}</Text>
+                </TouchableOpacity>
             
             
                 

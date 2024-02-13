@@ -17,6 +17,15 @@ const CollectionDetails = () => {
         checkToken(userId, setUserId)
     },[])
 
+    const checkOwner = () => {
+        if(data.user && userId === data.user) {
+            return true
+        } else {
+            return false
+        }
+    }
+
+
     return(
         <SafeAreaView>
             <Stack.Screen
@@ -26,6 +35,9 @@ const CollectionDetails = () => {
                     headerBackVisible: false,
                     headerLeft: () => (
                         <ScreenHeaderBtn title={"<-- Back"} dimension="100%" handlePress={() => router.back()} />
+                    ),
+                    headerRight: () => (
+                        checkOwner() ? <ScreenHeaderBtn title={"Edit Recipe"} dimension="100%" handlePress={() => router.push(`/edit-collection-form/${params.id}`)} /> : null
                     ),
                     headerTitle: "Collection Details",
                     headerTitleAlign: "center"
