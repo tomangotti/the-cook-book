@@ -124,6 +124,9 @@ const EditCollectionForm = () => {
                                     innerIconStyle={{ borderWidth: 2 }}
                                     onPress={() => handleRecipeSelection(item.id)}
                                     text={item.name}
+                                    textStyle={{
+                                        textDecorationLine: "none",
+                                    }}
                                 />
                             
                         )}
