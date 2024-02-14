@@ -8,8 +8,8 @@ import getUsersRecipes from "../../components/hooks/getUsersRecipes";
 import getFavoriteRecipes from "../../components/hooks/getFavoriteRecipes";
 import { SafeAreaView } from 'react-native-safe-area-context';
 import ScreenHeaderBtn from "../../components/ScreenHeaderBtn";
-import postNewCollection from '../../components/hooks/postNewCollection';
 import getSingleCollection from '../../components/hooks/getSingleCollection';
+import checkToken from '../../components/hooks/checkToken';
 
 const EditCollectionForm = () => {
     const router = useRouter();
@@ -18,9 +18,16 @@ const EditCollectionForm = () => {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [selectedRecipes, setSelectedRecipes] = useState([]);
+    const [showDelete, setShowDelete] = useState(false);
 
-    const { userRecipes, recipesIsLoading, recipeError, reFetchRecipes } = getUsersRecipes(params.id);
-    const { favoriteRecipes, favRecipesIsLoading, favRecipesError, reFetchFavRecipes} = getFavoriteRecipes(params.id);
+    useEffect(() => {
+        checkToken(userId, setUserId)
+    },[])
+    
+    const { userRecipes, recipesIsLoading, recipeError, reFetchRecipes } = getUsersRecipes(userId);
+    const { favoriteRecipes, favRecipesIsLoading, favRecipesError, reFetchFavRecipes} = getFavoriteRecipes(userId);
+    const [userId, setUserId] = useState(null)
+
     
     useEffect(() => {
         if(data) {
@@ -38,7 +45,7 @@ const EditCollectionForm = () => {
         }
     };
 
-    const handleCreateCollection = async () => {
+    const handleSaveCollection = async () => {
         const collection = {
             name: name,
             user: params.id,
@@ -47,13 +54,45 @@ const EditCollectionForm = () => {
         }
         
         console.log(collection);
-        const response = await postNewCollection(collection, params.id);
-        if(!response) {
-            alert('error saving collection')
-        } else {
-            router.push(`/your-recipes/${params.id}`)
-        }
+        // const response = await postNewCollection(collection, params.id);
+        // if(!response) {
+        //     alert('error saving collection')
+        // } else {
+        //     router.push(`/your-recipes/${params.id}`)
+        // }
     };
+
+    const handleShowDelete = () => {
+        setShowDelete(!showDelete);
+    }
+
+    const handleDeleteCollection = async () => {
+        console.log("DELETE")
+    }
+
+    const deleteButton = () => {
+        return(
+            <TouchableOpacity onPress={handleDeleteCollection}
+                    style={{
+                        width: "70%",
+                        marginLeft: "auto",
+                        marginRight: "auto",
+                        marginTop: 5,
+                        marginBottom: 15,
+                        borderRadius: 15,
+                        shadowColor: "#000",
+                        shadowOffset: {
+                            width: 0,
+                            height: 2,
+                            },
+                        shadowOpacity: 0.25,
+                        shadowRadius: 5.84,
+                        elevation: 5,
+                }}>
+                    <Text style={{ textAlign: "center", padding: 10, backgroundColor: "red", color: "white", borderRadius: 15 }}>Confirm Delete</Text>
+                </TouchableOpacity>
+        )
+    }
 
     return (
         <SafeAreaView>
@@ -64,7 +103,7 @@ const EditCollectionForm = () => {
                 headerLeft: () => (
                     <ScreenHeaderBtn title={"<-- Back"} dimension="100%" handlePress={() => router.back()} />
                 ),
-                headerTitle: "New Collection",
+                headerTitle: "Edit Collection",
                 headerTitleAlign: "center"
             }} />
             
@@ -158,12 +197,31 @@ const EditCollectionForm = () => {
                 
                 
             </View>
-            <TouchableOpacity onPress={handleCreateCollection}
+            <TouchableOpacity onPress={handleSaveCollection}
                     style={{
                         width: "80%",
                         marginLeft: "auto",
                         marginRight: "auto",
-                        marginTop: 45,
+                        marginTop: 35,
+                        marginBottom: 10,
+                        borderRadius: 15,
+                        shadowColor: "#000",
+                        shadowOffset: {
+                            width: 0,
+                            height: 2,
+                            },
+                        shadowOpacity: 0.25,
+                        shadowRadius: 5.84,
+                        elevation: 5,
+                }}>
+                    <Text style={{ textAlign: "center", padding: 10, backgroundColor: "blue", color: "white", borderRadius: 15 }}>Save Collection</Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={handleShowDelete}
+                    style={{
+                        width: "80%",
+                        marginLeft: "auto",
+                        marginRight: "auto",
+                        marginTop: 5,
                         marginBottom: 15,
                         borderRadius: 15,
                         shadowColor: "#000",
@@ -175,8 +233,9 @@ const EditCollectionForm = () => {
                         shadowRadius: 5.84,
                         elevation: 5,
                 }}>
-                    <Text style={{ textAlign: "center", padding: 10, backgroundColor: "blue", color: "white", borderRadius: 15 }}>Create Collection</Text>
+                    <Text style={{ textAlign: "center", padding: 10, backgroundColor: showDelete ? "grey" : "red", color: "white", borderRadius: 15 }}>{showDelete ? "Cancel": "Delete"}</Text>
                 </TouchableOpacity>
+                {showDelete ? deleteButton() : null}
             </ScrollView>
         </SafeAreaView>
     );
