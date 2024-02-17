@@ -20,13 +20,17 @@ const EditCollectionForm = () => {
     const [selectedRecipes, setSelectedRecipes] = useState([]);
     const [showDelete, setShowDelete] = useState(false);
 
+
+    const { userRecipes, recipesIsLoading, recipeError, reFetchRecipes } = getUsersRecipes(userId);
+    const { favoriteRecipes, favRecipesIsLoading, favRecipesError, reFetchFavRecipes} = getFavoriteRecipes(userId);
+    const [userId, setUserId] = useState(null)
+
+
     useEffect(() => {
         checkToken(userId, setUserId)
     },[])
     
-    const { userRecipes, recipesIsLoading, recipeError, reFetchRecipes } = getUsersRecipes(userId);
-    const { favoriteRecipes, favRecipesIsLoading, favRecipesError, reFetchFavRecipes} = getFavoriteRecipes(userId);
-    const [userId, setUserId] = useState(null)
+    
 
     
     useEffect(() => {
@@ -67,7 +71,7 @@ const EditCollectionForm = () => {
     }
 
     const handleDeleteCollection = async () => {
-        console.log("DELETE")
+        const response = await deleteCollection(params.id);
     }
 
     const deleteButton = () => {
