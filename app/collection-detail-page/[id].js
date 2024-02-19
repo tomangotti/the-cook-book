@@ -37,7 +37,7 @@ const CollectionDetails = () => {
                         <ScreenHeaderBtn title={"<-- Back"} dimension="100%" handlePress={() => router.back()} />
                     ),
                     headerRight: () => (
-                        checkOwner() ? <ScreenHeaderBtn title={"Edit Recipe"} dimension="100%" handlePress={() => router.push(`/edit-collection-form/${params.id}`)} /> : null
+                        checkOwner() ? <ScreenHeaderBtn title={"Edit Collection"} dimension="100%" handlePress={() => router.push(`/edit-collection-form/${params.id}`)} /> : null
                     ),
                     headerTitle: "Collection Details",
                     headerTitleAlign: "center"

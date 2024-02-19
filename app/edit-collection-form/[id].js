@@ -10,6 +10,8 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import ScreenHeaderBtn from "../../components/ScreenHeaderBtn";
 import getSingleCollection from '../../components/hooks/getSingleCollection';
 import checkToken from '../../components/hooks/checkToken';
+import deleteCollection from '../../components/hooks/deleteCollection';
+
 
 const EditCollectionForm = () => {
     const router = useRouter();
@@ -19,16 +21,16 @@ const EditCollectionForm = () => {
     const [description, setDescription] = useState('');
     const [selectedRecipes, setSelectedRecipes] = useState([]);
     const [showDelete, setShowDelete] = useState(false);
-
-
-    const { userRecipes, recipesIsLoading, recipeError, reFetchRecipes } = getUsersRecipes(userId);
-    const { favoriteRecipes, favRecipesIsLoading, favRecipesError, reFetchFavRecipes} = getFavoriteRecipes(userId);
     const [userId, setUserId] = useState(null)
 
+    // const { userRecipes, recipesIsLoading, recipeError, reFetchRecipes } = getUsersRecipes(userId);
+    // const { favoriteRecipes, favRecipesIsLoading, favRecipesError, reFetchFavRecipes} = getFavoriteRecipes(userId);
+    
 
-    useEffect(() => {
-        checkToken(userId, setUserId)
-    },[])
+
+    // useEffect(() => {
+    //     checkToken(userId, setUserId)
+    // },[])
     
     
 
@@ -71,7 +73,13 @@ const EditCollectionForm = () => {
     }
 
     const handleDeleteCollection = async () => {
+        console.log("deleting collection")
         const response = await deleteCollection(params.id);
+        if(response) {
+            router.push(`/home`)
+        } else {
+            alert('error deleting collection')
+        }
     }
 
     const deleteButton = () => {
@@ -148,7 +156,7 @@ const EditCollectionForm = () => {
                         />
                     </View>
                 </View>
-                <View style={{margin: 10}}>
+                {/* <View style={{margin: 10}}>
                     <Text style={{textAlign: 'center', fontSize: 16}}>Your Recipes</Text>
                     <FlatList
                         data={userRecipes}
@@ -197,7 +205,7 @@ const EditCollectionForm = () => {
                             
                         )}
                     />
-                </View>
+                </View> */}
                 
                 
             </View>
