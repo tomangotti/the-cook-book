@@ -51,6 +51,7 @@ const CollectionCardDetails = ({item, userId}) => {
         </>
     )
 
+    
 }
 
 export default CollectionCardDetails
