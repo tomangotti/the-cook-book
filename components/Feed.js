@@ -2,7 +2,7 @@ import React, {useCallback, useState} from 'react';
 import {  SafeAreaView, View, Text, TouchableOpacity, FlatList, ActivityIndicator, Image, ScrollView, RefreshControl } from 'react-native';
 import {Stack, useRouter } from 'expo-router';
 
-import getRecipes from './hooks/getRecipes';
+import getFeed from './hooks/getFeed';
 import RecipeCard from './RecipeCard';
 import PopularRecipeCard from './cards/popularRecipeCard';
 import ScreenHeaderBtn from './ScreenHeaderBtn';
@@ -13,7 +13,7 @@ import ButtonTemplate from './buttons/buttonTemplate';
 const Feed = ({userId, loggedIn, setLoggedIn}) => {
     const router = useRouter();
     const [refreshing, setRefreshing] = useState(false);
-    const { data, isLoading, error, reFetch} = getRecipes('recipes/all');
+    const { data, isLoading, error, reFetch} = getFeed();
 
     const onRefresh = useCallback(() => {
         setRefreshing(true);
@@ -23,6 +23,10 @@ const Feed = ({userId, loggedIn, setLoggedIn}) => {
 
     function handleAskBot() {
         router.push(`/chat-bot/${userId}`)
+    }
+
+    function handleSearch() {
+        router.push(`/search-page/${userId}`)
     }
 
     
@@ -47,10 +51,13 @@ const Feed = ({userId, loggedIn, setLoggedIn}) => {
                 }}
             />
             <ScrollView showsVerticalScrollIndicator={false}  refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh}/>}>
+
                 <ButtonTemplate title="Ask Chef" color="blue" pressed={handleAskBot} />
+                <ButtonTemplate title="Search All" color="blue" pressed={handleSearch} />
+
                 <View style={{margin: 0}}>
                     <View style={{ marginTop: 10, alignItems: "center", backgroundColor: "lightgrey"}}>
-                        <Text style={{fontSize: 24}}>Popular Recipes</Text>
+                        <Text style={{fontSize: 24}}>Popular Cool Recipes</Text>
                     </View>
 
                     <View style={{
