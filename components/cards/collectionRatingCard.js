@@ -2,16 +2,18 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
+import GetUserCollecionRating from '../hooks/getUserCollectionRating';
+import postNewCollectionRating from '../hooks/postNewCollectionRating';
 // import postNewRating from '../hooks/postNewRating';
 // import GetUserRecipeRating from '../hooks/getUserRecipeRating';
 
-const FavoriteRatingCard = ({userId, collectionId}) => {
+const CollectionRatingCard = ({userId, collectionId}) => {
 
-    const {data, isLoading, error} = GetUserRecipeRating(userId, collectionId);
+    const {data, isLoading, error} = GetUserCollecionRating(userId, collectionId);
     const [rating, setRating] = useState(0)
 
     useEffect(()=> {
-        if(data.recipe){
+        if(data.collection){
             setRating(data.rating)
         }
     },[data])
@@ -22,10 +24,10 @@ const FavoriteRatingCard = ({userId, collectionId}) => {
         const newRating = {
             rating: value,
             user: userId,
-            recipe: collectionId,
+            collection: collectionId,
         }
         
-        const response = await postNewRating(newRating);
+        const response = await postNewCollectionRating(newRating);
         console.log(response);
         
     };
@@ -52,4 +54,4 @@ const FavoriteRatingCard = ({userId, collectionId}) => {
     );
 };
 
-export default FavoriteRatingCard;
+export default CollectionRatingCard;

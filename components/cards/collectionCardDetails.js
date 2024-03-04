@@ -7,10 +7,26 @@ import { useRouter } from "expo-router";
 // import FavoriteCard from "./cards/favoriteCard";
 import SmallRecipeCard from "./smallRecipeCard";
 import FavoriteCollectionCard from "./favoriteCollectionCard";
+import CollectionRatingCard from "./collectionRatingCard";
 
 const CollectionCardDetails = ({item, userId}) => {
     const router = useRouter();
     console.log(item.recipes_details);
+
+    const rating = () => {
+        if(item.average_rating === undefined) return (
+            <View>
+                <Text style={{fontSize: 16, margin: "auto", backgroundColor: "#F3F4F8", marginTop: 10}}>Rating Unavailable</Text>
+            </View>
+        )
+        else return (
+            <View>
+                <Text style={{fontSize: 16, margin: "auto", backgroundColor: "#F3F4F8", marginTop: 10}}>Rating: {item.average_rating}</Text>
+            </View>
+        )
+    }
+
+
     return(
         <>
         <View  style={{ 
@@ -32,13 +48,16 @@ const CollectionCardDetails = ({item, userId}) => {
             }}>
                 <Text style={{fontSize: 32, marginTop: 5, marginBottom: 15}}>{item.name}</Text>
                 <Text style={{fontSize: 16, marginBottom: 15}}>{item.description}</Text>
+                {rating()}
                 <TouchableOpacity style={{backgroundColor: "#F3F4F8", borderRadius: 10, marginTop: 10, marginHorizontal: 30}} onPress={() => router.push(`/profile-page/${item.user}`)}>
                         <Text style={{fontSize: 16, textAlign: "center"}}>By: {item.user_username}</Text>
                 </TouchableOpacity>
                 <View style={{alignItems: "center"}}>
                         {userId ? <FavoriteCollectionCard collectionId={item.id} userId={userId}/> : null}
                 </View>
-            
+                <View style={{alignItems: "center"}}>
+                    {userId ? <CollectionRatingCard collectionId={item.id} userId={userId}/> : null}
+                </View>
                 
         </View>
         <FlatList

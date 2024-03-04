@@ -16,6 +16,7 @@ const RatingCard = ({userId, recipeId}) => {
         }
     },[data])
 
+    
 
     const handleRating = async (value) => {
         setRating(value);
