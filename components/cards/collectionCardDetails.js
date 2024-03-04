@@ -6,6 +6,7 @@ import { useRouter } from "expo-router";
 // import RatingCard from "./cards/ratingCard";
 // import FavoriteCard from "./cards/favoriteCard";
 import SmallRecipeCard from "./smallRecipeCard";
+import FavoriteCollectionCard from "./favoriteCollectionCard";
 
 const CollectionCardDetails = ({item, userId}) => {
     const router = useRouter();
@@ -34,7 +35,9 @@ const CollectionCardDetails = ({item, userId}) => {
                 <TouchableOpacity style={{backgroundColor: "#F3F4F8", borderRadius: 10, marginTop: 10, marginHorizontal: 30}} onPress={() => router.push(`/profile-page/${item.user}`)}>
                         <Text style={{fontSize: 16, textAlign: "center"}}>By: {item.user_username}</Text>
                 </TouchableOpacity>
-            
+                <View style={{alignItems: "center"}}>
+                        {userId ? <FavoriteCollectionCard collectionId={item.id} userId={userId}/> : null}
+                </View>
             
                 
         </View>
