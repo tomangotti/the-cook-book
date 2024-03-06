@@ -17,7 +17,7 @@ const PopularRecipeCard = ({item, handleNavigate, user_id}) => {
             paddingTop:0,
             borderRadius: 12,
             backgroundColor: "#FFF",
-            width: 325,
+            width: 275,
             margin: 10,
             shadowColor: "#000",
             shadowOffset: {
@@ -29,8 +29,8 @@ const PopularRecipeCard = ({item, handleNavigate, user_id}) => {
             elevation: 5,
             }}>
             <View style={{
-                width: 325,
-                height: 325,
+                width: 275,
+                height: 275,
                 backgroundColor: "#F3F4F8",
                 borderRadius: 12,
                 justifyContent: "center",

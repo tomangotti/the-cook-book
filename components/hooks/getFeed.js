@@ -1,13 +1,13 @@
 import { useState, useEffect } from "react";
 
-const getFeed = () => {
+const getFeed = (user_id) => {
     const [data, setData] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
 
     const getData = () => {
         setIsLoading(true);
-        fetch(`https://mysite-p4xg.onrender.com/recipes/feed/recipes`)
+        fetch(`https://mysite-p4xg.onrender.com/recipes/feed/recipes/${user_id}`)
             .then((r) => {
                 if (r.ok) {
                     r.json().then((data) => {
