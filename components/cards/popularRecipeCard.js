@@ -51,14 +51,16 @@ const PopularRecipeCard = ({item, handleNavigate, user_id}) => {
                         borderTopRightRadius: 12,
                     }}/>
             </View>
-            <View style={{flex: 1, alignItems:"center"}}>
-                <Text style={{fontSize: 24, margin:2, textAlign: "center"}}>{item.name}</Text>
-            </View>
-            <View style={{flex: 1, alignItems:"center"}}>
-                <Text style={{fontSize: 16, margin:0}}>Rating: {item.average_rating}</Text>
-            </View>
-            <View style={{flex: 1, alignItems:"center"}}>
-                <Text style={{fontSize: 12, margin:0}}>Cook: {item.user_username}</Text>
+            <View style={{justifyContent: "center", flex: 1, padding: 5}}>
+                <View style={{flex: 1, alignItems:"center"}}>
+                    <Text style={{fontSize: 24, margin:2, textAlign: "center"}}>{item.name}</Text>
+                </View>
+                <View style={{flex: 1, alignItems:"center"}}>
+                    <Text style={{fontSize: 16, margin:2}}>Rating: {item.average_rating}</Text>
+                </View>
+                <View style={{flex: 1, alignItems:"center"}}>
+                    <Text style={{fontSize: 12, margin:2}}>Cook: {item.user_username}</Text>
+                </View>
             </View>
             
         </TouchableOpacity>

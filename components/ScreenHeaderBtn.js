@@ -1,9 +1,10 @@
 import React from "react";
-import { TouchableOpacity, Text } from "react-native";
+import { TouchableOpacity, Text, View } from "react-native";
 
 const ScreenHeaderBtn = ({ title, dimension, handlePress }) => {
     return (
         <TouchableOpacity onPress={handlePress}>
+            <View style={{justifyContent: "center", flex: 1, alignItems: "center"}}>
             <Text
                 style={{
                     marginTop: 5,
@@ -13,18 +14,16 @@ const ScreenHeaderBtn = ({ title, dimension, handlePress }) => {
                     borderRadius: 10,
                     height: 60,
                     paddingTop: 10,
-                    paddingBottom: 0,
+                    paddingBottom: 10,
                     fontSize: 16,
-                    display: "flex",
                     backgroundColor: "#F3F4F8",
-                    justifyContent: "center",
-                    alignItems: "center",
                     borderWidth: 1,
                     borderColor: "#EAEAF2",
                 }}
             >
                 {title}
             </Text>
+            </View>
         </TouchableOpacity>
     );
 };

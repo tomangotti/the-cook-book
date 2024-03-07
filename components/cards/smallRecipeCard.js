@@ -44,7 +44,7 @@ const SmallRecipeCard = ({item, handleNavigate, user_id}) => {
                                 borderTopRightRadius: 16,
                             }}/>
                 </View>
-                <View style={{ padding: 10, alignItems: "center"}}>
+                <View style={{ padding: 10, justifyContent: "center", flex: 1}}>
                     <Text style={{fontSize: 16, textAlign: "center"}}>{item.name}</Text>
                 </View>
                 

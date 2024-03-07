@@ -120,7 +120,7 @@ const EditCollectionForm = () => {
             }} />
             
             <ScrollView showsVerticalScrollIndicator={false}>
-            <View style={{
+            {/* <View style={{
                 backgroundColor: 'white',
                 borderBlockColor: 'white',
                 borderRadius: 15,
@@ -156,7 +156,7 @@ const EditCollectionForm = () => {
                         />
                     </View>
                 </View>
-                {/* <View style={{margin: 10}}>
+                <View style={{margin: 10}}>
                     <Text style={{textAlign: 'center', fontSize: 16}}>Your Recipes</Text>
                     <FlatList
                         data={userRecipes}
@@ -205,10 +205,10 @@ const EditCollectionForm = () => {
                             
                         )}
                     />
-                </View> */}
+                </View>
                 
                 
-            </View>
+            </View> */}
             <TouchableOpacity onPress={handleSaveCollection}
                     style={{
                         width: "80%",

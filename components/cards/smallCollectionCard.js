@@ -4,7 +4,7 @@ import { View, Text, TouchableOpacity, Image } from 'react-native';
 const SmallCollectionCard = ({item, handleNavigate}) => {
     const colors = ["red", "blue", "green", "purple", "orange", "pink", "brown", "black", "grey", "teal", "cyan", "magenta", "indigo", "lime", "maroon", "navy", "olive", "silver"];
     const randomColor = colors[Math.floor(Math.random() * colors.length)];
-            
+    console.log(item.recipes_details[0].user_username)
     return(
         <>
             <TouchableOpacity onPress={handleNavigate} style={{ 
@@ -28,13 +28,14 @@ const SmallCollectionCard = ({item, handleNavigate}) => {
                     padding: 10, 
                     width: 175,
                     height: 150,
-                    justifyContent: "center", // Added to center the text vertically
+                    justifyContent: "center",
                     borderRadius: 16,
                     borderColor: '#FFF',
                     borderWidth: 5,
 
                 }}>
                     <Text style={{fontSize: 28, textAlign: "center", color: "#FFF"}}>{item.name}</Text>
+                    <Text style={{fontSize: 12, textAlign: "center", color: "#FFF", marginTop: 2}}>By: {item.recipes_details[0].user_username}</Text>
                 </View>
                 
             </TouchableOpacity>
