@@ -29,6 +29,7 @@ const editRecipeForm = () => {
     const [category, setCategory] = useState("")
     const [servings, setServings] = useState("")
     const [cookTime, setCookTime] = useState("")
+    const [published, setPublished] = useState(true)
 
     const categoryOptions = [
         "Breakfast",
@@ -51,6 +52,13 @@ const editRecipeForm = () => {
             setServings(data.recipe.servings)
             setCategory(data.recipe.category)
 
+
+            if(!data.recipe.published){
+                setPublished(false)
+            } else {
+                setPublished(data.recipe.published)
+            }
+            
             if(data.recipe.tags){
                 const tagList = []
                 data.recipe.tags.forEach(tag => {
@@ -142,7 +150,8 @@ const editRecipeForm = () => {
         formData.append("servings", servings);
         formData.append("cook_time", cookTime);
         formData.append("category", category);
-
+        formData.append("published", published);
+        
         const tagsJSON = JSON.stringify(tags)
         formData.append("tags", tagsJSON);
 
@@ -215,6 +224,13 @@ const editRecipeForm = () => {
                         {categoryOptions.map((option, index) => (
                             <Picker.Item key={index} label={option} value={option} />
                         ))}
+                    </Picker>
+                </View>
+                <View style={{margin: 5}} >
+                    <Text>Public</Text>
+                    <Picker selectedValue={published} onValueChange={setPublished} style={{backgroundColor: "lightgrey", width: 300}}>
+                        <Picker.Item label="Yes" value={true} />
+                        <Picker.Item label="No" value={false} />
                     </Picker>
                 </View>
                 <View style={{margin: 5}}>

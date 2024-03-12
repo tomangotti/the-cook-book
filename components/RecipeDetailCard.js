@@ -8,7 +8,7 @@ import FavoriteCard from "./cards/favoriteCard";
 
 const RecipeDetailCard = ({item, userId}) => {
     const router = useRouter();
-
+    console.log(item)
     const rating = () => {
         if(item.average_rating === undefined) return (
             <View>

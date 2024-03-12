@@ -7,8 +7,6 @@ import SmallCollectionCard from "./smallCollectionCard";
 
 const FeedCardType = ({data, userId}) => {
     const router = useRouter();
-    console.log(data.name)
-    console.log(data.name.toLowerCase().includes("collection"))
 
     return(
         <View>

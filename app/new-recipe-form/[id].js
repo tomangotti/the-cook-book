@@ -22,13 +22,12 @@ const newRecipeForm = () => {
     const [tags, setTags] = useState([])
     const [tagText, setTagText] = useState("")
     const [category, setCategory] = useState("")
+    const [published, setPublished] = useState(true)
 
     const [image, setImage] = useState(null);
     const router = useRouter();
     const params = useGlobalSearchParams()
     
-
-
     const categoryOptions = [
         "Breakfast",
         "Lunch",
@@ -99,7 +98,6 @@ const newRecipeForm = () => {
     const handleSubmit = async () => {
         const formData = new FormData();
 
-
         if (image) {
             const imageUri = image; 
             const uriParts = imageUri.split(".");
@@ -118,6 +116,7 @@ const newRecipeForm = () => {
         formData.append("servings", servings);
         formData.append("cook_time", cookTime);
         formData.append("category", category);
+        formData.append("published", published);
         
         const tagsJSON = JSON.stringify(tags)
         formData.append("tags", tagsJSON);
@@ -192,6 +191,13 @@ const newRecipeForm = () => {
                         {categoryOptions.map((option, index) => (
                             <Picker.Item key={index} label={option} value={option} />
                         ))}
+                    </Picker>
+                </View>
+                <View style={{margin: 5}} >
+                    <Text>Public</Text>
+                    <Picker selectedValue={published} onValueChange={setPublished} style={{backgroundColor: "lightgrey", width: 300}}>
+                        <Picker.Item label="Yes" value={true} />
+                        <Picker.Item label="No" value={false} />
                     </Picker>
                 </View>
                 <View style={{margin: 5}}>
