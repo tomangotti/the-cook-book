@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, TextInput, Button, FlatList, ScrollView, Text, TouchableOpacity } from 'react-native';
 import { Stack, router, useGlobalSearchParams, useRouter } from "expo-router";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
+import { Picker } from '@react-native-picker/picker';
 
 import getUsersRecipes from "../../components/hooks/getUsersRecipes";
 import getFavoriteRecipes from "../../components/hooks/getFavoriteRecipes";
@@ -16,6 +17,7 @@ const CreateCollectionForm = () => {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [selectedRecipes, setSelectedRecipes] = useState([]);
+    const [published, setPublished] = useState(true)
 
     const { userRecipes, recipesIsLoading, recipeError, reFetchRecipes } = getUsersRecipes(params.id);
     const { favoriteRecipes, favRecipesIsLoading, favRecipesError, reFetchFavRecipes} = getFavoriteRecipes(params.id);
@@ -35,7 +37,8 @@ const CreateCollectionForm = () => {
             name: name,
             user: params.id,
             description: description,
-            recipes: selectedRecipes
+            recipes: selectedRecipes,
+            published: published
         }
         
         console.log(collection);
@@ -95,6 +98,13 @@ const CreateCollectionForm = () => {
                             value={description}
                             onChangeText={setDescription}
                         />
+                    </View>
+                    <View style={{margin: 5}} >
+                        <Text>Public</Text>
+                        <Picker selectedValue={published} onValueChange={setPublished} style={{backgroundColor: "lightgrey", width: 300}}>
+                            <Picker.Item label="Yes" value={true} />
+                            <Picker.Item label="No" value={false} />
+                        </Picker>
                     </View>
                 </View>
                 <View style={{margin: 10}}>
