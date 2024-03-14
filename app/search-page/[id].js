@@ -1,56 +1,60 @@
 import React, { useEffect, useState } from 'react';
-import { ScrollView, SafeAreaView, View, TextInput, FlatList, ActivityIndicator, Text, TouchableOpacity } from 'react-native';
-import { Picker } from '@react-native-picker/picker';
-import { Stack, router, useGlobalSearchParams, useRouter } from "expo-router";
+import { SafeAreaView, View, FlatList, Text, TouchableOpacity } from 'react-native';
+import { Stack, router,} from "expo-router";
 
-
-import getRecipes from '../../components/hooks/getRecipes';
+import SearchRecipesCard from '../../components/cards/searchRecipesCard';
+import SearchCollectionsCard from '../../components/cards/searchCollectionsCard';
 import ScreenHeaderBtn from "../../components/ScreenHeaderBtn";
-
+import HorizontalLine from '../../components/styleComponents/HorizontalLine';
 
 const SearchPage = () => {
-    const router = useRouter();
-    const [searchText, setSearchText] = useState('');
-    const [recipes, setRecipes] = useState([]);
-    const [category, setCategory] = useState('');
-    const {data, isLoading, error} = getRecipes();
-    const [filteredRecipes, setFilteredRecipes] = useState([]); //
+
+    const [activeTab, setActiveTab] = useState("Recipes");
+    const tabs = ["Recipes", "Collections", "Users"]
     
-    useEffect(() => {
-        setRecipes(data)
-    },[data])
+    
 
-    useEffect(() => {
-        if (category === "All") {
-            setFilteredRecipes(recipes.filter((recipe) => recipe.name.toLowerCase().includes(searchText.toLowerCase())))
-        } else {
-            setFilteredRecipes(recipes.filter((recipe) => recipe.name.toLowerCase().includes(searchText.toLowerCase()) && recipe.category === category))
+
+
+
+    function TabButton({name, onHandleSearchType}) {
+        return (
+            <TouchableOpacity  onPress={onHandleSearchType} style={{
+                paddingVertical: 16,
+                paddingHorizontal: 10,
+                backgroundColor: name === activeTab ? "#312651" : "#F3F4F8",
+                borderRadius: 16,
+                marginLeft: 18,
+                shadowColor: "#000",
+                shadowOffset: {
+                width: "35%",
+                },
+                shadowOpacity: 0.25,
+                shadowRadius: 5.84,
+                elevation: 5,
+                shadowColor: "#F3F4F8",
+            }}>
+                <Text style={{
+                    fontSize: 16,
+                    color: name === activeTab ? "#C3BFCC" : "#AAA9B8",
+                }}
+                    >{name}</Text>
+            </TouchableOpacity>
+        )
+    }
+
+    const displayTabContent = () => {
+        switch (activeTab) {
+            case "Recipes":
+                return (<SearchRecipesCard />)
+            case "Collections":
+                return (<SearchCollectionsCard />)
+            case "Users":
+                return (<Text>Users</Text>)    
         }
-    },[recipes, searchText, category])
+    }
 
-    const categoryOptions = [
-        "All",
-        "Breakfast",
-        "Lunch",
-        "Dinner",
-        "Dessert",
-        "Snack",
-        "Appetizer",
-        "Drink",
-        "Other"
-    ]
-
-    // const filteredRecipes = () => {
-    //     if (category === "All") {
-    //         return recipes.filter((recipe) => recipe.name.toLowerCase().includes(searchText.toLowerCase()))
-    //     } else {
-    //         return recipes.filter((recipe) => recipe.name.toLowerCase().includes(searchText.toLowerCase()) && recipe.category === category)
-    //     }
-    // }
-
-    function handlePress(id) {
-        router.push(`/recipe-details/${id}`)
-    } 
+    
 
     return (
         <SafeAreaView>
@@ -65,45 +69,22 @@ const SearchPage = () => {
                 headerTitleAlign: "center"
             }}/>
         
-        <View style={{backgroundColor: "white", margin: 15, borderRadius: 15}}>
-            <View>
-                <TextInput
-                    placeholder="Search by Recipe name"
-                    value={searchText}
-                    style={{ backgroundColor: 'lightgrey', width: '75%', marginTop: 25, alignSelf: 'center', fontSize: 20 }}
-                    onChangeText={(text) => setSearchText(text)}
+        <View style={{backgroundColor: "white", margin: 15, borderRadius: 15, paddingBottom: 20}}>
+            <View style={{alignItems: 'center', marginTop: 25}}>
+                <FlatList 
+                    data={tabs}
+                    horizontal
+                    showsHorizontalScrollIndicator={false}
+                    renderItem={({item}) => (
+                        <TabButton name={item} onHandleSearchType={() => setActiveTab(item)} />
+                    )}
                 />
-            </View>    
+            </View>
+            <View style={{width: "80%", alignSelf: "center"}}>     
+                <HorizontalLine />
+            </View>
             
-            <View style={{marginVertical: 15, alignSelf: "center"}}>
-                <Text style={{fontSize: 18}}>Category</Text>
-                <Picker selectedValue={category} onValueChange={setCategory} style={{backgroundColor: "lightgrey", width: 300}}>
-                    {categoryOptions.map((option, index) => (
-                        <Picker.Item key={index} label={option} value={option} />
-                    ))}
-                </Picker>
-            </View>
-            <View style={{marginVertical: 10}}>
-                <Text style={{fontSize: 18, alignSelf: "center"}}>Results</Text>
-            </View>
-            {isLoading ? (
-                    <ActivityIndicator size="large" />
-                ) : error ? (
-                    <View>
-                        <Text>Something Went Wrong:</Text>
-                        <Text>{error}</Text>
-                    </View>
-                        ) : 
-            <FlatList
-                data={filteredRecipes}
-                keyExtractor={(item) => item.id.toString()}
-                renderItem={({ item }) => (
-                <TouchableOpacity onPress={() => handlePress(item.id)} style={{marginHorizontal: 15, marginVertical:5, padding: 5, width: '75%', borderWidth: 1, borderColor: 'black', borderRadius: 5, alignSelf: "center"}}>
-                    <Text style={{marginLeft: 10}}>{item.name} - by: {item.user_username}</Text>
-                </TouchableOpacity>
-                )}
-            />
-                }
+            {displayTabContent()}
         </View>
         </SafeAreaView>
     );
