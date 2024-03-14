@@ -1,38 +1,41 @@
 import React, { useEffect, useState } from 'react';
 import { View, TextInput, FlatList, ActivityIndicator, Text, TouchableOpacity } from 'react-native';
+import { Picker } from '@react-native-picker/picker';
 import { useRouter } from "expo-router";
-import getCollections from '../hooks/getCollections';
 
 
-const SearchCollectionsCard = () => {
+import getUsers from '../hooks/getUsers';
+
+
+const SearchUsersCard = () => {
     const router = useRouter();
     const [searchText, setSearchText] = useState('');
-    const [collections, setCollections] = useState([]);
-    const {data, isLoading, error} = getCollections();
-    const [filteredCollections, setFilteredCollections] = useState([]);
+    const [users, setUsers] = useState([]);
+    const {data, isLoading, error} = getUsers();
+    const [filteredUsers, setFilteredUsers] = useState([]);
 
     useEffect(() => {
-        setCollections(data)
+        setUsers(data)
     },[data])
 
     useEffect(() => {
         if(searchText === "") {
-            setFilteredCollections([])
+            setFilteredUsers([])
         } else {    
-            setFilteredCollections(collections.filter((collections) => collections.name.toLowerCase().includes(searchText.toLowerCase())))
+            setFilteredUsers(users.filter((users) => users.username.toLowerCase().includes(searchText.toLowerCase())))
         }    
-        },[collections, searchText])
+        },[users, searchText])
 
     
     function handlePress(id) {
-        router.push(`/collection-detail-page/${id}`)
+        router.push(`/profile-page/${id}`)
     } 
 
     return (
         <View>
             <View>
                 <TextInput
-                    placeholder="Search by Collection name"
+                    placeholder="Search by Username"
                     value={searchText}
                     style={{ backgroundColor: 'lightgrey', width: '75%', marginTop: 25, alignSelf: 'center', fontSize: 20 }}
                     onChangeText={(text) => setSearchText(text)}
@@ -55,11 +58,11 @@ const SearchCollectionsCard = () => {
                     </View>
                         ) : 
             <FlatList
-                data={filteredCollections}
+                data={filteredUsers}
                 keyExtractor={(item) => item.id.toString()}
                 renderItem={({ item }) => (
                 <TouchableOpacity onPress={() => handlePress(item.id)} style={{marginHorizontal: 15, marginVertical:5, padding: 5, width: '75%', borderWidth: 1, borderColor: 'black', borderRadius: 5, alignSelf: "center"}}>
-                    <Text style={{marginLeft: 10}}>{item.name} - by: {item.user_username}</Text>
+                    <Text style={{marginLeft: 10}}>{item.username}</Text>
                 </TouchableOpacity>
                 )}
             />
@@ -69,4 +72,4 @@ const SearchCollectionsCard = () => {
     )
 }
 
-export default SearchCollectionsCard;
+export default SearchUsersCard;

@@ -20,7 +20,10 @@ const SearchRecipesCard = () => {
     },[data])
 
     useEffect(() => {
-        if (category === "All") {
+        if(searchText === "") {
+            setFilteredRecipes([])
+        }
+        else if (category === "All") {
             setFilteredRecipes(recipes.filter((recipe) => recipe.name.toLowerCase().includes(searchText.toLowerCase())))
         } else {
             setFilteredRecipes(recipes.filter((recipe) => recipe.name.toLowerCase().includes(searchText.toLowerCase()) && recipe.category === category))

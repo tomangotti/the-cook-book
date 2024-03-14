@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { SafeAreaView, View, FlatList, Text, TouchableOpacity } from 'react-native';
 import { Stack, router,} from "expo-router";
 
+import SearchUsersCard from '../../components/cards/searchUsersCard';
 import SearchRecipesCard from '../../components/cards/searchRecipesCard';
 import SearchCollectionsCard from '../../components/cards/searchCollectionsCard';
 import ScreenHeaderBtn from "../../components/ScreenHeaderBtn";
@@ -13,9 +14,6 @@ const SearchPage = () => {
     const tabs = ["Recipes", "Collections", "Users"]
     
     
-
-
-
 
     function TabButton({name, onHandleSearchType}) {
         return (
@@ -50,7 +48,7 @@ const SearchPage = () => {
             case "Collections":
                 return (<SearchCollectionsCard />)
             case "Users":
-                return (<Text>Users</Text>)    
+                return (<SearchUsersCard />)    
         }
     }
 
@@ -65,7 +63,7 @@ const SearchPage = () => {
                 headerLeft: () => (
                     <ScreenHeaderBtn title={"<-- Back"} dimension="100%" handlePress={() => router.back()} />
                 ),
-                headerTitle: "Search",
+                headerTitle: `Search ${activeTab}`,
                 headerTitleAlign: "center"
             }}/>
         
