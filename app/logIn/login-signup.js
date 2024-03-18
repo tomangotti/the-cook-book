@@ -13,6 +13,7 @@ const LogInSignUp = ({loggedIn, setLoggedIn}) => {
 
 
 
+
     const displayTabContent = () => {
         switch (activeTab) {
             case "Sign-Up":
@@ -23,6 +24,7 @@ const LogInSignUp = ({loggedIn, setLoggedIn}) => {
     }
 
 
+    
 
     function TabButton({name, onHandleSearchType}) {
         return (

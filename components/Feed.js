@@ -1,18 +1,16 @@
 import React, {useCallback, useState} from 'react';
-import {  SafeAreaView, View, Text, TouchableOpacity, FlatList, ActivityIndicator, Image, ScrollView, RefreshControl } from 'react-native';
+import {  SafeAreaView, View, Text, TouchableOpacity, ActivityIndicator, ScrollView, RefreshControl } from 'react-native';
 import {Stack, useRouter } from 'expo-router';
 
 import getFeed from './hooks/getFeed';
-import RecipeCard from './RecipeCard';
-import PopularRecipeCard from './cards/popularRecipeCard';
 import ScreenHeaderBtn from './ScreenHeaderBtn';
-import ButtonTemplate from './buttons/buttonTemplate';
 import FeedCardType from './cards/feedCardType';
 import SmallButtonTemplate from './buttons/smallButtonTemplate';
 
 
 
-const Feed = ({userId, loggedIn, setLoggedIn}) => {
+
+const Feed = ({userId}) => {
     const router = useRouter();
     const [refreshing, setRefreshing] = useState(false);
     const { data, isLoading, error, reFetch} = getFeed(userId);
@@ -39,14 +37,10 @@ const Feed = ({userId, loggedIn, setLoggedIn}) => {
                     headerShadowVisible: false,
                     headerStyle: {backgroundColor: "#FAFAFC"},
                     headerLeft: () => (
-                        loggedIn ? 
-                        <ScreenHeaderBtn title={"Your Recipes"} dimension='75%' handlePress={() => router.push(`/your-recipes/${userId}`)} /> :
-                        null
+                        <ScreenHeaderBtn title={"Your Recipes"} dimension='75%' handlePress={() => router.push(`/your-recipes/${userId}`)} /> 
                     ),
-                    headerRight: () => (
-                        loggedIn ? 
-                            <ScreenHeaderBtn title={"Profile Page"} dimension='100%' handlePress={() => router.push(`/profile-page/${userId}`)} /> :
-                            <ScreenHeaderBtn title={"Log in"} dimension='100%' handlePress={() => router.push('logIn/login-signup')}/>
+                    headerRight: () => ( 
+                            <ScreenHeaderBtn title={"Profile Page"} dimension='100%' handlePress={() => router.push(`/profile-page/${userId}`)} />
                     ),
                     headerTitle: "The Good Cook Book",
                     headerTitleAlign: "center",

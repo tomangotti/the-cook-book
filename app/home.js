@@ -20,17 +20,18 @@ const Home = () => {
     
     useEffect(() => {
         checkLogin()
-    },[])
+    },[loggedIn])
     
-    if(loggedIn === false) {
+    if(loggedIn === false && userId === null){ 
         return(
             <LogInSignUp loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
         )
-    }else if(loggedIn === true) {
+    }else if(loggedIn === true && userId) {
         return(
-            <Feed userId={userId} loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
+            <Feed userId={userId} />
         )
     }
 }
+
 
 export default Home

@@ -13,7 +13,7 @@ const postLogin = async (info) => {
 
     if(response.ok) {
         const data = await response.json()
-        storeToken(data.token)
+        await storeToken(data.token)
         return true
     } else {
         return false

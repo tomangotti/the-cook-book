@@ -7,6 +7,7 @@ import ButtonTemplate from "./buttons/buttonTemplate";
 import postNewUser from "./hooks/postNewUser";
 
 
+
 const SignUp = ({loggedIn, setLoggedIn}) => {
     const [email, setEmail] = useState("")
     const [fName, setFName] = useState("")
@@ -31,7 +32,7 @@ const SignUp = ({loggedIn, setLoggedIn}) => {
             if(post === true) {
                 setLoggedIn(post)
             } else if(post === false) {
-                alert("Sign up failed")
+                alert("Sign up failed, please try again later")
                 setLoggedIn(post)
             }
         }
