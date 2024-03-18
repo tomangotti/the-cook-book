@@ -3,13 +3,14 @@ import { useState } from "react";
 import { View, Text, TextInput, TouchableOpacity} from 'react-native';
 import postLogin from "./hooks/postLogin";
 import ButtonTemplate from "./buttons/buttonTemplate";
+import {useRouter } from "expo-router";
 
 
 
 const Login = ({loggedIn, setLoggedIn}) => {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
-
+    const router = useRouter()
     async function handleLogin() {
         const attempt = await postLogin({
             'username': username,
@@ -37,7 +38,7 @@ const Login = ({loggedIn, setLoggedIn}) => {
                 <ButtonTemplate title="Login" color="blue" pressed={handleLogin} />
             </View>
             <View style={{margin: 5, width: "60%"}}>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() => router.push("/forgot-password-form/forgotPasswordForm")}>
                     <Text style={{textAlign: "center"}}>Forgot Password</Text>
                 </TouchableOpacity>
             </View>
