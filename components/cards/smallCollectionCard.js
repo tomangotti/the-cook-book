@@ -4,7 +4,7 @@ import { View, Text, TouchableOpacity, Image } from 'react-native';
 const SmallCollectionCard = ({item, handleNavigate}) => {
     const colors = ["red", "blue", "green", "purple", "orange", "pink", "brown", "black", "grey", "teal", "cyan", "magenta", "indigo", "lime", "maroon", "navy", "olive", "silver"];
     const randomColor = colors[Math.floor(Math.random() * colors.length)];
-    console.log(item.recipes_details[0].user_username)
+    
     return(
         <>
             <TouchableOpacity onPress={handleNavigate} style={{ 
@@ -13,8 +13,8 @@ const SmallCollectionCard = ({item, handleNavigate}) => {
                 flexDirection: "column",
                 margin: 15,
                 borderRadius: 16,
-                backgroundColor: randomColor,
-                width: 175,
+                backgroundColor: '#FFF',
+                width: 200,
                 shadowColor: "#000",
                 shadowOffset: {
                     width: 0,
@@ -26,16 +26,16 @@ const SmallCollectionCard = ({item, handleNavigate}) => {
             }}>
                 <View style={{ 
                     padding: 10, 
-                    width: 175,
-                    height: 150,
+                    width: 200,
+                    height: 275,
                     justifyContent: "center",
                     borderRadius: 16,
-                    borderColor: '#FFF',
+                    borderColor: randomColor,
                     borderWidth: 5,
 
                 }}>
-                    <Text style={{fontSize: 28, textAlign: "center", color: "#FFF"}}>{item.name}</Text>
-                    <Text style={{fontSize: 12, textAlign: "center", color: "#FFF", marginTop: 2}}>By: {item.recipes_details[0].user_username}</Text>
+                    <Text style={{fontSize: 35, textAlign: "center", color: randomColor}}>{item.name}</Text>
+                    <Text style={{fontSize: 12, textAlign: "center", color: randomColor, marginTop: 2}}>By: {item.recipes_details[0].user_username}</Text>
                 </View>
                 
             </TouchableOpacity>

@@ -3,8 +3,8 @@ import { View, Text, TouchableOpacity, Image } from 'react-native';
 
 
 const PopularRecipeCard = ({item, handleNavigate, user_id}) => {
-
-    
+    const imageAddress = ["https://freesvg.org/img/mealplate.png", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ83aBZygUGIMqHLcMhhY9VhE283tGv61pOf-boYo9WnQ&s","https://images.rawpixel.com/image_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTA0L2pvYjk3MC1lbGVtZW50LTIwMi14LmpwZw.jpg"]
+    const randomAddress = imageAddress[Math.floor(Math.random() * imageAddress.length)];
     return(
         <>
         <TouchableOpacity onPress={handleNavigate} style={{ 
@@ -42,7 +42,7 @@ const PopularRecipeCard = ({item, handleNavigate, user_id}) => {
                 source={{
                     uri: item.image
                     ? item.image
-                    : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ83aBZygUGIMqHLcMhhY9VhE283tGv61pOf-boYo9WnQ&s"
+                    : randomAddress
                     }}
                     resizeMode="cover" style={{
                         width: "100%",
@@ -52,14 +52,11 @@ const PopularRecipeCard = ({item, handleNavigate, user_id}) => {
                     }}/>
             </View>
             <View style={{justifyContent: "center", flex: 1, padding: 5}}>
-                <View style={{flex: 1, alignItems:"center"}}>
-                    <Text style={{fontSize: 24, margin:2, textAlign: "center"}}>{item.name}</Text>
+                <View style={{alignItems:"center", justifyContent: "center"}}>
+                    <Text style={{fontSize: 20, margin:2, textAlign: "center"}}>{item.name}</Text>
                 </View>
-                <View style={{flex: 1, alignItems:"center"}}>
-                    <Text style={{fontSize: 16, margin:2}}>Rating: {item.average_rating}</Text>
-                </View>
-                <View style={{flex: 1, alignItems:"center"}}>
-                    <Text style={{fontSize: 12, margin:2}}>Cook: {item.user_username}</Text>
+                <View style={{flex: 2, alignItems:"center", justifyContent: "center" }}>
+                    <Text style={{fontSize: 12, margin:2}}>Cook: {item.user_username} - Rating: {item.average_rating}</Text>
                 </View>
             </View>
             
