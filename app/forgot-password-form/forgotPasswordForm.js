@@ -13,6 +13,7 @@ const ForgotPasswordForm = () => {
     const router = useRouter()
 
     const handlePress = () => {
+        router.push("/forgot-password-form/enterCodeForm")
         console.log(email)
     }
 
