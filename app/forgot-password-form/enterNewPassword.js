@@ -14,7 +14,8 @@ const EnterNewPassword = () => {
     const router = useRouter();
 
     const handlePress = () => {
-        // Handle submit button press
+        console.log("Password: ", password);
+
     };
 
     return(
@@ -30,11 +31,11 @@ const EnterNewPassword = () => {
             }}/>
             <View style={{alignItems: "center", width: "100%", marginTop: 25}}>
                 <View style={{margin: 5}}>
-                    <Text style={{fontSize: 18}}>Password</Text>
+                    <Text style={{fontSize: 18}}>New Password</Text>
                     <TextInput  value={password} onChangeText={setPassword} style={{backgroundColor: "lightgrey", width: 250}}></TextInput>
                 </View>
                 <View style={{margin: 5}}>
-                    <Text style={{fontSize: 18}}>Confirm Password</Text>
+                    <Text style={{fontSize: 18}}>Confirm New Password</Text>
                     <TextInput  value={confirmPassword} onChangeText={setConfirmPassword} style={{backgroundColor: "lightgrey", width: 250}}></TextInput>
                 </View>
                 <View style={{width: "80%", margin:15}}>

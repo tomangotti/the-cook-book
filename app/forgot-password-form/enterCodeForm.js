@@ -24,7 +24,7 @@ const EnterCodeForm = () => {
     }, []);
 
     const handlePress = () => {
-        // Handle submit button press
+        router.push('/forgot-password-form/enterNewPassword');
     };
 
     const formatTime = (seconds) => {
