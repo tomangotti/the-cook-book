@@ -22,7 +22,7 @@ const newRecipeForm = () => {
     const [ingredients, setIngredients] = useState([])
     const [tags, setTags] = useState([])
     const [tagText, setTagText] = useState("")
-    const [category, setCategory] = useState("")
+    const [category, setCategory] = useState("Breakfast")
     const [published, setPublished] = useState(true)
 
     const [image, setImage] = useState(null);
