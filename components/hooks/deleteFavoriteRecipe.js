@@ -14,8 +14,6 @@ const deleteFavoriteRecipe = async (user_id, recipe_id) => {
             return false;
         }
 
-        const data = await response.json();
-        console.log(data);
         return true;
     } catch (error) {
         console.error(error);

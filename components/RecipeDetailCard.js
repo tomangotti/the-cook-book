@@ -41,7 +41,7 @@ const RecipeDetailCard = ({item, userId}) => {
             shadowRadius: 5.84,
             elevation: 5,
             }}>
-            <Text style={{fontSize: 32, marginTop: 5, marginBottom: 15}}>{item.name}</Text>
+            <Text style={{fontSize: 32, marginTop: 5, marginBottom: 15, textAlign: "center"}}>{item.name}</Text>
             <View style={{
                 width: 350,
                 height: 350,
