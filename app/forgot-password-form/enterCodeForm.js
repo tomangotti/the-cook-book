@@ -5,7 +5,7 @@ import { useRouter } from "expo-router";
 
 import ButtonTemplate from "../../components/buttons/buttonTemplate";
 import ScreenHeaderBtn from "../../components/ScreenHeaderBtn";
-
+import PostCodeCheck from "../../components/hooks/PostCodeCheck";
 
 
 const EnterCodeForm = () => {
@@ -23,8 +23,17 @@ const EnterCodeForm = () => {
         };
     }, []);
 
-    const handlePress = () => {
-        router.push('/forgot-password-form/enterNewPassword');
+    const handlePress = async () => {
+        const response = await PostCodeCheck(code);
+        if (!response) {
+            alert("Invalid Code");
+            return;
+        }else if (countdown <= 0) {
+            alert("Code Expired");
+            router.back();
+            return;
+        }
+        router.push('/forgot-password-form/enterNewPassword', {user_id, response});
     };
 
     const formatTime = (seconds) => {

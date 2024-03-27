@@ -5,7 +5,7 @@ import { useRouter } from "expo-router";
 
 import ButtonTemplate from "../../components/buttons/buttonTemplate";
 import ScreenHeaderBtn from "../../components/ScreenHeaderBtn";
-
+import PostNewPassword from "../../components/hooks/PostNewPassword";
 
 
 const EnterNewPassword = () => {
@@ -13,7 +13,17 @@ const EnterNewPassword = () => {
     const [confirmPassword, setConfirmPassword] = useState("");
     const router = useRouter();
 
-    const handlePress = () => {
+    const handlePress = async () => {
+        if (password !== confirmPassword) {
+            alert("Passwords do not match");
+            return;
+        }
+        const response = await PostNewPassword(password);
+        if (!response) {
+            alert("Password not changed");
+            return;
+        }
+        router.push("/home");
         console.log("Password: ", password);
 
     };

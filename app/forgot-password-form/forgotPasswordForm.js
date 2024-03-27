@@ -6,15 +6,22 @@ import { Stack } from "expo-router";
 import ButtonTemplate from "../../components/buttons/buttonTemplate";
 import { useRouter } from "expo-router";
 import ScreenHeaderBtn from "../../components/ScreenHeaderBtn";
-
+import PostEmailForPasswordReset from "../../components/hooks/postEmailForPasswordReset";
 
 const ForgotPasswordForm = () => {
     const [email, setEmail] = useState("")
     const router = useRouter()
 
-    const handlePress = () => {
-        router.push("/forgot-password-form/enterCodeForm")
+    const handlePress = async () => {
         console.log(email)
+        const response = await PostEmailForPasswordReset(email)
+        if (!response) {
+            alert("Email not found")
+            return
+        } else{
+            router.push("/forgot-password-form/enterCodeForm")
+        }
+        
     }
 
     return(
