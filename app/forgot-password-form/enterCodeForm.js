@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, TextInput, SafeAreaView} from 'react-native';
 import { Stack } from "expo-router";
-import { useRouter } from "expo-router";
+import { useRouter} from "expo-router";
 
 import ButtonTemplate from "../../components/buttons/buttonTemplate";
-import ScreenHeaderBtn from "../../components/ScreenHeaderBtn";
 import PostCodeCheck from "../../components/hooks/PostCodeCheck";
 import BackImageHeaderButton from "../../components/buttons/BackImageHeaderButton";
 
@@ -12,7 +11,7 @@ const EnterCodeForm = () => {
     const [code, setCode] = useState("");
     const [countdown, setCountdown] = useState(300); // 5 minutes in seconds
     const router = useRouter();
-
+    
     useEffect(() => {
         const timer = setInterval(() => {
             setCountdown(prevCountdown => prevCountdown - 1);
@@ -24,16 +23,19 @@ const EnterCodeForm = () => {
     }, []);
 
     const handlePress = async () => {
-        const response = await PostCodeCheck(code);
-        if (!response) {
-            alert("Invalid Code");
-            return;
-        }else if (countdown <= 0) {
+        if (countdown <= 0) {
             alert("Code Expired");
             router.back();
             return;
         }
-        router.push('/forgot-password-form/enterNewPassword', {user_id, response});
+        
+        const response = await PostCodeCheck(code);
+        console.log(response);
+        if (!response) {
+            alert("Invalid Code");
+            return;
+        }
+        router.push(`/forgot-password-form/${response}`);
     };
 
     const formatTime = (seconds) => {

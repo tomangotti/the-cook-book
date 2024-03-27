@@ -14,8 +14,12 @@ const ForgotPasswordForm = () => {
     const router = useRouter()
 
     const handlePress = async () => {
-        console.log(email)
+        if(email === ""){
+            router.push("/forgot-password-form/enterCodeForm")
+            return;
+        }
         const response = await PostEmailForPasswordReset(email)
+        console.log(response)
         if (!response) {
             alert("Email not found")
             return

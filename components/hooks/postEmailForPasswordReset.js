@@ -1,6 +1,6 @@
 
 const PostEmailForPasswordReset = async (email) => {
-    console.log(email)
+    
     const response = await fetch("https://mysite-p4xg.onrender.com/users/send/code", {
         method: "POST",
         headers: {
@@ -8,7 +8,6 @@ const PostEmailForPasswordReset = async (email) => {
         },
         body: JSON.stringify({email: email})
     })
-
     if (response.ok) {
         return true
     } else {

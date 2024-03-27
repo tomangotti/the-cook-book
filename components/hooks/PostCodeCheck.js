@@ -1,6 +1,6 @@
 
 const PostCodeCheck = async (code) => {
-    console.log(email)
+    console.log(code)
     const response = await fetch("https://mysite-p4xg.onrender.com/users/approve/code", {
         method: "POST",
         headers: {
@@ -10,7 +10,10 @@ const PostCodeCheck = async (code) => {
     })
 
     if (response.ok) {
+        
         data = await response.json()
+        console.log(data.user_id)
+
         return data.user_id
     } else {
         return false

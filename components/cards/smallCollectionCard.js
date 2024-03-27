@@ -14,7 +14,7 @@ const SmallCollectionCard = ({item, handleNavigate}) => {
                 margin: 15,
                 borderRadius: 16,
                 backgroundColor: '#FFF',
-                width: 200,
+                width: 175,
                 shadowColor: "#000",
                 shadowOffset: {
                     width: 0,
@@ -26,8 +26,8 @@ const SmallCollectionCard = ({item, handleNavigate}) => {
             }}>
                 <View style={{ 
                     padding: 10, 
-                    width: 200,
-                    height: 275,
+                    width: 175,
+                    height: 250,
                     justifyContent: "center",
                     borderRadius: 16,
                     borderColor: randomColor,

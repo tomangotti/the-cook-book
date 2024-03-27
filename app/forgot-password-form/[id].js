@@ -1,10 +1,9 @@
 import React, { useState} from "react";
 import { View, Text, TextInput, SafeAreaView} from 'react-native';
 import { Stack } from "expo-router";
-import { useRouter } from "expo-router";
+import { useRouter, useGlobalSearchParams, } from "expo-router";
 
 import ButtonTemplate from "../../components/buttons/buttonTemplate";
-import ScreenHeaderBtn from "../../components/ScreenHeaderBtn";
 import PostNewPassword from "../../components/hooks/postNewPassword";
 import BackImageHeaderButton from "../../components/buttons/BackImageHeaderButton";
 
@@ -12,13 +11,18 @@ const EnterNewPassword = () => {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const router = useRouter();
-    const user_id = router.params.user_id;
+    const params = useGlobalSearchParams();
+
+    
+
     const handlePress = async () => {
         if (password !== confirmPassword) {
             alert("Passwords do not match");
             return;
         }
-        const response = await PostNewPassword(password, user_id);
+        console.log("User ID: ", params.id);
+        console.log("Password: ", password)
+        const response = await PostNewPassword(password, params.id);
         if (!response) {
             alert("Password not changed");
             return;

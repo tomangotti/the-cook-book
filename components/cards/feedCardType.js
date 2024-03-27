@@ -5,13 +5,13 @@ import {Stack, useRouter } from 'expo-router';
 import PopularRecipeCard from "./popularRecipeCard";
 import SmallCollectionCard from "./smallCollectionCard";
 
-const FeedCardType = ({data, userId}) => {
+const FeedCardType = ({data, userId, backgroundColor}) => {
     const router = useRouter();
 
     return(
-        <View>
-            <View style={{ marginTop: 5, alignItems: "left"}}>
-                        <Text style={{fontSize: 20, marginLeft: 10}}>{data.name}</Text>
+        <View style={{backgroundColor: backgroundColor}}>
+            <View style={{ marginTop: 10, alignItems: "left"}}>
+                        <Text style={{fontSize: 20, marginLeft: 10}}>{data.name.toUpperCase()}</Text>
             </View>
             {data.data.length === 0 ? <Text style={{fontSize: 16, alignSelf: 'center'}}>No {data.name} to display</Text> : null}
             <View style={{
@@ -24,10 +24,10 @@ const FeedCardType = ({data, userId}) => {
                         } else {
                             return (<PopularRecipeCard item={item} key={item.id} user_id={userId} handleNavigate={() => router.push(`/recipe-details/${item.id}`)} />)
                         }
-                }} 
-                keyExtractor={item => item?.id}
-                contentContainerStyle={{columnGap: 8}}
-                horizontal
+                    }} 
+                    keyExtractor={item => item?.id}
+                    contentContainerStyle={{columnGap: 8}}
+                    horizontal
                 />
                 
             </View>

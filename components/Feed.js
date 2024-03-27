@@ -14,6 +14,19 @@ const Feed = ({userId}) => {
     const router = useRouter();
     const [refreshing, setRefreshing] = useState(false);
     const { data, isLoading, error, reFetch} = getFeed(userId);
+    let n = 0;
+
+    const backgroundColorChooser = () => {
+        options = ["#FAFAFC", ""]
+        if(n === 0){
+            n = 1
+            return options[0]
+        } else if(n === 1){
+            n = 0
+            return options[1]
+        }
+    }
+
 
     const onRefresh = useCallback(() => {
         setRefreshing(true);
@@ -65,7 +78,7 @@ const Feed = ({userId}) => {
                             </TouchableOpacity>
                         </View>
                     ) : data.map((list) => {
-                        return <FeedCardType data={list} key={list} userId={userId} />
+                        return <FeedCardType data={list} key={list} userId={userId} backgroundColor={backgroundColorChooser()} />
                     })}
 
                 </View>
