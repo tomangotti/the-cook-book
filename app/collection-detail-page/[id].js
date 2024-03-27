@@ -6,6 +6,7 @@ import ScreenHeaderBtn from "../../components/ScreenHeaderBtn";
 import getSingleCollection from "../../components/hooks/getSingleCollection";
 import checkToken from "../../components/hooks/checkToken";
 import CollectionCardDetails from "../../components/cards/collectionCardDetails";
+import BackImageHeaderButton from "../../components/buttons/BackImageHeaderButton";
 
 const CollectionDetails = () => {
     const params = useGlobalSearchParams();
@@ -26,6 +27,7 @@ const CollectionDetails = () => {
     }
 
 
+
     return(
         <SafeAreaView>
             <Stack.Screen
@@ -34,7 +36,8 @@ const CollectionDetails = () => {
                     headerShadowVisible: false,
                     headerBackVisible: false,
                     headerLeft: () => (
-                        <ScreenHeaderBtn title={"<-- Back"} dimension="100%" handlePress={() => router.back()} />
+                        
+                    <BackImageHeaderButton handlePress={() => router.back()} />
                     ),
                     headerRight: () => (
                         checkOwner() ? <ScreenHeaderBtn title={"Edit Collection"} dimension="100%" handlePress={() => router.push(`/edit-collection-form/${params.id}`)} /> : null
@@ -42,7 +45,7 @@ const CollectionDetails = () => {
                     headerTitle: "Collection Details",
                     headerTitleAlign: "center"
                 }}/>
-            
+            <ScrollView showsVerticalScrollIndicator={false} >
                 {isLoading ? (
                     <ActivityIndicator size="large" />
                 ) : error ? (
@@ -55,7 +58,7 @@ const CollectionDetails = () => {
                     <CollectionCardDetails item={data} userId={userId} />
                 ) :
                 null}
-            
+            </ScrollView>
         </SafeAreaView>
     )
 }

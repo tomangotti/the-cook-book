@@ -11,7 +11,7 @@ import ScreenHeaderBtn from "../../components/ScreenHeaderBtn";
 import getSingleCollection from '../../components/hooks/getSingleCollection';
 import checkToken from '../../components/hooks/checkToken';
 import deleteCollection from '../../components/hooks/deleteCollection';
-
+import BackImageHeaderButton from '../../components/buttons/BackImageHeaderButton';
 
 const EditCollectionForm = () => {
     const router = useRouter();
@@ -113,7 +113,7 @@ const EditCollectionForm = () => {
                 headerShadowVisible: false,
                 headerBackVisible: false,
                 headerLeft: () => (
-                    <ScreenHeaderBtn title={"<-- Back"} dimension="100%" handlePress={() => router.back()} />
+                    <BackImageHeaderButton handlePress={() => router.back()} />
                 ),
                 headerTitle: "Edit Collection",
                 headerTitleAlign: "center"

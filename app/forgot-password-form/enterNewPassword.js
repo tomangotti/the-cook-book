@@ -5,8 +5,8 @@ import { useRouter } from "expo-router";
 
 import ButtonTemplate from "../../components/buttons/buttonTemplate";
 import ScreenHeaderBtn from "../../components/ScreenHeaderBtn";
-import PostNewPassword from "../../components/hooks/PostNewPassword";
-
+import PostNewPassword from "../../components/hooks/postNewPassword";
+import BackImageHeaderButton from "../../components/buttons/BackImageHeaderButton";
 
 const EnterNewPassword = () => {
     const [password, setPassword] = useState("");
@@ -36,7 +36,7 @@ const EnterNewPassword = () => {
                 headerTitle: "Enter New Password",
                 headerTitleAlign: "center",
                 headerLeft: () => (
-                    <ScreenHeaderBtn title={"<-- Back"} dimension="100%" handlePress={() => router.back()} />
+                    <BackImageHeaderButton handlePress={() => router.back()} />
                 )
             }}/>
             <View style={{alignItems: "center", width: "100%", marginTop: 25}}>

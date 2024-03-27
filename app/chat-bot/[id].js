@@ -7,7 +7,7 @@ import ScreenHeaderBtn from "../../components/ScreenHeaderBtn";
 import getUserMessages from "../../components/hooks/getUserMessages";
 import postNewMessage from "../../components/hooks/postNewMessage";
 import ClearChat from "../../components/hooks/clearChat";
-
+import BackImageHeaderButton from "../../components/buttons/BackImageHeaderButton";
 
 const ChatBot = () => {
     const [inputMessage, setInputMessage] = useState("");
@@ -169,7 +169,7 @@ const ChatBot = () => {
                     headerShadowVisible: false,
                     headerStyle: {backgroundColor: "#FAFAFC"},
                     headerLeft: () => (
-                        <ScreenHeaderBtn title={"<-- Back"} dimension='100%' handlePress={() => router.back()} />
+                        <BackImageHeaderButton handlePress={() => router.back()} />
                     ),
                     headerRight: () => (
                         <ScreenHeaderBtn title={"Clear Chat"} dimension='100%' handlePress={() => handleClearChat()} />

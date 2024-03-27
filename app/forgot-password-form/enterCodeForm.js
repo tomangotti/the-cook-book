@@ -6,7 +6,7 @@ import { useRouter } from "expo-router";
 import ButtonTemplate from "../../components/buttons/buttonTemplate";
 import ScreenHeaderBtn from "../../components/ScreenHeaderBtn";
 import PostCodeCheck from "../../components/hooks/PostCodeCheck";
-
+import BackImageHeaderButton from "../../components/buttons/BackImageHeaderButton";
 
 const EnterCodeForm = () => {
     const [code, setCode] = useState("");
@@ -50,7 +50,7 @@ const EnterCodeForm = () => {
                 headerTitle: "Enter Code",
                 headerTitleAlign: "center",
                 headerLeft: () => (
-                    <ScreenHeaderBtn title={"<-- Back"} dimension="100%" handlePress={() => router.back()} />
+                    <BackImageHeaderButton handlePress={() => router.back()} />
                 )
             }}/>
             <View style={{alignItems: "center", width: "100%", marginTop: 25}}>

@@ -6,6 +6,7 @@ import ScreenHeaderBtn from "../../components/ScreenHeaderBtn";
 import getCartItems from "../../components/hooks/getCartItems";
 import CartRecipeCard from "../../components/cards/cartRecipeCard";
 import IngredientCard from "../../components/IngredientCard";
+import BackImageHeaderButton from "../../components/buttons/BackImageHeaderButton";
 
 const CartPage = () => {
     const params = useGlobalSearchParams();
@@ -27,7 +28,7 @@ const CartPage = () => {
                 headerShadowVisible: false,
                 headerBackVisible: false,
                 headerLeft: () => (
-                    <ScreenHeaderBtn title={"<-- Back"} dimension="100%" handlePress={() => router.back()} />
+                    <BackImageHeaderButton handlePress={() => router.back()} />
                 ),
                 headerTitle: "Cart Items",
                 headerTitleAlign: "center"

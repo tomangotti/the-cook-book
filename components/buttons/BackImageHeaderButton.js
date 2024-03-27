@@ -1,11 +1,24 @@
 import React from "react";
-import { TouchableOpacity, Text, View } from "react-native";
+import { TouchableOpacity, View, Image } from "react-native";
 
 const BackImageHeaderButton = ({handlePress}) => {
+    const image = require("../../assets/images/back.png");
     return (
         <TouchableOpacity onPress={handlePress}>
-            <View style={{justifyContent: "center", flex: 1, alignItems: "center"}}>
-                <Image source={require("../../assets/images/back.png")} style={{width: "100%", height: "100%"}} />
+            <View style={{
+                    width: 75, 
+                    height: 60,
+                    margin: 5,
+                    justifyContent: "center", 
+                    flex: 1, 
+                    alignItems: "center",
+                    borderWidth: 1,
+                    borderColor: "#EAEAF2",
+                    borderRadius: 10}}>
+            <Image source={image} style={{
+                width: "75%", 
+                height: "75%",
+                }} />
             </View>
         </TouchableOpacity>
     );

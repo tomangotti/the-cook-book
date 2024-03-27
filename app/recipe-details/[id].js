@@ -13,6 +13,7 @@ import SaveRecipe from "../../components/hooks/saveRecipe";
 import ButtonTemplate from "../../components/buttons/buttonTemplate";
 import PostItemToCart from "../../components/hooks/postItemToCart";
 import postShareRecipe from "../../components/hooks/postShareRecipe";
+import BackImageHeaderButton from "../../components/buttons/BackImageHeaderButton";
 
 
 const RecipeDetails = () => {
@@ -65,7 +66,7 @@ const RecipeDetails = () => {
                     headerShadowVisible: false,
                     headerBackVisible: false,
                     headerLeft: () => (
-                        <ScreenHeaderBtn title={"<-- Back"} dimension="100%" handlePress={() => router.back()} />
+                        <BackImageHeaderButton handlePress={() => router.back()} />
                     ),
                     headerRight: () => (
                         checkOwner() ? <ScreenHeaderBtn title={"Edit Recipe"} dimension="100%" handlePress={() => router.push(`/edit-recipe-form/${params.id}`)} /> : null

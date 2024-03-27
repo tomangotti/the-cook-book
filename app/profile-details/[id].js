@@ -9,7 +9,7 @@ import ButtonTemplate from "../../components/buttons/buttonTemplate";
 import ProfileEditForm from "./profileEditForm";
 import storeToken from "../../components/tokens/storeToken";
 import removeToken from "../../components/tokens/removeToken";
-
+import BackImageHeaderButton from "../../components/buttons/BackImageHeaderButton";
 
 
 const profileHome = () => {
@@ -64,7 +64,7 @@ const profileHome = () => {
                     headerShadowVisible: false,
                     headerBackVisible: false,
                     headerLeft: () => (
-                        <ScreenHeaderBtn title={"<-- Back"} dimension="100%" handlePress={() => router.back()} />
+                        <BackImageHeaderButton handlePress={() => router.back()} />
                     ),
                     headerTitle: "Profile Details",
                     headerTitleAlign: "center"

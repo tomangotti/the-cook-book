@@ -9,6 +9,8 @@ import getFavoriteRecipes from "../../components/hooks/getFavoriteRecipes";
 import { SafeAreaView } from 'react-native-safe-area-context';
 import ScreenHeaderBtn from "../../components/ScreenHeaderBtn";
 import postNewCollection from '../../components/hooks/postNewCollection';
+import BackImageHeaderButton from '../../components/buttons/BackImageHeaderButton';
+
 
 const CreateCollectionForm = () => {
     const router = useRouter();
@@ -57,7 +59,7 @@ const CreateCollectionForm = () => {
                 headerShadowVisible: false,
                 headerBackVisible: false,
                 headerLeft: () => (
-                    <ScreenHeaderBtn title={"<-- Back"} dimension="100%" handlePress={() => router.back()} />
+                    <BackImageHeaderButton handlePress={() => router.back()} />
                 ),
                 headerTitle: "New Collection",
                 headerTitleAlign: "center"

@@ -1,7 +1,6 @@
 import React from 'react';
-import { useEffect, useState } from 'react';
 import { View, Text, FlatList, SafeAreaView, ScrollView } from 'react-native';
-import { Stack, useGlobalSearchParams, useRouter, ActivityIndicator } from 'expo-router';
+import { Stack, useGlobalSearchParams, useRouter,} from 'expo-router';
 
 import ScreenHeaderBtn from "../../components/ScreenHeaderBtn";
 import getProfileInformation from '../../components/hooks/getProfileInformation';
@@ -12,7 +11,7 @@ import ButtonTemplate from '../../components/buttons/buttonTemplate';
 import followingCheck from '../../components/hooks/followingCheck';
 import followUser from '../../components/hooks/followUser';
 import unFollowUser from '../../components/hooks/unFollowUser';
-
+import BackImageHeaderButton from '../../components/buttons/BackImageHeaderButton';
 
 const ProfilePage = () => {
     const router = useRouter();
@@ -61,7 +60,7 @@ const ProfilePage = () => {
                 headerShadowVisible: false,
                 headerBackVisible: false,
                 headerLeft: () => (
-                    <ScreenHeaderBtn title={"<-- Back"} dimension="100%" handlePress={() => router.back()} />
+                    <BackImageHeaderButton handlePress={() => router.back()} />
                 ),
                 headerRight: () => {
                     if (profileData.id && userInfo.id && userInfo.id == profileData.id) {

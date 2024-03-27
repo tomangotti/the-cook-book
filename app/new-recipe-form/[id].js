@@ -11,7 +11,7 @@ import { Picker } from '@react-native-picker/picker';
 
 import ScreenHeaderBtn from "../../components/ScreenHeaderBtn";
 import addNewRecipe from "../../components/hooks/addNewRecipe";
-
+import BackImageHeaderButton from "../../components/buttons/BackImageHeaderButton";
 
 const newRecipeForm = () => {
     const [name, setName] = useState("")
@@ -143,7 +143,7 @@ const newRecipeForm = () => {
                 headerShadowVisible: false,
                 headerBackVisible: false,
                 headerLeft: () => (
-                    <ScreenHeaderBtn title={"<-- Back"} dimension="100%" handlePress={() => router.back()} />
+                    <BackImageHeaderButton handlePress={() => router.back()} />
                 ),
                 headerTitle: "New Recipe",
                 headerTitleAlign: "center"

@@ -7,6 +7,7 @@ import SearchRecipesCard from '../../components/cards/searchRecipesCard';
 import SearchCollectionsCard from '../../components/cards/searchCollectionsCard';
 import ScreenHeaderBtn from "../../components/ScreenHeaderBtn";
 import HorizontalLine from '../../components/styleComponents/HorizontalLine';
+import BackImageHeaderButton from '../../components/buttons/BackImageHeaderButton';
 
 const SearchPage = () => {
 
@@ -61,7 +62,7 @@ const SearchPage = () => {
                 headerShadowVisible: false,
                 headerBackVisible: false,
                 headerLeft: () => (
-                    <ScreenHeaderBtn title={"<-- Back"} dimension="100%" handlePress={() => router.back()} />
+                    <BackImageHeaderButton handlePress={() => router.back()} />
                 ),
                 headerTitle: `Search ${activeTab}`,
                 headerTitleAlign: "center"

@@ -10,6 +10,7 @@ import getUsersCollections from "../../components/hooks/getUsersCollections";
 import getFavoriteRecipes from "../../components/hooks/getFavoriteRecipes";
 import getFavoriteCollections from "../../components/hooks/getFavoriteCollections";
 import SmallCollectionCard from "../../components/cards/smallCollectionCard";
+import BackImageHeaderButton from "../../components/buttons/BackImageHeaderButton";
 
 const YourRecipePage = () => {
     const params = useGlobalSearchParams();
@@ -126,7 +127,7 @@ const YourRecipePage = () => {
                     headerShadowVisible: false,
                     headerBackVisible: false,
                     headerLeft: () => (
-                        <ScreenHeaderBtn title={"<-- Back"} dimension="100%" handlePress={() => router.back()} />
+                        <BackImageHeaderButton handlePress={() => router.back()} />
                     ),
                     headerTitle: "Recipes",
                     headerTitleAlign: "center"
