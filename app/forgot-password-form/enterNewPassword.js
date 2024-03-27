@@ -12,13 +12,13 @@ const EnterNewPassword = () => {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const router = useRouter();
-
+    const user_id = router.params.user_id;
     const handlePress = async () => {
         if (password !== confirmPassword) {
             alert("Passwords do not match");
             return;
         }
-        const response = await PostNewPassword(password);
+        const response = await PostNewPassword(password, user_id);
         if (!response) {
             alert("Password not changed");
             return;
