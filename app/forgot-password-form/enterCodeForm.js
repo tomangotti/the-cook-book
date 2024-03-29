@@ -9,7 +9,7 @@ import BackImageHeaderButton from "../../components/buttons/BackImageHeaderButto
 
 const EnterCodeForm = () => {
     const [code, setCode] = useState("");
-    const [countdown, setCountdown] = useState(300); // 5 minutes in seconds
+    const [countdown, setCountdown] = useState(300); 
     const router = useRouter();
     
     useEffect(() => {

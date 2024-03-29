@@ -7,7 +7,8 @@ import ButtonTemplate from "../../components/buttons/buttonTemplate";
 import PostNewPassword from "../../components/hooks/postNewPassword";
 import BackImageHeaderButton from "../../components/buttons/BackImageHeaderButton";
 
-const EnterNewPassword = () => {
+
+const enterNewPassword = () => {
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
     const router = useRouter();
@@ -61,4 +62,4 @@ const EnterNewPassword = () => {
 }
 
 
-export default EnterNewPassword;
+export default enterNewPassword;

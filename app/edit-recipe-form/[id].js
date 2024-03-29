@@ -1,14 +1,12 @@
-import react, { useEffect, useState } from "react";
-import { Stack, router, useGlobalSearchParams, useRouter } from "expo-router";
+import { useEffect, useState } from "react";
+import { Stack, useGlobalSearchParams, useRouter } from "expo-router";
 import { Picker } from "@react-native-picker/picker";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import * as ImagePicker from 'expo-image-picker';
-import Constants from 'expo-constants';
 
 import { ScrollView, View, Text, TextInput, TouchableOpacity, SafeAreaView, Platform, Button, Image} from 'react-native';
 
-import ScreenHeaderBtn from "../../components/ScreenHeaderBtn";
 import editRecipe from "../../components/hooks/editRecipe";
 import getSingleRecipe from "../../components/hooks/getSingleRecipe";
 import ButtonTemplate from "../../components/buttons/buttonTemplate";

@@ -1,5 +1,5 @@
 import { Stack, useRouter } from "expo-router";
-import react, { useState } from "react";
+import { useState } from "react";
 import { TouchableOpacity, View, Text, FlatList, ScrollView, SafeAreaView } from "react-native";
 
 

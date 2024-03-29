@@ -65,7 +65,8 @@ const CollectionCardDetails = ({item, userId}) => {
             keyExtractor={(item) => item.id.toString()}
             numColumns={2}
             contentContainerStyle={{ padding: 0 }}
-            showsVerticalScrollIndicator={false}
+            showsVerticalScrollIndicator={true}
+            horizontal={false}
             renderItem={({ item }) => (
                 <SmallRecipeCard item={item} handleNavigate={() => router.push(`/recipe-details/${item.id}`)} />
             )}

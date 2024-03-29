@@ -45,7 +45,7 @@ const CollectionDetails = () => {
                     headerTitle: "Collection Details",
                     headerTitleAlign: "center"
                 }}/>
-            <ScrollView showsVerticalScrollIndicator={false} >
+            
                 {isLoading ? (
                     <ActivityIndicator size="large" />
                 ) : error ? (
@@ -55,10 +55,12 @@ const CollectionDetails = () => {
                         <Button title="Retry" onPress={refetch} />
                     </View>
                 ) : data ? (
+                    <ScrollView showsVerticalScrollIndicator={false} >
                     <CollectionCardDetails item={data} userId={userId} />
+                    </ScrollView>
                 ) :
                 null}
-            </ScrollView>
+            
         </SafeAreaView>
     )
 }

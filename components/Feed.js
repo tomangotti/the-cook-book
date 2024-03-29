@@ -27,7 +27,9 @@ const Feed = ({userId}) => {
         }
     }
 
-
+    const index = () => {
+        return Math.floor(Math.random() * 1000)
+    }
     const onRefresh = useCallback(() => {
         setRefreshing(true);
         reFetch()
@@ -78,7 +80,7 @@ const Feed = ({userId}) => {
                             </TouchableOpacity>
                         </View>
                     ) : data.map((list) => {
-                        return <FeedCardType data={list} key={list} userId={userId} backgroundColor={backgroundColorChooser()} />
+                        return <FeedCardType data={list} key={index()} userId={userId} backgroundColor={backgroundColorChooser()} />
                     })}
 
                 </View>

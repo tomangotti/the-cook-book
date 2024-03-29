@@ -5,7 +5,6 @@ import { Stack } from "expo-router";
 
 import ButtonTemplate from "../../components/buttons/buttonTemplate";
 import { useRouter } from "expo-router";
-import ScreenHeaderBtn from "../../components/ScreenHeaderBtn";
 import PostEmailForPasswordReset from "../../components/hooks/postEmailForPasswordReset";
 import BackImageHeaderButton from "../../components/buttons/BackImageHeaderButton";
 
