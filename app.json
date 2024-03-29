@@ -10,7 +10,7 @@
     ],
     "name": "the-cook-book",
     "slug": "the-cook-book",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/appIcon.png",
     "extra": {
       "router": {
         "origin": false
