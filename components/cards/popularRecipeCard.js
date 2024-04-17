@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity, Image } from 'react-native';
 
 
 const PopularRecipeCard = ({item, handleNavigate, user_id}) => {
-    const imageAddress = ["https://freesvg.org/img/mealplate.png", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ83aBZygUGIMqHLcMhhY9VhE283tGv61pOf-boYo9WnQ&s","https://images.rawpixel.com/image_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTA0L2pvYjk3MC1lbGVtZW50LTIwMi14LmpwZw.jpg"]
+    const imageAddress = ["https://freesvg.org/img/mealplate.png", "https://images.rawpixel.com/image_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIzLTA0L2pvYjk3MC1lbGVtZW50LTIwMi14LmpwZw.jpg"]
     const randomAddress = imageAddress[Math.floor(Math.random() * imageAddress.length)];
     return(
         <>
