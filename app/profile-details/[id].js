@@ -17,6 +17,7 @@ const profileHome = () => {
     const params = useGlobalSearchParams();
     const { userInfo, isLoading, error, reFetch } = getUserInfo()
     const [editFormActive, setEditFormActive] = useState(false)
+    const [deleteFormActive, setDeleteFormActive] = useState(false)
 
 
     const buttonOptions = () => {
@@ -24,6 +25,8 @@ const profileHome = () => {
             return (
                 <View>
                     <ButtonTemplate title="Cancel" pressed={handleCancel} color="grey"/>
+                    <ButtonTemplate title={deleteFormActive ? 'Cancel' : 'Delete Account'} pressed={handleDeleteForm} color={deleteFormActive ? 'grey' : 'red'} />
+                    {deleteFormActive ? (<ButtonTemplate title='Confirm Delete' pressed={handleDelete} color='red' />) : null}
                 </View>
             )
         } else {
@@ -55,6 +58,12 @@ const profileHome = () => {
         setEditFormActive(!editFormActive)
     }
 
+    function handleDelete() {
+    }
+
+    function handleDeleteForm() {
+        setDeleteFormActive(!deleteFormActive)
+    }
 
 
     return (
