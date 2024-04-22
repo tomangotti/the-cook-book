@@ -2,15 +2,14 @@ import React, { useEffect, useState } from "react";
 import { Stack, useGlobalSearchParams, router } from "expo-router";
 
 import { TouchableOpacity, SafeAreaView, Text, View, ScrollView, ActivityIndicator, RefreshControl, Image, Button } from "react-native";
-import ScreenHeaderBtn from "../../components/ScreenHeaderBtn";
 import getUserInfo from "../../components/hooks/getUserInfo";
 import ProfileInfoCard from "./profileInfoCard";
 import ButtonTemplate from "../../components/buttons/buttonTemplate";
 import ProfileEditForm from "./profileEditForm";
-import storeToken from "../../components/tokens/storeToken";
 import removeToken from "../../components/tokens/removeToken";
 import BackImageHeaderButton from "../../components/buttons/BackImageHeaderButton";
-
+import HorizontalLine from "../../components/styleComponents/HorizontalLine";
+import HandleDeleteAccount from "../../components/hooks/handleDeleteAccount";
 
 const profileHome = () => {
     // const router = useRouter();
@@ -24,7 +23,12 @@ const profileHome = () => {
         if (editFormActive) {
             return (
                 <View>
+                    
                     <ButtonTemplate title="Cancel" pressed={handleCancel} color="grey"/>
+                    <View style={{alignSelf: "center",width: "75%"}}>
+                        <HorizontalLine />
+                    </View>
+                    
                     <ButtonTemplate title={deleteFormActive ? 'Cancel' : 'Delete Account'} pressed={handleDeleteForm} color={deleteFormActive ? 'grey' : 'red'} />
                     {deleteFormActive ? (<ButtonTemplate title='Confirm Delete' pressed={handleDelete} color='red' />) : null}
                 </View>
@@ -32,6 +36,7 @@ const profileHome = () => {
         } else {
             return (
             <View>
+                
                 <ButtonTemplate title="Edit" pressed={handleEdit} color="grey" />
                 <ButtonTemplate title="Log Out" pressed={handleLogOut} color="grey" />
             </View>
@@ -58,7 +63,15 @@ const profileHome = () => {
         setEditFormActive(!editFormActive)
     }
 
-    function handleDelete() {
+    const handleDelete = async () => {
+        const deleteAccount = await HandleDeleteAccount();
+        if(deleteAccount) {
+            const att = await removeToken();
+            alert('Account Deleted')
+            router.replace('/home')
+        } else {
+            alert('failed to delete account. try again later')
+        }
     }
 
     function handleDeleteForm() {
