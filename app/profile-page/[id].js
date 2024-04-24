@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, FlatList, SafeAreaView, ScrollView } from 'react-native';
+import { View, Text, FlatList, SafeAreaView, ScrollView, ActivityIndicator } from 'react-native';
 import { Stack, useGlobalSearchParams, useRouter,} from 'expo-router';
 
 import ScreenHeaderBtn from "../../components/ScreenHeaderBtn";
@@ -72,8 +72,9 @@ const ProfilePage = () => {
                 headerTitle: "Profile Page",
                 headerTitleAlign: "center"
             }} />
-            
+            {isLoading ? <ActivityIndicator size="large" /> : 
             <ScrollView showsVerticalScrollIndicator={false}>
+                
                 <View>
                     <View>
                         <Text style={{fontSize: 32, textAlign: "center", margin: 15}}>{profileData.username}</Text>
@@ -120,6 +121,7 @@ const ProfilePage = () => {
                     />
                 </View>
                 </ScrollView>
+    }
         </SafeAreaView>
     );
 };
