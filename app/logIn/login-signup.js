@@ -3,23 +3,24 @@ import { useState } from "react";
 import { TouchableOpacity, View, Text, FlatList, ScrollView, SafeAreaView } from "react-native";
 
 
+
 import SignUp from "../../components/SignUp";
 import Login from "../../components/LogIn";
+import BackImageHeaderButton from "../../components/buttons/BackImageHeaderButton";
 
-const LogInSignUp = ({loggedIn, setLoggedIn}) => {
+const LogInSignUp = () => {
     const [activeTab, setActiveTab] = useState("Log-In");
     const tabs = ["Log-In", "Sign-Up"]
     const router = useRouter();
 
 
 
-
     const displayTabContent = () => {
         switch (activeTab) {
             case "Sign-Up":
-                return (<SignUp loggedIn={loggedIn} setLoggedIn={setLoggedIn} />)
+                return (<SignUp  />)
             case "Log-In":
-                return (<Login loggedIn={loggedIn} setLoggedIn={setLoggedIn} />)
+                return (<Login  />)
         }
     }
 
@@ -62,7 +63,8 @@ const LogInSignUp = ({loggedIn, setLoggedIn}) => {
                 headerShadowVisible: false,
                 headerBackVisible: false,
                 headerTitle: "Sign Up or Login",
-                headerTitleAlign: "center"
+                headerTitleAlign: "center",
+                headerLeft: () => <BackImageHeaderButton handlePress={() => router.push('/home')} />,
             }}/>
             <ScrollView showsVerticalScrollIndicator={false} >
                 <View style={{alignItems: "center", margin: 15}}>

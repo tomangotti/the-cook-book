@@ -1,20 +1,21 @@
 import React from "react";
 import { useState } from "react";
 import { View, Text, TextInput, TouchableOpacity, Button} from 'react-native';
-
+import { useRouter } from "expo-router";
 
 import ButtonTemplate from "./buttons/buttonTemplate";
 import postNewUser from "./hooks/postNewUser";
 
 
 
-const SignUp = ({loggedIn, setLoggedIn}) => {
+const SignUp = () => {
     const [email, setEmail] = useState("")
     const [fName, setFName] = useState("")
     const [lName, setLName] = useState("")
     const [password, setPassword] = useState("")
     const [passwordConfirm, setPasswordConfirm] = useState("")
     const [username, setUsername] = useState("")
+    const router = useRouter()
 
     const handleSignUp = async () => {
 
@@ -30,10 +31,10 @@ const SignUp = ({loggedIn, setLoggedIn}) => {
             }
             const post = await postNewUser(userInfo)
             if(post === true) {
-                setLoggedIn(post)
+                router.replace("/home")
             } else if(post === false) {
                 alert("Sign up failed, please try again later")
-                setLoggedIn(post)
+                
             }
         }
         

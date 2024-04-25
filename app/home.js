@@ -7,7 +7,6 @@ import ScreenHeaderBtn from "../components/ScreenHeaderBtn";
 
 import Feed from "../components/Feed";
 import checkToken from "../components/hooks/checkToken";
-import LogInSignUp from "./logIn/login-signup";
 
 
 // const Home = () => {
@@ -93,7 +92,7 @@ const Home = () => {
                     headerLeft: () => (
                         userId ?  
                         (<ScreenHeaderBtn title={"Your Recipes"} dimension='75%' handlePress={() => router.push(`/your-recipes/${userId}`)} />) 
-                        : <ScreenHeaderBtn title={"Log In"} dimension='100%' handlePress={() => router.push('/home')} /> 
+                        : <ScreenHeaderBtn title={"Log In"} dimension='100%' handlePress={() => router.push('/logIn/login-signup')} /> 
                     ),
                     headerRight: () => (
                         userId ? 

@@ -7,7 +7,8 @@ import {useRouter } from "expo-router";
 
 
 
-const Login = ({loggedIn, setLoggedIn}) => {
+
+const Login = () => {
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const router = useRouter()
@@ -16,8 +17,11 @@ const Login = ({loggedIn, setLoggedIn}) => {
             'username': username,
             'password': password
         });
+        console.log(attempt)
         if(attempt === true) {
-            setLoggedIn(attempt);
+            console.log("Login successful")
+            
+            router.replace("/home")
         } else if(attempt === false) {
             alert("Login failed, try again");
             setLoggedIn(attempt)
