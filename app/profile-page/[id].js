@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, FlatList, SafeAreaView, ScrollView, ActivityIndicator } from 'react-native';
 import { Stack, useGlobalSearchParams, useRouter,} from 'expo-router';
 
+
 import ScreenHeaderBtn from "../../components/ScreenHeaderBtn";
 import getProfileInformation from '../../components/hooks/getProfileInformation';
 import getUserInfo from '../../components/hooks/getUserInfo';

@@ -8,7 +8,7 @@ import FavoriteCard from "./cards/favoriteCard";
 
 const RecipeDetailCard = ({item, ingredients, userId}) => {
     const router = useRouter();
-    console.log(item)
+
     const rating = () => {
         if(item.average_rating === undefined) return (
             <View>
@@ -21,6 +21,16 @@ const RecipeDetailCard = ({item, ingredients, userId}) => {
             </View>
         )
     }
+
+
+    const handleUserPagePress = () => {
+        if(userId){
+            router.push(`/profile-page/${item.user}`)
+        }else {
+            alert("You must be logged in to view user profiles")
+        }
+    }
+
     
     return(
         <>
@@ -65,7 +75,7 @@ const RecipeDetailCard = ({item, ingredients, userId}) => {
             </View>
             <View>
                 <Text style={{fontSize: 20, margin: "auto", textAlign: "center", marginTop: 10}}>{item.description}</Text>
-                    <TouchableOpacity style={{backgroundColor: "#F3F4F8", borderRadius: 10, marginTop: 10, marginHorizontal: 30}} onPress={() => router.push(`/profile-page/${item.user}`)}>
+                    <TouchableOpacity style={{backgroundColor: "#F3F4F8", borderRadius: 10, marginTop: 10, marginHorizontal: 30}} onPress={handleUserPagePress}>
                         <Text style={{fontSize: 16, textAlign: "center"}}>By: {item.user_username}</Text>
                     </TouchableOpacity>
                     <View style={{alignItems: "center"}}>

@@ -18,13 +18,9 @@ const RecipeDetails = () => {
     const { data, isLoading, error, reFetch} = getSingleRecipe(params.id)
     const [userId, setUserId] = useState(null)
 
-
     useEffect(() => {
         checkToken(userId, setUserId)
     },[])
-
-
-    
 
 
     const checkOwner = () => {
@@ -34,7 +30,6 @@ const RecipeDetails = () => {
             return false
         }
     }
-
 
     return(
         <SafeAreaView>
@@ -68,18 +63,7 @@ const RecipeDetails = () => {
                         <RecipeDetailCard item={data.recipe} ingredients={data.ingredients} userId={userId} /> : null)
                 }
                 
-                {/* <Text style={{fontSize: 24, alignSelf: "center"}}>Ingredients</Text>
-                {isLoading ? (
-                        <ActivityIndicator size="large" />
-                    ) : error ? (
-                        <View>
-                            <Text>Something Went Wrong:</Text>
-                        </View>
-                    ) : ( data.ingredients?.map((item) => (
-                            <IngredientCard item={item} recipeName={data.recipe.name} key={item.id} />
-                        ))
-                    )
-                }*/}
+                
                 </View>
             </ScrollView>
         </SafeAreaView>
