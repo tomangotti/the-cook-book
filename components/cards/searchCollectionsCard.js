@@ -53,7 +53,11 @@ const SearchCollectionsCard = () => {
                         <Text>Something Went Wrong:</Text>
                         <Text>{error}</Text>
                     </View>
-                        ) : 
+                        ) : filteredCollections.length === 0 ? (
+                            <View style={{alignSelf: "center"}}>
+                                <Text>No Results Found</Text>
+                            </View>
+                        ) :
             <FlatList
                 data={filteredCollections}
                 keyExtractor={(item) => item.id.toString()}

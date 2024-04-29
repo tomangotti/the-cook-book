@@ -56,7 +56,11 @@ const SearchUsersCard = () => {
                         <Text>Something Went Wrong:</Text>
                         <Text>{error}</Text>
                     </View>
-                        ) : 
+                        ) : filteredUsers.length === 0 ? (
+                            <View style={{alignSelf: "center"}}>
+                                <Text>No Results Found</Text>
+                            </View>
+                        ) :
             <FlatList
                 data={filteredUsers}
                 keyExtractor={(item) => item.id.toString()}

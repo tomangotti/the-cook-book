@@ -11,7 +11,7 @@ const SearchRecipesCard = () => {
     const router = useRouter();
     const [searchText, setSearchText] = useState('');
     const [recipes, setRecipes] = useState([]);
-    const [category, setCategory] = useState('');
+    const [category, setCategory] = useState('All');
     const {data, isLoading, error} = getRecipes();
     const [filteredRecipes, setFilteredRecipes] = useState([]);
 
@@ -20,6 +20,7 @@ const SearchRecipesCard = () => {
     },[data])
 
     useEffect(() => {
+        console.log(filteredRecipes)
         if(searchText === "") {
             setFilteredRecipes([])
         }
@@ -77,8 +78,12 @@ const SearchRecipesCard = () => {
                     <View>
                         <Text>Something Went Wrong:</Text>
                         <Text>{error}</Text>
-                    </View>
-                        ) : 
+                    </View> 
+                    ) : filteredRecipes.length === 0 ? (
+                        <View style={{alignSelf: "center"}}>
+                            <Text>No Results Found</Text>
+                        </View>
+                    ) :
             <FlatList
                 data={filteredRecipes}
                 keyExtractor={(item) => item.id.toString()}
@@ -87,7 +92,7 @@ const SearchRecipesCard = () => {
                     <Text style={{marginLeft: 10}}>{item.name} - by: {item.user_username}</Text>
                 </TouchableOpacity>
                 )}
-            />
+            /> 
                 }
         </View>
         
