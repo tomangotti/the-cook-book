@@ -7,6 +7,8 @@ import ScreenHeaderBtn from "../components/ScreenHeaderBtn";
 
 import Feed from "../components/Feed";
 import checkToken from "../components/hooks/checkToken";
+import MainMenu from "../components/menu/mainMenu";
+import MenuButton from "../components/buttons/MenuButton";
 
 
 // const Home = () => {
@@ -54,12 +56,14 @@ const Home = () => {
     const [loggedIn, setLoggedIn] = useState(false)
     const [userId, setUserId] = useState(null)
     const [isLoading, setIsLoading] = useState(false)
+    const [menuVisible, setMenuVisible] = useState(false);
     
     const router = useRouter();
 
     async function checkLogin() {
         setIsLoading(true)
-
+        
+        
         let check = await checkToken(userId, setUserId)
 
         if(check === true){
@@ -77,6 +81,10 @@ const Home = () => {
         
     },[loggedIn])
 
+    
+
+
+
 
     if(isLoading === true){
         return(
@@ -91,18 +99,16 @@ const Home = () => {
                     headerStyle: {backgroundColor: "#FAFAFC"},
                     headerLeft: () => (
                         userId ?  
-                        (<ScreenHeaderBtn title={"Your Recipes"} dimension='75%' handlePress={() => router.push(`/your-recipes/${userId}`)} />) 
+                        (<MenuButton handlePress={() => setMenuVisible(!menuVisible)} />)
                         : <ScreenHeaderBtn title={"Log In"} dimension='100%' handlePress={() => router.push('/logIn/login-signup')} /> 
                     ),
-                    headerRight: () => (
-                        userId ? 
-                        <ScreenHeaderBtn title={"Profile Page"} dimension='100%' handlePress={() => router.push(`/profile-page/${userId}`)} /> 
-                        : null
-                    ),
-                    headerTitle: "The Good Cook Book",
+                    
+                    headerTitle: "Good Cook Book",
                     headerTitleAlign: "center",
                 }}
             />
+                {menuVisible ? <MainMenu userId={userId} /> : null}
+                
                 <Feed userId={userId} />
             </SafeAreaView>
         )

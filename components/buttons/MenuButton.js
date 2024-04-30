@@ -1,9 +1,10 @@
 import React from "react";
-import { TouchableOpacity, View, Image } from "react-native";
+import { TouchableOpacity, View, Image, Text } from "react-native";
+import { TEST_ID } from "react-native-gifted-chat";
 
-const BackImageHeaderButton = ({handlePress}) => {
-    const image = require("../../assets/images/back.png");
-    // const image = "https://cdn.icon-icons.com/icons2/953/PNG/512/back-button-left-arrow-symbol-in-a-square_icon-icons.com_74325.png"
+const MenuButton = ({handlePress}) => {
+    const image = require("../../assets/images/menuIcon.png");
+    
     return (
         <View style={{
             margin: 0,
@@ -23,4 +24,4 @@ const BackImageHeaderButton = ({handlePress}) => {
     );
 };
 
-export default BackImageHeaderButton;
+export default MenuButton;

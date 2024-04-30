@@ -96,6 +96,7 @@ const Feed = ({userId}) => {
     const router = useRouter();
     const [refreshing, setRefreshing] = useState(false);
     
+    
     const { data, isLoading, error, reFetch} = getFeed(userId);
     
     let n = 0;
@@ -132,10 +133,10 @@ const Feed = ({userId}) => {
     return (
         
             <ScrollView showsVerticalScrollIndicator={false}  refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh}/>}>
-                {userId === null ? null : <View style={{flexDirection: "row", justifyContent: "space-between", margin: 5}}>
+                {/* {userId === null ? null : <View style={{flexDirection: "row", justifyContent: "space-between", margin: 5}}>
                     <SmallButtonTemplate title="Ask Chef" color="blue" pressed={handleAskBot} />
                     <SmallButtonTemplate title="Search All" color="blue" pressed={handleSearch} />
-                </View>}
+                </View>} */}
                 
 
                 <View style={{margin: 0}}>

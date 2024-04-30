@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity, ActivityIndicator } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+
+import Ionicons from '@expo/vector-icons/Ionicons';
 
 import postNewRating from '../hooks/postNewRating';
 import GetUserRecipeRating from '../hooks/getUserRecipeRating';
@@ -14,6 +15,7 @@ const RatingCard = ({userId, recipeId}) => {
         if(data.recipe){
             setRating(data.rating)
         }
+        
     },[data])
 
     
@@ -41,11 +43,14 @@ const RatingCard = ({userId, recipeId}) => {
                         onPress={() => handleRating(star)}
                         style={{ marginRight: 5 }}
                     >
-                        <Ionicons
+                        <Text style={{ fontSize: 32, color: star <= rating ? 'gold' : 'gray' }}>
+                            ★
+                        </Text>
+                        {/* <Ionicons
                             name={star <= rating ? 'star' : 'star-outline'}
                             size={32}
                             color="gold"
-                        />
+                        /> */}
                     </TouchableOpacity>
                 ))}
             </View>
