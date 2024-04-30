@@ -56,7 +56,12 @@ const SearchUsersCard = () => {
                         <Text>Something Went Wrong:</Text>
                         <Text>{error}</Text>
                     </View>
-                        ) : filteredUsers.length === 0 ? (
+                        ) : searchText == "" ? (
+                            <View style={{alignSelf: "center"}}>
+                                <Text>Search for a User</Text>
+                            </View>
+                        ) :
+                        filteredUsers.length === 0 ? (
                             <View style={{alignSelf: "center"}}>
                                 <Text>No Results Found</Text>
                             </View>

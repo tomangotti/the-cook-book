@@ -20,7 +20,6 @@ const SearchRecipesCard = () => {
     },[data])
 
     useEffect(() => {
-        console.log(filteredRecipes)
         if(searchText === "") {
             setFilteredRecipes([])
         }
@@ -79,6 +78,10 @@ const SearchRecipesCard = () => {
                         <Text>Something Went Wrong:</Text>
                         <Text>{error}</Text>
                     </View> 
+                    ) : searchText == "" ? (
+                        <View style={{alignSelf: "center"}}>
+                            <Text>Search for a Recipe</Text>
+                        </View>
                     ) : filteredRecipes.length === 0 ? (
                         <View style={{alignSelf: "center"}}>
                             <Text>No Results Found</Text>
