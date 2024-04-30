@@ -13,6 +13,7 @@ import followingCheck from '../../components/hooks/followingCheck';
 import followUser from '../../components/hooks/followUser';
 import unFollowUser from '../../components/hooks/unFollowUser';
 import BackImageHeaderButton from '../../components/buttons/BackImageHeaderButton';
+import EditButton from '../../components/buttons/EditButton';
 
 const ProfilePage = () => {
     const router = useRouter();
@@ -66,7 +67,7 @@ const ProfilePage = () => {
                 headerRight: () => {
                     if (profileData.id && userInfo.id && userInfo.id == profileData.id) {
                         return (
-                            <ScreenHeaderBtn title={"Edit"} dimension="100%" handlePress={() => router.push(`/profile-details/${params.id}`)} />
+                            <EditButton handlePress={() => router.push(`/profile-details/${params.id}`)} />
                         )
                     }
                 },

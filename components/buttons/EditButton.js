@@ -1,9 +1,9 @@
 import React from "react";
-import { TouchableOpacity, View, Image, Text } from "react-native";
+import { TouchableOpacity, View, Image } from "react-native";
 
 
-const MenuButton = ({handlePress}) => {
-    const image = require("../../assets/images/menuIcon.png");
+const EditButton = ({handlePress}) => {
+    const image = require("../../assets/images/editIcon.png");
     
     return (
         <View style={{
@@ -24,4 +24,4 @@ const MenuButton = ({handlePress}) => {
     );
 };
 
-export default MenuButton;
+export default EditButton;

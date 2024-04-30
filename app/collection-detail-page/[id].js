@@ -7,6 +7,7 @@ import getSingleCollection from "../../components/hooks/getSingleCollection";
 import checkToken from "../../components/hooks/checkToken";
 import CollectionCardDetails from "../../components/cards/collectionCardDetails";
 import BackImageHeaderButton from "../../components/buttons/BackImageHeaderButton";
+import EditButton from "../../components/buttons/EditButton";
 
 const CollectionDetails = () => {
     const params = useGlobalSearchParams();
@@ -40,7 +41,7 @@ const CollectionDetails = () => {
                     <BackImageHeaderButton handlePress={() => router.back()} />
                     ),
                     headerRight: () => (
-                        checkOwner() ? <ScreenHeaderBtn title={"Edit Collection"} dimension="100%" handlePress={() => router.push(`/edit-collection-form/${params.id}`)} /> : null
+                        checkOwner() ? <EditButton handlePress={() => router.push(`/edit-collection-form/${params.id}`)} /> : null
                     ),
                     headerTitle: "Collection Details",
                     headerTitleAlign: "center"

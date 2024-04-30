@@ -10,6 +10,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import checkToken from "../../components/hooks/checkToken";
 
 import BackImageHeaderButton from "../../components/buttons/BackImageHeaderButton";
+import EditButton from "../../components/buttons/EditButton";
 
 
 const RecipeDetails = () => {
@@ -42,7 +43,7 @@ const RecipeDetails = () => {
                         <BackImageHeaderButton handlePress={() => router.back()} />
                     ),
                     headerRight: () => (
-                        checkOwner() ? <ScreenHeaderBtn title={"Edit Recipe"} dimension="100%" handlePress={() => router.push(`/edit-recipe-form/${params.id}`)} /> : null
+                        checkOwner() ? <EditButton handlePress={() => router.push(`/edit-recipe-form/${params.id}`)} /> : null
                     ),
                     headerTitle: "Recipe Details",
                     headerTitleAlign: "center"
