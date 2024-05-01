@@ -1,16 +1,12 @@
 import { Stack, useGlobalSearchParams, useRouter } from "expo-router";
 import { useEffect, useState, } from "react";
-import { SafeAreaView, Text, View, ScrollView, ActivityIndicator, RefreshControl, Image, Button } from "react-native";
-import ScreenHeaderBtn from "../../components/ScreenHeaderBtn";
+import { SafeAreaView, Text, View, ScrollView, ActivityIndicator} from "react-native";
 
 import getSingleRecipe from "../../components/hooks/getSingleRecipe"
 import RecipeDetailCard from "../../components/RecipeDetailCard";
-import IngredientCard from "../../components/IngredientCard";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import checkToken from "../../components/hooks/checkToken";
-
-import BackImageHeaderButton from "../../components/buttons/BackImageHeaderButton";
-import EditButton from "../../components/buttons/EditButton";
+import ImageHeaderButton from "../../components/buttons/ImageHeaderButton";
 
 
 const RecipeDetails = () => {
@@ -40,10 +36,10 @@ const RecipeDetails = () => {
                     headerShadowVisible: false,
                     headerBackVisible: false,
                     headerLeft: () => (
-                        <BackImageHeaderButton handlePress={() => router.back()} />
+                        <ImageHeaderButton imageTitle={"back"} handlePress={() => router.back()} />
                     ),
                     headerRight: () => (
-                        checkOwner() ? <EditButton handlePress={() => router.push(`/edit-recipe-form/${params.id}`)} /> : null
+                        checkOwner() ? <ImageHeaderButton imageTitle={"edit"} handlePress={() => router.push(`/edit-recipe-form/${params.id}`)} /> : null
                     ),
                     headerTitle: "Recipe Details",
                     headerTitleAlign: "center"

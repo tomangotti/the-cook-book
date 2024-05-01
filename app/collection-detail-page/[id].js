@@ -1,13 +1,12 @@
 import { Stack, useGlobalSearchParams, useRouter } from "expo-router";
-import react, { useEffect, useState, useCallback } from "react";
-import { SafeAreaView, Text, View, ScrollView, ActivityIndicator, RefreshControl, Image, Button } from "react-native";
-import ScreenHeaderBtn from "../../components/ScreenHeaderBtn";
+import { useEffect, useState} from "react";
+import { SafeAreaView, Text, View, ScrollView, ActivityIndicator, Button } from "react-native";
+
 
 import getSingleCollection from "../../components/hooks/getSingleCollection";
 import checkToken from "../../components/hooks/checkToken";
 import CollectionCardDetails from "../../components/cards/collectionCardDetails";
-import BackImageHeaderButton from "../../components/buttons/BackImageHeaderButton";
-import EditButton from "../../components/buttons/EditButton";
+import ImageHeaderButton from "../../components/buttons/ImageHeaderButton";
 
 const CollectionDetails = () => {
     const params = useGlobalSearchParams();
@@ -38,10 +37,10 @@ const CollectionDetails = () => {
                     headerBackVisible: false,
                     headerLeft: () => (
                         
-                    <BackImageHeaderButton handlePress={() => router.back()} />
+                    <ImageHeaderButton imageTitle={"back"} handlePress={() => router.back()} />
                     ),
                     headerRight: () => (
-                        checkOwner() ? <EditButton handlePress={() => router.push(`/edit-collection-form/${params.id}`)} /> : null
+                        checkOwner() ? <ImageHeaderButton imageTitle={"edit"} handlePress={() => router.push(`/edit-collection-form/${params.id}`)} /> : null
                     ),
                     headerTitle: "Collection Details",
                     headerTitleAlign: "center"

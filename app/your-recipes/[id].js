@@ -1,8 +1,8 @@
 import { Stack, useGlobalSearchParams, useRouter } from "expo-router";
-import react, { useEffect, useCallback, useState } from "react";
-import { SafeAreaView, Text, View, ScrollView, ActivityIndicator, RefreshControl, TouchableOpacity, FlatList } from "react-native";
+import { useCallback, useState } from "react";
+import { SafeAreaView, Text, View, ActivityIndicator, RefreshControl, FlatList } from "react-native";
 
-import ScreenHeaderBtn from "../../components/ScreenHeaderBtn";
+
 import SmallRecipeCard from "../../components/cards/smallRecipeCard";
 import ButtonTemplate from "../../components/buttons/buttonTemplate";
 import getUsersRecipes from "../../components/hooks/getUsersRecipes";
@@ -10,7 +10,7 @@ import getUsersCollections from "../../components/hooks/getUsersCollections";
 import getFavoriteRecipes from "../../components/hooks/getFavoriteRecipes";
 import getFavoriteCollections from "../../components/hooks/getFavoriteCollections";
 import SmallCollectionCard from "../../components/cards/smallCollectionCard";
-import BackImageHeaderButton from "../../components/buttons/BackImageHeaderButton";
+import ImageHeaderButton from "../../components/buttons/ImageHeaderButton";
 
 const YourRecipePage = () => {
     const params = useGlobalSearchParams();
@@ -127,7 +127,7 @@ const YourRecipePage = () => {
                     headerShadowVisible: false,
                     headerBackVisible: false,
                     headerLeft: () => (
-                        <BackImageHeaderButton handlePress={() => router.back()} />
+                        <ImageHeaderButton imageTitle={"back"} handlePress={() => router.back()} />
                     ),
                     headerTitle: "Recipes",
                     headerTitleAlign: "center"

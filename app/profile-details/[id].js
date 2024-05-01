@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, {useState } from "react";
 import { Stack, useGlobalSearchParams, router } from "expo-router";
 
-import { TouchableOpacity, SafeAreaView, Text, View, ScrollView, ActivityIndicator, RefreshControl, Image, Button } from "react-native";
+import { TouchableOpacity, SafeAreaView, Text, View, ScrollView, ActivityIndicator} from "react-native";
 import getUserInfo from "../../components/hooks/getUserInfo";
 import ProfileInfoCard from "./profileInfoCard";
 import ButtonTemplate from "../../components/buttons/buttonTemplate";
 import ProfileEditForm from "./profileEditForm";
 import removeToken from "../../components/tokens/removeToken";
-import BackImageHeaderButton from "../../components/buttons/BackImageHeaderButton";
+import ImageHeaderButton from "../../components/buttons/ImageHeaderButton";
 import HorizontalLine from "../../components/styleComponents/HorizontalLine";
 import HandleDeleteAccount from "../../components/hooks/handleDeleteAccount";
 
@@ -86,7 +86,7 @@ const profileHome = () => {
                     headerShadowVisible: false,
                     headerBackVisible: false,
                     headerLeft: () => (
-                        <BackImageHeaderButton handlePress={() => router.back()} />
+                        <ImageHeaderButton imageTitle={"back"} handlePress={() => router.back()} />
                     ),
                     headerTitle: "Profile Details",
                     headerTitleAlign: "center"

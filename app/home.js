@@ -8,7 +8,7 @@ import ScreenHeaderBtn from "../components/ScreenHeaderBtn";
 import Feed from "../components/Feed";
 import checkToken from "../components/hooks/checkToken";
 import MainMenu from "../components/menu/mainMenu";
-import MenuButton from "../components/buttons/MenuButton";
+import ImageHeaderButton from "../components/buttons/ImageHeaderButton";
 
 
 // const Home = () => {
@@ -78,11 +78,9 @@ const Home = () => {
     
     useEffect(() => {
         checkLogin()
-        
     },[loggedIn])
 
     
-
 
 
 
@@ -99,7 +97,7 @@ const Home = () => {
                     headerStyle: {backgroundColor: "#FAFAFC"},
                     headerLeft: () => (
                         userId ?  
-                        (<MenuButton handlePress={() => setMenuVisible(!menuVisible)} />)
+                        (<ImageHeaderButton imageTitle={"menu"} handlePress={() => setMenuVisible(!menuVisible)} />)
                         : <ScreenHeaderBtn title={"Log In"} dimension='100%' handlePress={() => router.push('/logIn/login-signup')} /> 
                     ),
                     
@@ -113,8 +111,6 @@ const Home = () => {
             </SafeAreaView>
         )
     }
-    
-    
 }
 
 

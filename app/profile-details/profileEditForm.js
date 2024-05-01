@@ -1,8 +1,8 @@
-import react, { useState } from 'react';
+import { useState } from 'react';
 import { View, Text, TextInput } from 'react-native';
 import ButtonTemplate from '../../components/buttons/buttonTemplate';
 import EditUserInfo from '../../components/hooks/editUserInfo';
-import { router, useRouter } from 'expo-router';
+import { useRouter } from 'expo-router';
 
 const ProfileEditForm = ({userInfo}) => {
     console.log(userInfo)

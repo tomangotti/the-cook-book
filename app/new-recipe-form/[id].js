@@ -4,12 +4,10 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 import * as ImagePicker from 'expo-image-picker';
-
-import { ScrollView, View, Text, TextInput, TouchableOpacity, SafeAreaView, Platform, Button, Image} from 'react-native';
+import { ScrollView, View, Text, TextInput, TouchableOpacity, SafeAreaView, Button, Image} from 'react-native';
 import { Picker } from '@react-native-picker/picker';
-
 import addNewRecipe from "../../components/hooks/addNewRecipe";
-import BackImageHeaderButton from "../../components/buttons/BackImageHeaderButton";
+import ImageHeaderButton from "../../components/buttons/ImageHeaderButton";
 
 const newRecipeForm = () => {
     const [name, setName] = useState("")
@@ -141,7 +139,7 @@ const newRecipeForm = () => {
                 headerShadowVisible: false,
                 headerBackVisible: false,
                 headerLeft: () => (
-                    <BackImageHeaderButton handlePress={() => router.back()} />
+                    <ImageHeaderButton imageTitle={"back"} handlePress={() => router.back()} />
                 ),
                 headerTitle: "New Recipe",
                 headerTitleAlign: "center"

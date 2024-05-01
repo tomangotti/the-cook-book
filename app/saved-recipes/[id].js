@@ -1,12 +1,12 @@
 import { Stack, useGlobalSearchParams, useRouter } from "expo-router";
-import react, { useEffect, useCallback, useState } from "react";
+import {useCallback, useState } from "react";
 import { SafeAreaView, Text, View, ScrollView, ActivityIndicator, RefreshControl, TouchableOpacity } from "react-native";
 
 
-import ScreenHeaderBtn from "../../components/ScreenHeaderBtn";
 import getUserSavedRecipes from "../../components/hooks/getUserSavedRecipes";
 import RecipeCard from "../../components/RecipeCard";
 import ButtonTemplate from "../../components/buttons/buttonTemplate";
+import ImageHeaderButton from "../../components/buttons/ImageHeaderButton";
 
 
 const SavedRecipePage = () => {
@@ -30,7 +30,7 @@ const SavedRecipePage = () => {
                     headerShadowVisible: false,
                     headerBackVisible: false,
                     headerLeft: () => (
-                        <ScreenHeaderBtn title={"<-- Back"} dimension="100%" handlePress={() => router.back()} />
+                        <ImageHeaderButton imageTitle={"back"} handlePress={() => router.back()} />
                     ),
                     headerTitle: "Saved Recipes",
                     headerTitleAlign: "center"

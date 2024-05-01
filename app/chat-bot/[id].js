@@ -1,13 +1,13 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useState, useCallback } from "react";
 import { Stack, useGlobalSearchParams, useRouter } from "expo-router";
 import { View, Text, ScrollView, SafeAreaView, TextInput, TouchableOpacity, ActivityIndicator, RefreshControl } from "react-native";
 import { KeyboardAvoidingView, Platform } from 'react-native';
 
-import ScreenHeaderBtn from "../../components/ScreenHeaderBtn";
+
 import getUserMessages from "../../components/hooks/getUserMessages";
 import postNewMessage from "../../components/hooks/postNewMessage";
 import ClearChat from "../../components/hooks/clearChat";
-import BackImageHeaderButton from "../../components/buttons/BackImageHeaderButton";
+import ImageHeaderButton from "../../components/buttons/ImageHeaderButton";
 
 const ChatBot = () => {
     const [inputMessage, setInputMessage] = useState("");
@@ -169,10 +169,10 @@ const ChatBot = () => {
                     headerShadowVisible: false,
                     headerStyle: {backgroundColor: "#FAFAFC"},
                     headerLeft: () => (
-                        <BackImageHeaderButton handlePress={() => router.back()} />
+                        <ImageHeaderButton imageTitle={"back"} handlePress={() => router.back()} />
                     ),
                     headerRight: () => (
-                        <ScreenHeaderBtn title={"Clear Chat"} dimension='100%' handlePress={() => handleClearChat()} />
+                        <ImageHeaderButton imageTitle={"trash"} handlePress={() => handleClearChat()} />
                     ),
                     headerTitle: "Chef Bot",
                     headerTitleAlign: "center",

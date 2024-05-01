@@ -14,6 +14,7 @@ import followUser from '../../components/hooks/followUser';
 import unFollowUser from '../../components/hooks/unFollowUser';
 import BackImageHeaderButton from '../../components/buttons/BackImageHeaderButton';
 import EditButton from '../../components/buttons/EditButton';
+import ImageHeaderButton from '../../components/buttons/ImageHeaderButton';
 
 const ProfilePage = () => {
     const router = useRouter();
@@ -62,12 +63,12 @@ const ProfilePage = () => {
                 headerShadowVisible: false,
                 headerBackVisible: false,
                 headerLeft: () => (
-                    <BackImageHeaderButton handlePress={() => router.back()} />
+                    <ImageHeaderButton imageTitle={"back"} handlePress={() => router.back()} />
                 ),
                 headerRight: () => {
                     if (profileData.id && userInfo.id && userInfo.id == profileData.id) {
                         return (
-                            <EditButton handlePress={() => router.push(`/profile-details/${params.id}`)} />
+                            <ImageHeaderButton imageTitle={"edit"} handlePress={() => router.push(`/profile-details/${params.id}`)} />
                         )
                     }
                 },

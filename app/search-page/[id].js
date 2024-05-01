@@ -5,9 +5,8 @@ import { Stack, router,} from "expo-router";
 import SearchUsersCard from '../../components/cards/searchUsersCard';
 import SearchRecipesCard from '../../components/cards/searchRecipesCard';
 import SearchCollectionsCard from '../../components/cards/searchCollectionsCard';
-import ScreenHeaderBtn from "../../components/ScreenHeaderBtn";
 import HorizontalLine from '../../components/styleComponents/HorizontalLine';
-import BackImageHeaderButton from '../../components/buttons/BackImageHeaderButton';
+import ImageHeaderButton from '../../components/buttons/ImageHeaderButton';
 
 const SearchPage = () => {
 
@@ -62,7 +61,7 @@ const SearchPage = () => {
                 headerShadowVisible: false,
                 headerBackVisible: false,
                 headerLeft: () => (
-                    <BackImageHeaderButton handlePress={() => router.back()} />
+                    <ImageHeaderButton imageTitle={"back"} handlePress={() => router.back()} />
                 ),
                 headerTitle: `Search ${activeTab}`,
                 headerTitleAlign: "center"

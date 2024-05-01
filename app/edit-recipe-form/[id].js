@@ -11,7 +11,7 @@ import editRecipe from "../../components/hooks/editRecipe";
 import getSingleRecipe from "../../components/hooks/getSingleRecipe";
 import ButtonTemplate from "../../components/buttons/buttonTemplate";
 import deleteRecipe from "../../components/hooks/deleteRecipe";
-import BackImageHeaderButton from "../../components/buttons/BackImageHeaderButton";
+import ImageHeaderButton from "../../components/buttons/ImageHeaderButton";
 
 const editRecipeForm = () => {
     const router = useRouter();
@@ -188,7 +188,7 @@ const editRecipeForm = () => {
                 headerShadowVisible: false,
                 headerBackVisible: false,
                 headerLeft: () => (
-                    <BackImageHeaderButton handlePress={() => router.back()} />
+                    <ImageHeaderButton imageTitle={"back"} handlePress={() => router.back()} />
                 ),
                 headerTitle: "Edit Recipe",
                 headerTitleAlign: "center"

@@ -3,10 +3,9 @@ import { useState } from "react";
 import { TouchableOpacity, View, Text, FlatList, ScrollView, SafeAreaView } from "react-native";
 
 
-
 import SignUp from "../../components/SignUp";
 import Login from "../../components/LogIn";
-import BackImageHeaderButton from "../../components/buttons/BackImageHeaderButton";
+import ImageHeaderButton from "../../components/buttons/ImageHeaderButton";
 
 const LogInSignUp = () => {
     const [activeTab, setActiveTab] = useState("Log-In");
@@ -64,7 +63,7 @@ const LogInSignUp = () => {
                 headerBackVisible: false,
                 headerTitle: "Sign Up or Login",
                 headerTitleAlign: "center",
-                headerLeft: () => <BackImageHeaderButton handlePress={() => router.push('/home')} />,
+                headerLeft: () => <ImageHeaderButton imageTitle={"back"} handlePress={() => router.push('/home')} />,
             }}/>
             <ScrollView showsVerticalScrollIndicator={false} >
                 <View style={{alignItems: "center", margin: 15}}>

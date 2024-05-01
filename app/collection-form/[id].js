@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
-import { View, TextInput, Button, FlatList, ScrollView, Text, TouchableOpacity } from 'react-native';
-import { Stack, router, useGlobalSearchParams, useRouter } from "expo-router";
+import { View, TextInput, FlatList, ScrollView, Text, TouchableOpacity } from 'react-native';
+import { Stack, useGlobalSearchParams, useRouter } from "expo-router";
 import BouncyCheckbox from "react-native-bouncy-checkbox";
 import { Picker } from '@react-native-picker/picker';
 
 import getUsersRecipes from "../../components/hooks/getUsersRecipes";
 import getFavoriteRecipes from "../../components/hooks/getFavoriteRecipes";
 import { SafeAreaView } from 'react-native-safe-area-context';
-import ScreenHeaderBtn from "../../components/ScreenHeaderBtn";
 import postNewCollection from '../../components/hooks/postNewCollection';
-import BackImageHeaderButton from '../../components/buttons/BackImageHeaderButton';
+import ImageHeaderButton from '../../components/buttons/ImageHeaderButton';
 
 
 const CreateCollectionForm = () => {
@@ -59,7 +58,7 @@ const CreateCollectionForm = () => {
                 headerShadowVisible: false,
                 headerBackVisible: false,
                 headerLeft: () => (
-                    <BackImageHeaderButton handlePress={() => router.back()} />
+                    <ImageHeaderButton imageTitle={"back"} handlePress={() => router.back()} />
                 ),
                 headerTitle: "New Collection",
                 headerTitleAlign: "center"

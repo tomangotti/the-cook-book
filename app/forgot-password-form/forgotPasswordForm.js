@@ -6,7 +6,7 @@ import { Stack } from "expo-router";
 import ButtonTemplate from "../../components/buttons/buttonTemplate";
 import { useRouter } from "expo-router";
 import PostEmailForPasswordReset from "../../components/hooks/postEmailForPasswordReset";
-import BackImageHeaderButton from "../../components/buttons/BackImageHeaderButton";
+import ImageHeaderButton from "../../components/buttons/ImageHeaderButton";
 
 const ForgotPasswordForm = () => {
     const [email, setEmail] = useState("")
@@ -36,7 +36,7 @@ const ForgotPasswordForm = () => {
             headerTitle: "Forgot Password",
             headerTitleAlign: "center",
             headerLeft: () => (
-                <BackImageHeaderButton handlePress={() => router.back()} />
+                <ImageHeaderButton imageTitle={"back"} handlePress={() => router.back()} />
             )
         }}/>
         <View style={{alignItems: "center", width: "100%", marginTop: 25}}>
