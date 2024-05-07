@@ -12,5 +12,6 @@
       "./types"
     ]
   },
+  
   "extends": "expo/tsconfig.base"
 }
