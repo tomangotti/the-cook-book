@@ -10,6 +10,10 @@ const ProfileEditForm = ({userInfo}) => {
     const [lastName, setLastName] = useState(`${userInfo.last_name}`)
     const [email, setEmail] = useState(`${userInfo.email}`)
     const [username, setUsername] = useState(`${userInfo.username}`)
+    const [twitterLink, setTwitterLink] = useState('')
+    const [isntagramLink, setInstagramLink] = useState('')
+    const [facebookLink, setFacebookLink] = useState('')
+    const [youtubeLink, setYoutubeLink] = useState('')
     const router = useRouter()
 
 
@@ -47,6 +51,22 @@ const ProfileEditForm = ({userInfo}) => {
             <View>
                 <Text>UserName</Text>
                 <TextInput value={username} onChangeText={setUsername} style={{backgroundColor: "lightgrey", width: 200}} ></TextInput>
+            </View>
+            <View>
+                <Text>Twitter</Text>
+                <TextInput value={twitterLink} onChangeText={setTwitterLink} style={{backgroundColor: "lightgrey", width: 200}} ></TextInput>
+            </View>
+            <View>
+                <Text>Instagram</Text>
+                <TextInput value={isntagramLink} onChangeText={setInstagramLink} style={{backgroundColor: "lightgrey", width: 200}} ></TextInput>
+            </View>
+            <View>
+                <Text>Facebook</Text>
+                <TextInput value={facebookLink} onChangeText={setFacebookLink} style={{backgroundColor: "lightgrey", width: 200}} ></TextInput>
+            </View>
+            <View>
+                <Text>YouTube</Text>
+                <TextInput value={youtubeLink} onChangeText={setYoutubeLink} style={{backgroundColor: "lightgrey", width: 200}} ></TextInput>
             </View>
             <ButtonTemplate pressed={handleSave} title="Save" color="green" />
         </View>

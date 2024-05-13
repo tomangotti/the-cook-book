@@ -1,9 +1,8 @@
 import React from 'react';
-import { View, Text, FlatList, SafeAreaView, ScrollView, ActivityIndicator } from 'react-native';
+import { View, Text, FlatList, SafeAreaView, ScrollView, ActivityIndicator, Image } from 'react-native';
 import { Stack, useGlobalSearchParams, useRouter,} from 'expo-router';
 
 
-import ScreenHeaderBtn from "../../components/ScreenHeaderBtn";
 import getProfileInformation from '../../components/hooks/getProfileInformation';
 import getUserInfo from '../../components/hooks/getUserInfo';
 import SmallRecipeCard from '../../components/cards/smallRecipeCard';
@@ -12,8 +11,6 @@ import ButtonTemplate from '../../components/buttons/buttonTemplate';
 import followingCheck from '../../components/hooks/followingCheck';
 import followUser from '../../components/hooks/followUser';
 import unFollowUser from '../../components/hooks/unFollowUser';
-import BackImageHeaderButton from '../../components/buttons/BackImageHeaderButton';
-import EditButton from '../../components/buttons/EditButton';
 import ImageHeaderButton from '../../components/buttons/ImageHeaderButton';
 
 const ProfilePage = () => {
@@ -22,6 +19,7 @@ const ProfilePage = () => {
     const {profileData, recipeData, collectionData, isLoading, error, reFetch} = getProfileInformation(params.id)
     const {userInfo} = getUserInfo();
     const {isFollowing, setIsFollowing} = followingCheck(params.id)
+    const profileImage = require('../../assets/images/profile.png');
 
     const handleFollowPressed = async () => {
         console.log(isFollowing)
@@ -79,8 +77,25 @@ const ProfilePage = () => {
             <ScrollView showsVerticalScrollIndicator={false}>
                 
                 <View>
+                    <View style={{alignSelf: "center", width: "85%"}}>
+                        <Image source={profileImage} resizeMode="cover" 
+                            style={{
+                                width: "95%",
+                                borderRadius: 12,
+                                borderWidth: 5,
+                                backgroundColor: "#FFF",
+                                alignSelf: "center",
+                            }}
+                        />
+                    </View>
                     <View>
                         <Text style={{fontSize: 32, textAlign: "center", margin: 15}}>{profileData.username}</Text>
+                    </View>
+                    <View style={{alignItems: 'center', flexDirection:"row"}}>
+                        <Text>Twitter</Text>
+                        <Text>Facebook</Text>
+                        <Text>Instagram</Text>
+                        <Text>YouTube</Text>
                     </View>
                     
                     <View style={{flexDirection: 'row', alignItems: 'center'}}>

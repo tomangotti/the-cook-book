@@ -16,6 +16,12 @@ const ProfileInfoCard = ({userInfo}) => {
                 <Text>Email: {userInfo.email}</Text>
                 <Text>Username: {userInfo.username} </Text>
             </View>
+            <View>
+                <Text>Twitter: </Text>
+                <Text>Facebook: </Text>
+                <Text>Instagram: </Text>
+                <Text>YouTube: </Text>
+            </View>
         </View>
     )
 }
