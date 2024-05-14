@@ -45,7 +45,7 @@ const newRecipeForm = () => {
         });
     
         if (!result.canceled) {
-            setImage(result.uri);
+            setImage(result.assets[0].uri);
         }
     };
 

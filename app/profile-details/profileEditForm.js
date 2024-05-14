@@ -1,8 +1,9 @@
 import { useState } from 'react';
-import { View, Text, TextInput } from 'react-native';
+import { View, Text, TextInput, Button, Image } from 'react-native';
 import ButtonTemplate from '../../components/buttons/buttonTemplate';
 import EditUserInfo from '../../components/hooks/editUserInfo';
 import { useRouter } from 'expo-router';
+import * as ImagePicker from 'expo-image-picker';
 
 const ProfileEditForm = ({userInfo}) => {
     console.log(userInfo)
@@ -14,6 +15,8 @@ const ProfileEditForm = ({userInfo}) => {
     const [isntagramLink, setInstagramLink] = useState('')
     const [facebookLink, setFacebookLink] = useState('')
     const [youtubeLink, setYoutubeLink] = useState('')
+    
+    const [image, setImage] = useState(null);
     const router = useRouter()
 
 
@@ -34,8 +37,26 @@ const ProfileEditForm = ({userInfo}) => {
         }
     }
 
+    const pickImage = async () => {
+        let result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.All,
+            allowsEditing: true,
+            aspect: [1, 1],
+            quality: 1,
+        });
+        console.log(result.assets[0].uri);
+    
+        if (!result.canceled) {
+            setImage(result.assets[0].uri);
+        }
+    };
+
     return (
         <View  style={{alignItems: "center", width: "100%", marginTop: 25}}>
+            <View style={{margin: 5}}>
+                    <Button title="Pick an image from camera roll" onPress={pickImage} />
+                    {image && <Image source={{ uri: image }} style={{ width: 200, height: 200 }} />}
+            </View>
             <View>
                 <Text>First Name</Text>
                 <TextInput value={firstName} onChangeText={setFirstName} style={{backgroundColor: "lightgrey", width: 200}} ></TextInput>
