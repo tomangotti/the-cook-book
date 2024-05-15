@@ -6,17 +6,18 @@ import getUserProfileImage from "../hooks/getUserProfileImage";
 const ProfileImageButton = ({handlePress}) => {
     
     const defaultImage = require('../../assets/images/profile.png');
-    const [image, setImage] = useState(defaultImage)
+    const [image, setImage] = useState("")
+    const userImage = getUserProfileImage();
 
     useEffect(() => {
-        const fetchImage = async () => {
-            const data = getUserProfileImage();
-            if(data){
-                setImage({uri: data.image})
-            }
+        
+        if(userImage !== null){
+            console.log(userImage.image)
+            setImage(userImage.image)
+        } else{
+            setImage(defaultImage)
         }
-        fetchImage();
-    },[])
+    },[userImage])
     
     
     return (
@@ -29,7 +30,7 @@ const ProfileImageButton = ({handlePress}) => {
             borderRadius: 10}}>
 
             <TouchableOpacity style={{width:50, height:50}} onPress={handlePress}>
-                    <Image source={image}  style={{margin: 0, width: "100%", height:"100%"}} />
+                    <Image source={{uri: image}}  style={{margin: 0, width: "100%", height:"100%", borderRadius: 90}} />
             </TouchableOpacity>
         </View>
     );

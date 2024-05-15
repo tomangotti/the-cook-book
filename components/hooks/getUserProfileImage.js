@@ -1,5 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const getToken = async () => {
     try {
@@ -26,10 +26,11 @@ const getUserProfileImage = (id) => {
 
         if (!savedToken) {
             setError("Token not found");
-            return;
+            return null;
         }
 
         try {
+            console.log("hello1")
             const response = await fetch(`https://mysite-p4xg.onrender.com/users/profile/image/get`, {
                 method: 'GET',
                 headers: {

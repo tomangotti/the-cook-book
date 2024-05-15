@@ -4,6 +4,7 @@ import ButtonTemplate from '../../components/buttons/buttonTemplate';
 import EditUserInfo from '../../components/hooks/editUserInfo';
 import { useRouter } from 'expo-router';
 import * as ImagePicker from 'expo-image-picker';
+import postProfileImage from '../../components/hooks/postProfileImage';
 
 const ProfileEditForm = ({userInfo}) => {
     console.log(userInfo)
@@ -21,6 +22,10 @@ const ProfileEditForm = ({userInfo}) => {
 
 
     const handleSave = async () => {
+        saveImage();
+    }
+
+    const saveProfile = async () => {
         const updatedProfileInfo = {
             first_name: firstName,
             last_name: lastName,
@@ -35,6 +40,33 @@ const ProfileEditForm = ({userInfo}) => {
         } else {
             alert('failed to updated information. try again later')
         }
+    }
+
+    const saveImage = async () => {
+        const formData = new FormData();
+
+        if (image) {
+            const imageUri = image; 
+            const uriParts = imageUri.split(".");
+            const fileType = uriParts[uriParts.length - 1];
+            formData.append("image", {
+                uri: imageUri,
+                name: `image.${fileType}`,
+                type: `image/${fileType}`,
+            });
+        }
+        
+
+        const response = await postProfileImage(formData)
+        if(response) {
+            router.back()
+        } else {
+            alert('failed to upload image. try again later')
+        }
+    }
+
+    const saveLinks = async () => {
+
     }
 
     const pickImage = async () => {
