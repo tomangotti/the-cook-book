@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { View, Text, FlatList, SafeAreaView, ScrollView, ActivityIndicator, Image } from 'react-native';
 import { Stack, useGlobalSearchParams, useRouter,} from 'expo-router';
 
@@ -12,6 +12,8 @@ import followingCheck from '../../components/hooks/followingCheck';
 import followUser from '../../components/hooks/followUser';
 import unFollowUser from '../../components/hooks/unFollowUser';
 import ImageHeaderButton from '../../components/buttons/ImageHeaderButton';
+import getProfileImageAll from '../../components/hooks/getProfileImageAll';
+
 
 const ProfilePage = () => {
     const router = useRouter();
@@ -19,7 +21,19 @@ const ProfilePage = () => {
     const {profileData, recipeData, collectionData, isLoading, error, reFetch} = getProfileInformation(params.id)
     const {userInfo} = getUserInfo();
     const {isFollowing, setIsFollowing} = followingCheck(params.id)
-    const profileImage = require('../../assets/images/profile.png');
+    const defaultImage = require('../../assets/images/profile.png');
+    const userImage = getProfileImageAll(params.id)
+    const [image, setImage] = useState("")
+
+    useEffect(() => {
+        if(userImage !== null){
+            console.log(userImage.image)
+            setImage({uri: userImage.image})
+        } else{
+            setImage(defaultImage)
+        }
+    },[userImage])
+
 
     const handleFollowPressed = async () => {
         console.log(isFollowing)
@@ -77,19 +91,26 @@ const ProfilePage = () => {
             <ScrollView showsVerticalScrollIndicator={false}>
                 
                 <View>
-                    <View style={{alignSelf: "center", width: "85%"}}>
-                        <Image source={profileImage} resizeMode="cover" 
+                    <View style={{
+                        width: 350,
+                        height: 350,
+                        backgroundColor: "white",
+                        borderRadius: 25,
+                        justifyContent: "center",
+                        alignSelf: "center",
+                        alignItems: "center",
+                        marginTop: 10,
+                    }}>
+                        <Image source={image} resizeMode="cover" 
                             style={{
                                 width: "95%",
-                                borderRadius: 12,
-                                borderWidth: 5,
-                                backgroundColor: "#FFF",
-                                alignSelf: "center",
+                                height: "95%",
+                                borderRadius: 25,
                             }}
                         />
                     </View>
                     <View>
-                        <Text style={{fontSize: 32, textAlign: "center", margin: 15}}>{profileData.username}</Text>
+                        <Text style={{fontSize: 32, textAlign: "center", margin: 10}}>{profileData.username}</Text>
                     </View>
                     <View style={{alignItems: 'center', flexDirection:"row"}}>
                         <Text>Twitter</Text>

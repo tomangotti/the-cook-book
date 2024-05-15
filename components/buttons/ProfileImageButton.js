@@ -13,7 +13,7 @@ const ProfileImageButton = ({handlePress}) => {
         
         if(userImage !== null){
             console.log(userImage.image)
-            setImage(userImage.image)
+            setImage({uri: userImage.image})
         } else{
             setImage(defaultImage)
         }
@@ -30,7 +30,7 @@ const ProfileImageButton = ({handlePress}) => {
             borderRadius: 10}}>
 
             <TouchableOpacity style={{width:50, height:50}} onPress={handlePress}>
-                    <Image source={{uri: image}}  style={{margin: 0, width: "100%", height:"100%", borderRadius: 90}} />
+                    <Image source={image}  style={{margin: 0, width: "100%", height:"100%", borderRadius: 90}} />
             </TouchableOpacity>
         </View>
     );
