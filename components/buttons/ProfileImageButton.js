@@ -12,7 +12,6 @@ const ProfileImageButton = ({handlePress}) => {
     useEffect(() => {
         
         if(userImage !== null){
-            console.log(userImage.image)
             setImage({uri: userImage.image})
         } else{
             setImage(defaultImage)

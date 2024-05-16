@@ -15,7 +15,7 @@ const getToken = async () => {
 };
 
 
-const postProfileImage = async (newImage) => {
+const postNewLinks = async (newLinks) => {
     
     const savedToken = await getToken();
 
@@ -25,13 +25,13 @@ const postProfileImage = async (newImage) => {
     }
 
     try {
-        const response = await fetch('https://mysite-p4xg.onrender.com/users/profile/image/add', {
+        const response = await fetch('https://mysite-p4xg.onrender.com/users/links/user/add', {
             method: 'POST',
             headers: {
-                'Content-Type': 'multipart/form-data',
+                'Content-Type': 'application/json',
                 'Authorization': `token ${savedToken}`, 
             },
-            body: newImage,
+            body: JSON.stringify(newLinks),
         });
 
         if (response.ok) {
@@ -48,4 +48,4 @@ const postProfileImage = async (newImage) => {
 
 }
 
-export default postProfileImage;
+export default postNewLinks;

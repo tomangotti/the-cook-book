@@ -1,5 +1,5 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const getToken = async () => {
     try {
@@ -7,30 +7,33 @@ const getToken = async () => {
         if (savedToken) {
             return savedToken;
         } else {
-            return null;
+            return null; // Return null instead of false
         }
     } catch (error) {
         console.error('Error retrieving token:', error);
-        return null;
+        return null; // Return null on error
     }
 };
 
-
-const getUserProfileImage = (id) => {
-    const [userImage, setUserImage] = useState(null);
+const getUserLinks = (id) => {
+    console.log(id)
+    const [userLinks, setUserLinks] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
 
-    const fetchUserImage = async () => {
-        
+    const fetchUserInfo = async () => {
+        setIsLoading(true);
+
         const savedToken = await getToken();
 
         if (!savedToken) {
             setError("Token not found");
-            return null;
+            setIsLoading(false);
+            return;
         }
 
         try {
-            const response = await fetch(`https://mysite-p4xg.onrender.com/users/profile/image/get`, {
+            const response = await fetch(`https://mysite-p4xg.onrender.com/users/links/user/${id}`, {
                 method: 'GET',
                 headers: {
                     'Authorization': `Token ${savedToken}`,
@@ -41,21 +44,25 @@ const getUserProfileImage = (id) => {
             if (response.ok) {
                 const data = await response.json();
                 
-                setUserImage(data);
+                setUserLinks(data);
             } else {
                 setError(response.status);
             }
         } catch (error) {
             console.error('Error fetching user info:', error);
             setError("Network error");
-        } 
+        } finally {
+            setIsLoading(false);
+        }
     };
 
     useEffect(() => {
-        fetchUserImage();
+        fetchUserInfo();
     }, []);
-    
-    return userImage; 
-}
 
-export default getUserProfileImage;
+    
+
+    return { userLinks, isLoading }; 
+};
+
+export default getUserLinks;

@@ -10,6 +10,7 @@ import removeToken from "../../components/tokens/removeToken";
 import ImageHeaderButton from "../../components/buttons/ImageHeaderButton";
 import HorizontalLine from "../../components/styleComponents/HorizontalLine";
 import HandleDeleteAccount from "../../components/hooks/handleDeleteAccount";
+import getUserLinks from "../../components/hooks/getUserLinks";
 
 const profileHome = () => {
     // const router = useRouter();
@@ -17,6 +18,7 @@ const profileHome = () => {
     const { userInfo, isLoading, error, reFetch } = getUserInfo()
     const [editFormActive, setEditFormActive] = useState(false)
     const [deleteFormActive, setDeleteFormActive] = useState(false)
+    const {userLinks} = getUserLinks(params.id);
 
 
     const buttonOptions = () => {
@@ -101,8 +103,8 @@ const profileHome = () => {
                                 <TouchableOpacity onPress={reFetch}>
                                     <Text>Retry</Text>
                                 </TouchableOpacity>
-                            </View> ) : editFormActive ? (<ProfileEditForm userInfo={userInfo} />) :
-                            (<ProfileInfoCard userInfo={userInfo}/>)
+                            </View> ) : editFormActive ? (<ProfileEditForm userInfo={userInfo} userLinks={userLinks} />) :
+                            (<ProfileInfoCard userInfo={userInfo} userLinks={userLinks}/>)
                 }
                 {buttonOptions()}
             </ScrollView>

@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, Linking, TouchableOpacity } from 'react-native';
-import ButtonTemplate from "./buttons/buttonTemplate";
+
 
 const IngredientCard = ({item, recipeName}) => {
 

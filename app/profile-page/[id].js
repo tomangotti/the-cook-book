@@ -13,6 +13,7 @@ import followUser from '../../components/hooks/followUser';
 import unFollowUser from '../../components/hooks/unFollowUser';
 import ImageHeaderButton from '../../components/buttons/ImageHeaderButton';
 import getProfileImageAll from '../../components/hooks/getProfileImageAll';
+import LinkCards from '../../components/cards/linkCards';
 
 
 const ProfilePage = () => {
@@ -27,7 +28,6 @@ const ProfilePage = () => {
 
     useEffect(() => {
         if(userImage !== null){
-            console.log(userImage.image)
             setImage({uri: userImage.image})
         } else{
             setImage(defaultImage)
@@ -36,7 +36,7 @@ const ProfilePage = () => {
 
 
     const handleFollowPressed = async () => {
-        console.log(isFollowing)
+        
         
         if(isFollowing === true){
             const response = await unFollowUser(params.id)
@@ -112,13 +112,11 @@ const ProfilePage = () => {
                     <View>
                         <Text style={{fontSize: 32, textAlign: "center", margin: 10}}>{profileData.username}</Text>
                     </View>
-                    <View style={{alignItems: 'center', flexDirection:"row"}}>
-                        <Text>Twitter</Text>
-                        <Text>Facebook</Text>
-                        <Text>Instagram</Text>
-                        <Text>YouTube</Text>
+
+                    <View style={{alignItems: "center"}}>
+                        <LinkCards id={params.id} />
                     </View>
-                    
+
                     <View style={{flexDirection: 'row', alignItems: 'center'}}>
                         <View style={{flex: 1, borderRightWidth: 1, borderColor: 'black', padding: 20}}>
                             <Text style={{fontSize: 16}}>Followers: {profileData.followers_count}</Text>

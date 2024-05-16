@@ -1,32 +1,38 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { View, Text, TextInput, Button, Image } from 'react-native';
+
 import ButtonTemplate from '../../components/buttons/buttonTemplate';
 import EditUserInfo from '../../components/hooks/editUserInfo';
 import { useRouter } from 'expo-router';
 import * as ImagePicker from 'expo-image-picker';
 import postProfileImage from '../../components/hooks/postProfileImage';
+import postNewLinks from '../../components/hooks/postNewLinks';
 
-const ProfileEditForm = ({userInfo}) => {
-    console.log(userInfo)
+const ProfileEditForm = ({userInfo, userLinks}) => {
+    
     const [firstName, setFirstName] = useState(`${userInfo.first_name}`)
     const [lastName, setLastName] = useState(`${userInfo.last_name}`)
     const [email, setEmail] = useState(`${userInfo.email}`)
     const [username, setUsername] = useState(`${userInfo.username}`)
-    const [twitterLink, setTwitterLink] = useState('')
-    const [isntagramLink, setInstagramLink] = useState('')
-    const [facebookLink, setFacebookLink] = useState('')
-    const [youtubeLink, setYoutubeLink] = useState('')
+    const [twitterLink, setTwitterLink] = useState(``)
+    const [isntagramLink, setInstagramLink] = useState(``)
+    const [facebookLink, setFacebookLink] = useState(``)
+    const [youtubeLink, setYoutubeLink] = useState(``)
     
     const [image, setImage] = useState(null);
     const router = useRouter()
 
+    useEffect(() => {
+        if(userLinks !== null){
+            setTwitterLink(userLinks.link_twitter)
+            setInstagramLink(userLinks.link_instagram)
+            setFacebookLink(userLinks.link_facebook)
+            setYoutubeLink(userLinks.link_youtube)
+        }
+    },[])
 
     const handleSave = async () => {
-        saveImage();
-    }
-
-    const saveProfile = async () => {
-        const updatedProfileInfo = {
+        const newInfo = {
             first_name: firstName,
             last_name: lastName,
             email: email,
@@ -34,40 +40,54 @@ const ProfileEditForm = ({userInfo}) => {
             id: userInfo.id,
         }
 
-        const fetchRequest = await EditUserInfo(updatedProfileInfo)
-        if(fetchRequest) {
-            router.back()
-        } else {
-            alert('failed to updated information. try again later')
-        }
-    }
-
-    const saveImage = async () => {
-        const formData = new FormData();
-
+        const newImage = new FormData();
         if (image) {
             const imageUri = image; 
             const uriParts = imageUri.split(".");
             const fileType = uriParts[uriParts.length - 1];
-            formData.append("image", {
+            newImage.append("image", {
                 uri: imageUri,
                 name: `image.${fileType}`,
                 type: `image/${fileType}`,
             });
         }
-        
 
-        const response = await postProfileImage(formData)
-        if(response) {
-            router.back()
-        } else {
-            alert('failed to upload image. try again later')
+        const newLinks = {
+            link_twitter: twitterLink,
+            link_instagram: isntagramLink,
+            link_facebook: facebookLink,
+            link_youtube: youtubeLink
         }
+
+        
+        const fetchRequest = await EditUserInfo(newInfo)
+        if(fetchRequest) {
+        } else {
+            alert('failed to updated information. try again later')
+            return
+        }
+
+        if(image !== null){
+            const fetchRequestImage = await postProfileImage(newImage)
+            if(fetchRequestImage) {
+            } else {
+                alert('failed to updated image. try again later')
+                return
+            }
+        }
+
+        const fetchRequestLinks = await postNewLinks(newLinks)
+        if(fetchRequestLinks) {
+        } else {
+            alert('failed to updated links. try again later')
+            return
+        }
+
+
+        router.back();
+
     }
 
-    const saveLinks = async () => {
-
-    }
 
     const pickImage = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({

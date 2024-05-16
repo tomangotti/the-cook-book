@@ -1,7 +1,7 @@
 import react from "react";
 import { Text, View } from "react-native";
 
-const ProfileInfoCard = ({userInfo}) => {
+const ProfileInfoCard = ({userInfo, userLinks}) => {
     console.log(userInfo);
     return(
         <View style={{margin: 25}}>
@@ -16,14 +16,18 @@ const ProfileInfoCard = ({userInfo}) => {
                 <Text>Email: {userInfo.email}</Text>
                 <Text>Username: {userInfo.username} </Text>
             </View>
-            <View>
-                <Text>Twitter: </Text>
-                <Text>Facebook: </Text>
-                <Text>Instagram: </Text>
-                <Text>YouTube: </Text>
-            </View>
+                {userLinks ? (
+                    <View style={{marginTop: 25}}>
+                        <Text style={{fontSize: 18, marginBottom: 15}}>User's Links</Text>
+                        <Text style={{marginVertical: 3}}>Twitter: {userLinks.link_twitter}</Text>
+                        <Text style={{marginVertical: 3}}>Facebook: {userLinks.link_facebook}</Text>
+                        <Text style={{marginVertical: 3}}>Instagram: {userLinks.link_instagram}</Text>
+                        <Text style={{marginVertical: 3}}>YouTube: {userLinks.link_youtube}</Text>
+                    </View>
+                ) : null}
         </View>
     )
 }
+
 
 export default  ProfileInfoCard

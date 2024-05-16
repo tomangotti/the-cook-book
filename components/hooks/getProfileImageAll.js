@@ -30,7 +30,6 @@ const getProfileImageAll = (id) => {
         }
 
         try {
-            console.log("hello1")
             const response = await fetch(`https://mysite-p4xg.onrender.com/users/profile/image/user/${id}`, {
                 method: 'GET',
                 headers: {
