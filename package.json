@@ -1,6 +1,6 @@
 {
-  "name": "the-cook-book",
-  "version": "1.4.0",
+  "name": "good-cook-book",
+  "version": "1.4.1",
   "engines": {
     "node": "21.1.0",
     "npm": "10.7.0"

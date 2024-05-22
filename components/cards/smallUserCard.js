@@ -47,15 +47,17 @@ const SmallUserCard = ({item, handleNavigate}) => {
                 justifyContent: "center",
                 alignSelf: "center",
                 alignItems: "center",
-                marginTop: 10,
+                marginTop: 0,
             }}>
             <Image
                 source={image}
                     resizeMode="cover" style={{
                         
-                        width: "95%",
-                        height: "95%",
-                        borderRadius: 25,
+                        width: "100%",
+                        height: "100%",
+                        borderTopLeftRadius: 25,
+                        borderTopRightRadius: 25,
+
                     }}/>
             </View>
             <View style={{justifyContent: "center", flex: 1, padding: 5}}>
