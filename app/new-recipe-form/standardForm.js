@@ -21,8 +21,6 @@ const StandardForm = ({recipeData, params, setIsLoading}) => {
     
     const router = useRouter();
 
-    
-    console.log("standard form")
     useEffect(() => {
         console.log(recipeData)
         if(recipeData !== null){
@@ -32,9 +30,7 @@ const StandardForm = ({recipeData, params, setIsLoading}) => {
             setServings(recipeData.servings)
             setCookTime(recipeData.cook_time)
             setIngredients(recipeData.ingredients)
-            setTags(recipeData.tags)
             setCategory(recipeData.category)
-            setPublished(recipeData.published)
         }
     }, [recipeData])
     
@@ -136,7 +132,7 @@ const StandardForm = ({recipeData, params, setIsLoading}) => {
 
         const ingredientsJSON = JSON.stringify(ingredients)
         formData.append("ingredients", ingredientsJSON);
-        console.log(formData)
+        
         const token = await getToken();
 
         const sendData = await addNewRecipe(formData, token)
@@ -144,8 +140,10 @@ const StandardForm = ({recipeData, params, setIsLoading}) => {
             setIsLoading(false)
             alert("error saving recipe. try again")
         } else {
+            setIsLoading(false)
             router.push(`/your-recipes/${params.id}`)
         }
+        
     }
 
     return (

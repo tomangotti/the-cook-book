@@ -1,6 +1,7 @@
 import react from "react";
 
 const addNewRecipe = async (formData, token) => {
+    console.log(`adding new recipe`);
     try {
         const response = await fetch('https://mysite-p4xg.onrender.com/recipes/recipe-saved', {
             method: 'POST',
