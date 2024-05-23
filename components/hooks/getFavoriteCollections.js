@@ -11,7 +11,6 @@ const getFavoriteCollections = (endPoint) => {
             .then((r) => {
                 if (r.ok) {
                     r.json().then((data) => {
-                        console.log(data)
                         setFavoriteCollections(data);
                         setFavCollectionsIsLoading(false);
                     })

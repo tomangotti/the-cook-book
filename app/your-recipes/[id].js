@@ -60,7 +60,6 @@ const YourRecipePage = () => {
         } else if (usersCollections.length === 0) {
             return <Text style={{textAlign: 'center', margin: 10}}>You have no collections yet!</Text>;
         } else {
-            console.log(usersCollections)
             return (
                 <FlatList
                     data={usersCollections}
@@ -105,7 +104,6 @@ const YourRecipePage = () => {
         } else if (favoriteCollections.length === 0) {
             return <Text style={{textAlign: 'center', margin: 10}}>You have no favorite collections yet!</Text>;
         } else {
-            console.log(favoriteCollections)
             return (
                 <FlatList
                     data={favoriteCollections}

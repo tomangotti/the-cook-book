@@ -11,7 +11,6 @@ const getFavoriteRecipes = (endPoint) => {
             .then((r) => {
                 if (r.ok) {
                     r.json().then((data) => {
-                        console.log(data)
                         setFavoriteRecipes(data);
                         setFavRecipesIsLoading(false);
                     })

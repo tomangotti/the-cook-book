@@ -11,7 +11,6 @@ const getUsersCollections = (endPoint) => {
             .then((r) => {
                 if (r.ok) {
                     r.json().then((data) => {
-                        console.log(data)
                         setusersCollections(data);
                         setCollectionIsLoading(false);
                     })
