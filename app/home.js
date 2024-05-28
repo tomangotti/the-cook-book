@@ -10,6 +10,7 @@ import checkToken from "../components/hooks/checkToken";
 import MainMenu from "../components/menu/mainMenu";
 import ImageHeaderButton from "../components/buttons/ImageHeaderButton";
 import ProfileImageButton from "../components/buttons/ProfileImageButton";
+import FooterMenu from "../components/menu/footerMenu";
 
 
 
@@ -18,7 +19,10 @@ const Home = () => {
     const [userId, setUserId] = useState(null)
     const [isLoading, setIsLoading] = useState(false)
     const [menuVisible, setMenuVisible] = useState(false);
-    
+    const [activeTab, setActiveTab] = useState("Discover");
+    const buttons = ["Discover", "Following"]
+
+
     const router = useRouter();
 
     async function checkLogin() {
@@ -64,11 +68,13 @@ const Home = () => {
                     ),
                     headerTitle: "Good Cook Book",
                     headerTitleAlign: "center",
+                    
                 }}
             />
                 {menuVisible ? <MainMenu userId={userId} /> : null}
                 
-                <Feed userId={userId} />
+                <Feed userId={userId} activeTab={activeTab} />
+                {userId ? <FooterMenu buttons={buttons} activeTab={activeTab} setActiveTab={setActiveTab} /> : null}
             </SafeAreaView>
         )
     }
