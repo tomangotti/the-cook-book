@@ -35,12 +35,23 @@ const Feed = ({userId, activeTab}) => {
         setRefreshing(false)
     }, []);
 
-    function handleAskBot() {
-        router.push(`/chat-bot/${userId}`)
-    }
 
-    function handleSearch() {
-        router.push(`/search-page/${userId}`)
+    const displayedFeed = () => {
+        console.log(activeTab)
+        console.log(data)
+        if(activeTab === "Discover" && data[0] !== undefined ){
+            return (
+                data[0].map((list) => {
+                    return <FeedCardType data={list} key={index()} userId={userId} backgroundColor={backgroundColorChooser()} />
+                })
+            )
+        } else if(activeTab === "Following" && data[1] !== undefined ){
+            return (
+                data[1].map((list) => {
+                    return <FeedCardType data={list} key={index()} userId={userId} backgroundColor={backgroundColorChooser()} />
+                })
+            )
+        }
     }
 
     
@@ -59,9 +70,7 @@ const Feed = ({userId, activeTab}) => {
                                 <Text>Retry</Text>
                             </TouchableOpacity>
                         </View>
-                    ) : data.map((list) => {
-                        return <FeedCardType data={list} key={index()} userId={userId} backgroundColor={backgroundColorChooser()} />
-                    })}
+                    ) : displayedFeed()}
 
                 </View>
             </ScrollView>

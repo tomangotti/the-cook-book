@@ -5,7 +5,7 @@ const getFeed = (user_id) => {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState(null);
     let url = ''
-    const urlOption1 = `https://mysite-p4xg.onrender.com/recipes/feed/v2/recipes/${user_id}`;
+    const urlOption1 = `https://mysite-p4xg.onrender.com/recipes/feed/v3/recipes/${user_id}`;
     const urlOption2 = `https://mysite-p4xg.onrender.com/recipes/feed/slim/recipes`;
 
     if(user_id === null){
@@ -20,7 +20,6 @@ const getFeed = (user_id) => {
             .then((r) => {
                 if (r.ok) {
                     r.json().then((data) => {
-                        
                         setData(data);
                         setIsLoading(false);
                     });
