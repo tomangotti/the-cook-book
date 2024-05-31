@@ -19,17 +19,7 @@ const EditCollectionForm = () => {
     const [showDelete, setShowDelete] = useState(false);
     const [userId, setUserId] = useState(null)
 
-    // const { userRecipes, recipesIsLoading, recipeError, reFetchRecipes } = getUsersRecipes(userId);
-    // const { favoriteRecipes, favRecipesIsLoading, favRecipesError, reFetchFavRecipes} = getFavoriteRecipes(userId);
     
-
-
-    // useEffect(() => {
-    //     checkToken(userId, setUserId)
-    // },[])
-    
-    
-
     
     useEffect(() => {
         if(data) {
@@ -205,7 +195,7 @@ const EditCollectionForm = () => {
                 
                 
             </View> */}
-            <TouchableOpacity onPress={handleSaveCollection}
+            {/* <TouchableOpacity onPress={handleSaveCollection}
                     style={{
                         width: "80%",
                         marginLeft: "auto",
@@ -223,7 +213,7 @@ const EditCollectionForm = () => {
                         elevation: 5,
                 }}>
                     <Text style={{ textAlign: "center", padding: 10, backgroundColor: "blue", color: "white", borderRadius: 15 }}>Save Collection</Text>
-                </TouchableOpacity>
+                </TouchableOpacity> */}
                 <TouchableOpacity onPress={handleShowDelete}
                     style={{
                         width: "80%",

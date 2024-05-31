@@ -5,7 +5,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import * as ImagePicker from 'expo-image-picker';
 
-import { ScrollView, View, Text, TextInput, TouchableOpacity, SafeAreaView, Platform, Button, Image} from 'react-native';
+import { ScrollView, View, Text, TextInput, TouchableOpacity, SafeAreaView, Platform, Button, Image, ActivityIndicator} from 'react-native';
 
 import editRecipe from "../../components/hooks/editRecipe";
 import getSingleRecipe from "../../components/hooks/getSingleRecipe";
@@ -17,6 +17,7 @@ const editRecipeForm = () => {
     const router = useRouter();
     const params = useGlobalSearchParams()
     const { data, isLoading, error, reFetch} = getSingleRecipe(params.id)
+    const [isUploading, setIsUploading] = useState(false)
     const [name, setName] = useState("")
     const [description, setDescription] = useState("")
     const [instructions, setInstructions] = useState("")
@@ -130,7 +131,7 @@ const editRecipeForm = () => {
     const handleEdit = async () => {
         const formData = new FormData();
 
-
+        setIsUploading(true)
         if (image) {
             const imageUri = image; 
             const uriParts = imageUri.split(".");
@@ -193,7 +194,7 @@ const editRecipeForm = () => {
                 headerTitle: "Edit Recipe",
                 headerTitleAlign: "center"
             }}/>
-            <ScrollView showsVerticalScrollIndicator={false}>
+            {isLoading || isUploading ? <ActivityIndicator size="large" /> : <ScrollView showsVerticalScrollIndicator={false}>
 
             
             <View style={{alignItems: "center", width: "100%", marginTop: 25}}>
@@ -291,7 +292,7 @@ const editRecipeForm = () => {
             </View>
                 
                 
-            </ScrollView>
+            </ScrollView>}
         </SafeAreaView>
     )    
 

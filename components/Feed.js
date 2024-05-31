@@ -37,19 +37,30 @@ const Feed = ({userId, activeTab}) => {
 
 
     const displayedFeed = () => {
-        console.log(activeTab)
-        console.log(data)
+        
         if(activeTab === "Discover" && data[0] !== undefined ){
             return (
                 data[0].map((list) => {
                     return <FeedCardType data={list} key={index()} userId={userId} backgroundColor={backgroundColorChooser()} />
                 })
             )
-        } else if(activeTab === "Following" && data[1] !== undefined ){
+        } else if(activeTab === "Following" && data[1] !== undefined && data[1].length > 0){
+            
             return (
                 data[1].map((list) => {
                     return <FeedCardType data={list} key={index()} userId={userId} backgroundColor={backgroundColorChooser()} />
                 })
+            )
+        } else {
+            return (
+                <View style={{
+                    flex: 1,
+                    justifyContent: "center",
+                    alignItems: "center",
+                    marginTop: 20
+                }}>
+                    <Text style={{fontSize: 20}}>There is no Data to show</Text>
+                </View>
             )
         }
     }
