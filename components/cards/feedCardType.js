@@ -14,7 +14,7 @@ const FeedCardType = ({data, userId, backgroundColor}) => {
             <View style={{ marginTop: 10, alignItems: "left"}}>
                         <Text style={{fontSize: 20, marginLeft: 10}}>{data.name.toUpperCase()}</Text>
             </View>
-            {data.data.length === 0 ? <Text style={{fontSize: 16, alignSelf: 'center'}}>No {data.name} to display</Text> : null}
+            {data.data.length === 0 ? <Text style={{fontSize: 20, alignSelf: 'center'}}>No {data.name} to display</Text> : null}
             <View style={{
                 margin: 5,
                 gap: 0

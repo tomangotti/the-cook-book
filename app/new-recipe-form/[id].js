@@ -41,8 +41,8 @@ const newRecipeForm = () => {
                                 width: "80%",
                                 marginLeft: "auto",
                                 marginRight: "auto",
-                                marginTop: 45,
-                                marginBottom: 15,
+                                marginTop: 15,
+                                marginBottom: 25,
                                 borderRadius: 15,
                                 shadowColor: "#000",
                                 shadowOffset: {
