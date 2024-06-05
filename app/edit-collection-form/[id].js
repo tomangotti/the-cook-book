@@ -1,12 +1,11 @@
 
 import React, { useState, useEffect } from 'react';
 import {ScrollView, Text, TouchableOpacity } from 'react-native';
-import { Stack, router, useGlobalSearchParams, useRouter } from "expo-router";
+import { Stack,useGlobalSearchParams, useRouter } from "expo-router";
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import getSingleCollection from '../../components/hooks/getSingleCollection';
 import deleteCollection from '../../components/hooks/deleteCollection';
-import BackImageHeaderButton from '../../components/buttons/BackImageHeaderButton';
 import ImageHeaderButton from '../../components/buttons/ImageHeaderButton';
 
 const EditCollectionForm = () => {
@@ -18,6 +17,7 @@ const EditCollectionForm = () => {
     const [selectedRecipes, setSelectedRecipes] = useState([]);
     const [showDelete, setShowDelete] = useState(false);
     const [userId, setUserId] = useState(null)
+
 
     
     
@@ -91,6 +91,8 @@ const EditCollectionForm = () => {
                 </TouchableOpacity>
         )
     }
+
+
 
     return (
         <SafeAreaView>
