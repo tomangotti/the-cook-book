@@ -6,9 +6,10 @@ import PopularRecipeCard from "./popularRecipeCard";
 import SmallCollectionCard from "./smallCollectionCard";
 import SmallUserCard from "./smallUserCard";
 
+
 const FeedCardType = ({data, userId, backgroundColor}) => {
     const router = useRouter();
-
+    
     return(
         <View style={{backgroundColor: backgroundColor}}>
             <View style={{ marginTop: 10, alignItems: "left"}}>
@@ -21,7 +22,7 @@ const FeedCardType = ({data, userId, backgroundColor}) => {
             }}>
                 <FlatList data={data.data} renderItem={({item}) => {
                         if(data.name.toLowerCase().includes("collection") === true){
-                            return (<SmallCollectionCard item={item} key={item.id} handleNavigate={() => router.push(`/collection-detail-page/${item.id}`)} />)
+                            return (<SmallCollectionCard item={item} key={item.id} user_id={userId} handleNavigate={() => router.push(`/collection-detail-page/${item.id}`)} />)
                         } else if(data.name.toLowerCase().includes("recipe") === true){
                             return (<PopularRecipeCard item={item} key={item.id} user_id={userId} handleNavigate={() => router.push(`/recipe-details/${item.id}`)} />)
                         } else {

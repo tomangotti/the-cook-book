@@ -37,7 +37,13 @@ const Feed = ({userId, activeTab}) => {
 
 
     const displayedFeed = () => {
-        
+        if(userId === null){
+            return (
+                data.map((list) => {
+                    return <FeedCardType data={list} key={index()} userId={userId} backgroundColor={backgroundColorChooser()} />
+                })
+            )
+        }
         if(activeTab === "Discover" && data[0] !== undefined ){
             return (
                 data[0].map((list) => {

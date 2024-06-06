@@ -2,9 +2,7 @@ import React from "react";
 import { View, Text, TouchableOpacity, Image, FlatList } from 'react-native';
 import { useRouter } from "expo-router";
 
-// import HorizontalLine from "./styleComponents/HorizontalLine";
-// import RatingCard from "./cards/ratingCard";
-// import FavoriteCard from "./cards/favoriteCard";
+
 import SmallRecipeCard from "./smallRecipeCard";
 import FavoriteCollectionCard from "./favoriteCollectionCard";
 import CollectionRatingCard from "./collectionRatingCard";
@@ -24,6 +22,14 @@ const CollectionCardDetails = ({item, userId}) => {
                 <Text style={{fontSize: 16, margin: "auto", backgroundColor: "#F3F4F8", marginTop: 10}}>Rating: {item.average_rating}</Text>
             </View>
         )
+    }
+
+    const handleUserPagePress = () => {
+        if(userId){
+            router.push(`/profile-page/${item.user}`)
+        }else {
+            alert("You must be logged in to view user profiles")
+        }
     }
 
 
@@ -49,7 +55,7 @@ const CollectionCardDetails = ({item, userId}) => {
                 <Text style={{fontSize: 32, marginTop: 5, marginBottom: 15}}>{item.name}</Text>
                 <Text style={{fontSize: 16, marginBottom: 15}}>{item.description}</Text>
                 {rating()}
-                <TouchableOpacity style={{backgroundColor: "#F3F4F8", borderRadius: 10, marginTop: 10, marginHorizontal: 30}} onPress={() => router.push(`/profile-page/${item.user}`)}>
+                <TouchableOpacity style={{backgroundColor: "#F3F4F8", borderRadius: 10, marginTop: 10, marginHorizontal: 30}} onPress={handleUserPagePress}>
                         <Text style={{fontSize: 16, textAlign: "center"}}>By: {item.user_username}</Text>
                 </TouchableOpacity>
                 <View style={{alignItems: "center"}}>

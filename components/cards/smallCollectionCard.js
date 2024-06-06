@@ -4,6 +4,7 @@ import { View, Text, TouchableOpacity, Image } from 'react-native';
 const SmallCollectionCard = ({item, handleNavigate}) => {
     
     
+    
     return(
         <>
             <TouchableOpacity onPress={handleNavigate} style={{ 
