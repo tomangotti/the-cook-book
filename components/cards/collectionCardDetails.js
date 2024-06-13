@@ -1,15 +1,14 @@
 import React from "react";
-import { View, Text, TouchableOpacity, Image, FlatList } from 'react-native';
+import { View, Text, TouchableOpacity, FlatList } from 'react-native';
 import { useRouter } from "expo-router";
-
-
 import SmallRecipeCard from "./smallRecipeCard";
 import FavoriteCollectionCard from "./favoriteCollectionCard";
 import CollectionRatingCard from "./collectionRatingCard";
 
+
+
 const CollectionCardDetails = ({item, userId}) => {
     const router = useRouter();
-    console.log(item.recipes_details);
 
     const rating = () => {
         if(item.average_rating === undefined) return (

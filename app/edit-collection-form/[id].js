@@ -1,6 +1,6 @@
 
 import React, { useState, useEffect } from 'react';
-import {ScrollView, Text, TouchableOpacity } from 'react-native';
+import {ScrollView, Text, TouchableOpacity, View, TextInput, FlatList  } from 'react-native';
 import { Stack,useGlobalSearchParams, useRouter } from "expo-router";
 import { SafeAreaView } from 'react-native-safe-area-context';
 
@@ -17,15 +17,13 @@ const EditCollectionForm = () => {
     const [selectedRecipes, setSelectedRecipes] = useState([]);
     const [showDelete, setShowDelete] = useState(false);
     const [userId, setUserId] = useState(null)
-
-
     
     
     useEffect(() => {
         if(data) {
             setName(data.name);
             setDescription(data.description);
-            setSelectedRecipes(data.recipes);
+            setSelectedRecipes(data.recipes_details);
         }
     },[data])
 
@@ -45,7 +43,6 @@ const EditCollectionForm = () => {
             recipes: selectedRecipes
         }
         
-        console.log(collection);
         // const response = await postNewCollection(collection, params.id);
         // if(!response) {
         //     alert('error saving collection')
@@ -59,7 +56,6 @@ const EditCollectionForm = () => {
     }
 
     const handleDeleteCollection = async () => {
-        console.log("deleting collection")
         const response = await deleteCollection(params.id);
         if(response) {
             router.push(`/home`)
@@ -92,23 +88,15 @@ const EditCollectionForm = () => {
         )
     }
 
+    const handleRemoveRecipe = (recipeId) => {
+        console.log(recipeId)
 
+        
+    }
 
-    return (
-        <SafeAreaView>
-            <Stack.Screen options={{
-                headerStyle: {backgroundColor: "#FAFAFC"},
-                headerShadowVisible: false,
-                headerBackVisible: false,
-                headerLeft: () => (
-                    <ImageHeaderButton imageTitle={"back"} handlePress={() => router.back()} />
-                ),
-                headerTitle: "Edit Collection",
-                headerTitleAlign: "center"
-            }} />
-            
-            <ScrollView showsVerticalScrollIndicator={false}>
-            {/* <View style={{
+    const editFormBody = () => {
+        return(
+            <View style={{
                 backgroundColor: 'white',
                 borderBlockColor: 'white',
                 borderRadius: 15,
@@ -144,97 +132,112 @@ const EditCollectionForm = () => {
                         />
                     </View>
                 </View>
-                <View style={{margin: 10}}>
-                    <Text style={{textAlign: 'center', fontSize: 16}}>Your Recipes</Text>
-                    <FlatList
-                        data={userRecipes}
-                        contentContainerStyle={{
-                            paddingHorizontal: 50,
-                            paddingVertical: 10,
-                        }}
-                        keyExtractor={(item) => item.id.toString()}
-                        renderItem={({ item }) => (
-                            
-                                <BouncyCheckbox
-                                    size={30}
-                                    fillColor="blue"
-                                    unfillColor="#FFFFFF"
-                                    iconStyle={{ borderColor: "blue" }}
-                                    innerIconStyle={{ borderWidth: 2 }}
-                                    onPress={() => handleRecipeSelection(item.id)}
-                                    text={item.name}
-                                    textStyle={{
-                                        textDecorationLine: "none",
-                                    }}
-                                />
-                            
-                        )}
-                    /> 
+                    <View>
+                        <Text style={{fontSize: 18, textAlign: "center", marginTop: 10}}>Recipes</Text>
+                        <FlatList 
+                            data={selectedRecipes}
+                            keyExtractor={(item) => item.id}
+                            renderItem={({item}) => (
+                                <View 
+                                    style={{
+                                        justifyContent: "space-between",
+                                        alignItems: "center",
+                                        padding: 5,
+                                        flexDirection: "row",
+                                        borderRadius: 12,
+                                        backgroundColor: "#F3F4F8",
+                                        width: "85%",
+                                        marginTop: 10,
+                                        marginBottom: 5,
+                                        marginLeft: "auto",
+                                        marginRight: "auto",
+                                        shadowColor: "#000",
+                                        shadowOffset: {
+                                            width: 0,
+                                            height: 2,
+                                            },
+                                        shadowOpacity: 0.25,
+                                        shadowRadius: 5.84,
+                                        elevation: 5,
+                                    }}>
+                                    <Text style={{alignSelf: "center"}}>{item.name}</Text>
+                                    <TouchableOpacity
+                                        onPress={() => handleRemoveRecipe(item.id)}
+                                        style={{
+                                            width: "25%",
+                                            marginRight: 5,
+                                            marginTop: 5,
+                                            marginBottom: 5,
+                                            borderRadius: 15,
+                                            backgroundColor: "red"
+                                        }}
+                                    >
+                                        <Text style={{ textAlign: "center", padding: 7.5,  color: "white", borderRadius: 15, fontSize: 12}}>Remove</Text>
+                                    </TouchableOpacity>
+                                </View>
+                            )}
+                        />
+                    </View>
+            </View>
+        )
+    }
+
+
+
+    return (
+        <SafeAreaView>
+            <Stack.Screen options={{
+                headerStyle: {backgroundColor: "#FAFAFC"},
+                headerShadowVisible: false,
+                headerBackVisible: false,
+                headerLeft: () => (
+                    <ImageHeaderButton imageTitle={"back"} handlePress={() => router.back()} />
+                ),
+                headerTitle: "Edit Collection",
+                headerTitleAlign: "center"
+            }} />
+            
+            <ScrollView showsVerticalScrollIndicator={false}>
+                {isLoading ? <Text>Loading...</Text> : editFormBody()}
+            
+                <View style={{alignItems: "center", marginVertical: 15}}>
+                    <TouchableOpacity onPress={handleSaveCollection}
+                        style={{
+                            width: "80%",
+                            marginLeft: "auto",
+                            marginRight: "auto",
+                            marginVertical: 5,
+                            borderRadius: 15,
+                            shadowColor: "#000",
+                            shadowOffset: {
+                                width: 0,
+                                height: 2,
+                                },
+                            shadowOpacity: 0.25,
+                            shadowRadius: 5.84,
+                            elevation: 5,
+                    }}>
+                        <Text style={{ textAlign: "center", padding: 10, backgroundColor: "green", borderRadius: 15, color: "white" }}>Save Collection</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={handleShowDelete}
+                        style={{
+                            width: "80%",
+                            marginLeft: "auto",
+                            marginRight: "auto",
+                            marginVertical: 5,
+                            borderRadius: 15,
+                            shadowColor: "#000",
+                            shadowOffset: {
+                                width: 0,
+                                height: 2,
+                                },
+                            shadowOpacity: 0.25,
+                            shadowRadius: 5.84,
+                            elevation: 5,
+                    }}>
+                        <Text style={{ textAlign: "center", padding: 10, backgroundColor: showDelete ? "grey" : "red", color: "white", borderRadius: 15 }}>{showDelete ? "Cancel": "Delete"}</Text>
+                    </TouchableOpacity>
                 </View>
-                <View style={{margin: 10}}>
-                    <Text style={{textAlign: 'center', fontSize: 16}}>Favorite Recipes</Text>
-                    <FlatList
-                        data={favoriteRecipes}
-                        contentContainerStyle={{
-                            paddingHorizontal: 50,
-                            paddingVertical: 10,
-                        }}
-                        keyExtractor={(item) => item.id.toString()}
-                        renderItem={({ item }) => (
-                                <BouncyCheckbox
-                                    size={30}
-                                    fillColor="blue"
-                                    unfillColor="#FFFFFF"
-                                    iconStyle={{ borderColor: "blue" }}
-                                    innerIconStyle={{ borderWidth: 2 }}
-                                    text={item.recipe.name}
-                                    onPress={()=> handleRecipeSelection(item.recipe.id)}
-                                />
-                            
-                        )}
-                    />
-                </View>
-                
-                
-            </View> */}
-            {/* <TouchableOpacity onPress={handleSaveCollection}
-                    style={{
-                        width: "80%",
-                        marginLeft: "auto",
-                        marginRight: "auto",
-                        marginTop: 35,
-                        marginBottom: 10,
-                        borderRadius: 15,
-                        shadowColor: "#000",
-                        shadowOffset: {
-                            width: 0,
-                            height: 2,
-                            },
-                        shadowOpacity: 0.25,
-                        shadowRadius: 5.84,
-                        elevation: 5,
-                }}>
-                    <Text style={{ textAlign: "center", padding: 10, backgroundColor: "blue", color: "white", borderRadius: 15 }}>Save Collection</Text>
-                </TouchableOpacity> */}
-                <TouchableOpacity onPress={handleShowDelete}
-                    style={{
-                        width: "80%",
-                        marginLeft: "auto",
-                        marginRight: "auto",
-                        marginTop: 5,
-                        marginBottom: 15,
-                        borderRadius: 15,
-                        shadowColor: "#000",
-                        shadowOffset: {
-                            width: 0,
-                            height: 2,
-                            },
-                        shadowOpacity: 0.25,
-                        shadowRadius: 5.84,
-                        elevation: 5,
-                }}>
-                    <Text style={{ textAlign: "center", padding: 10, backgroundColor: showDelete ? "grey" : "red", color: "white", borderRadius: 15 }}>{showDelete ? "Cancel": "Delete"}</Text>
-                </TouchableOpacity>
                 {showDelete ? deleteButton() : null}
             </ScrollView>
         </SafeAreaView>

@@ -14,12 +14,10 @@ import ImageHeaderButton from '../../components/buttons/ImageHeaderButton';
 const CreateCollectionForm = () => {
     const router = useRouter();
     const params = useGlobalSearchParams()
-
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [selectedRecipes, setSelectedRecipes] = useState([]);
     const [published, setPublished] = useState(true)
-
     const { userRecipes, recipesIsLoading, recipeError, reFetchRecipes } = getUsersRecipes(params.id);
     const { favoriteRecipes, favRecipesIsLoading, favRecipesError, reFetchFavRecipes} = getFavoriteRecipes(params.id);
     
