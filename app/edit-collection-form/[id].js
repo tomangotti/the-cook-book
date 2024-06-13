@@ -7,6 +7,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import getSingleCollection from '../../components/hooks/getSingleCollection';
 import deleteCollection from '../../components/hooks/deleteCollection';
 import ImageHeaderButton from '../../components/buttons/ImageHeaderButton';
+import removeRecipeFromCollection from '../../components/hooks/removeRecipeFromCollection';
 
 const EditCollectionForm = () => {
     const router = useRouter();
@@ -88,10 +89,16 @@ const EditCollectionForm = () => {
         )
     }
 
-    const handleRemoveRecipe = (recipeId) => {
+    const handleRemoveRecipe = async (recipeId) => {
         console.log(recipeId)
+        const response = await removeRecipeFromCollection(params.id ,recipeId);
+        console.log(response)
+        if(response) {
+            setSelectedRecipes(selectedRecipes.filter(recipe => recipe.id !== recipeId));
+        } else {
+            alert('error removing recipe')
+        }
 
-        
     }
 
     const editFormBody = () => {
