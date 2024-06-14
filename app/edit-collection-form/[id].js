@@ -8,6 +8,7 @@ import getSingleCollection from '../../components/hooks/getSingleCollection';
 import deleteCollection from '../../components/hooks/deleteCollection';
 import ImageHeaderButton from '../../components/buttons/ImageHeaderButton';
 import removeRecipeFromCollection from '../../components/hooks/removeRecipeFromCollection';
+import SearchForRecipe from './searchForRecipe';
 
 const EditCollectionForm = () => {
     const router = useRouter();
@@ -17,7 +18,6 @@ const EditCollectionForm = () => {
     const [description, setDescription] = useState('');
     const [selectedRecipes, setSelectedRecipes] = useState([]);
     const [showDelete, setShowDelete] = useState(false);
-    const [userId, setUserId] = useState(null)
     
     
     useEffect(() => {
@@ -90,9 +90,7 @@ const EditCollectionForm = () => {
     }
 
     const handleRemoveRecipe = async (recipeId) => {
-        console.log(recipeId)
         const response = await removeRecipeFromCollection(params.id ,recipeId);
-        console.log(response)
         if(response) {
             setSelectedRecipes(selectedRecipes.filter(recipe => recipe.id !== recipeId));
         } else {
@@ -184,6 +182,9 @@ const EditCollectionForm = () => {
                                 </View>
                             )}
                         />
+                    </View>
+                    <View>
+                        {data ? <SearchForRecipe recipeIds={data.recipes}/> : null}
                     </View>
             </View>
         )
