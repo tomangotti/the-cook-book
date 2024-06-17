@@ -19,18 +19,15 @@ const getRecipesForCollection = (userId) => {
         .then((r) => {
             if (r.ok) {
                 r.json().then((data) => {
-                    console.log("fetch ok!!!!")
                     setData(data);
                     setIsLoading(false);
                 });
             } else {
-                console.log("fetch not ok!!!!")
                 setError("Error fetching data");
                 setIsLoading(false);
             }
         })
         .catch((err) => {
-            console.log("fetch error!!!!")
             setError("Error fetching data");
             setIsLoading(false);
         });

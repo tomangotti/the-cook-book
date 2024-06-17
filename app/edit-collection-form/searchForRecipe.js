@@ -1,15 +1,17 @@
 import React, {useState, useEffect} from 'react';
 import { View, Text, TextInput, Button, FlatList } from 'react-native';
+
+
 import getRecipesForCollection from '../../components/hooks/getRecipesForCollection';
+import addRecipeToCollection from '../../components/hooks/addRecipeToCollection';
 
 
-
-const SearchForRecipe = ({recipeIds, userId}) => {
+const SearchForRecipe = ({recipeIds, userId, collectionId, handleAddRecipeToCollection}) => {
     const [searchText, setSearchText] = useState('');
     const [searchResults, setSearchResults] = useState([]);
     const [recipes, setRecipes] = useState([]);
     const {data, isLoading, error} = getRecipesForCollection(userId);
-
+    console.log(userId)
 
     useEffect(() => {
         setRecipes(data);
@@ -19,9 +21,9 @@ const SearchForRecipe = ({recipeIds, userId}) => {
         if(searchText === "") {
             setSearchResults([])
         } else {
-            setSearchResults(recipes.filter((recipe) => recipe.name.toLowerCase().includes(searchText.toLowerCase())))
+            setSearchResults(recipes.filter((recipe) => recipe.name.toLowerCase().includes(searchText.toLowerCase()) && !recipeIds.includes(recipe.id)))
         }
-    },[searchText]);
+    },[searchText, recipeIds]);
 
     
 
@@ -32,6 +34,19 @@ const SearchForRecipe = ({recipeIds, userId}) => {
     //     searchResultsContainer: {},
     //     searchResult: {},
     // }
+
+    const handleButtonPress = async (recipe) => {
+        console.log("recipeId", recipe.id);
+        console.log("collectionId", collectionId);
+        const request = await addRecipeToCollection(collectionId, recipe.id);
+        console.log("request", request);
+        if(request === true){
+            handleAddRecipeToCollection(recipe);
+        }else{
+            alert("Failed to add recipe to collection");
+        }
+    }
+
 
 
     return (
@@ -59,7 +74,7 @@ const SearchForRecipe = ({recipeIds, userId}) => {
                     renderItem={({ item }) => (
                         <View>
                             <Text>{item.name}</Text>
-                            <Button title="Add" onPress={() => {}} />
+                            <Button title="Add" onPress={() => handleButtonPress(item)} />
                         </View>
                     )}
                 /> 

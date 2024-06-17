@@ -18,6 +18,7 @@ const EditCollectionForm = () => {
     const [description, setDescription] = useState('');
     const [selectedRecipes, setSelectedRecipes] = useState([]);
     const [showDelete, setShowDelete] = useState(false);
+    const [recipesIds, setRecipesIds] = useState([])
     
     
     useEffect(() => {
@@ -26,6 +27,7 @@ const EditCollectionForm = () => {
             setName(data.name);
             setDescription(data.description);
             setSelectedRecipes(data.recipes_details);
+            setRecipesIds(data.recipes)
         }
     },[data])
 
@@ -97,11 +99,14 @@ const EditCollectionForm = () => {
         } else {
             alert('error removing recipe')
         }
+    }
 
+    const handleAddRecipeToCollection = (recipe) => {
+        setSelectedRecipes([...selectedRecipes, recipe]);
+        setRecipesIds([...recipesIds, recipe.id])
     }
 
     const editFormBody = () => {
-        console.log("reload form")
         return(
             <View style={{
                 backgroundColor: 'white',
@@ -186,7 +191,7 @@ const EditCollectionForm = () => {
                         />
                     </View>
                     <View>
-                        {data ? <SearchForRecipe recipeIds={data.recipes} userId={data.user} /> : null}
+                        {data.user != undefined ? <SearchForRecipe recipeIds={recipesIds} userId={data.user} collectionId={params.id} handleAddRecipeToCollection={handleAddRecipeToCollection} /> : null}
                     </View>
             </View>
         )
