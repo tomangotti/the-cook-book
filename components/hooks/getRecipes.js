@@ -6,6 +6,7 @@ const getRecipes = (endpoint) => {
     const [error, setError] = useState(null);
 
     const getData = () => {
+        console.log("fetching data");
         setIsLoading(true);
         fetch(`https://mysite-p4xg.onrender.com/recipes/all`)
             .then((r) => {

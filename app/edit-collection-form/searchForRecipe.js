@@ -3,9 +3,25 @@ import { View, Text, TextInput, Button, FlatList } from 'react-native';
 import getRecipesForCollection from '../../components/hooks/getRecipesForCollection';
 
 
-const SearchForRecipe = ({recipeIds}) => {
+
+const SearchForRecipe = ({recipeIds, userId}) => {
     const [searchText, setSearchText] = useState('');
-    const {data, isLoading, error} = getRecipesForCollection();
+    const [searchResults, setSearchResults] = useState([]);
+    const [recipes, setRecipes] = useState([]);
+    const {data, isLoading, error} = getRecipesForCollection(userId);
+
+
+    useEffect(() => {
+        setRecipes(data);
+    },[data]);
+
+    useEffect(() => {
+        if(searchText === "") {
+            setSearchResults([])
+        } else {
+            setSearchResults(recipes.filter((recipe) => recipe.name.toLowerCase().includes(searchText.toLowerCase())))
+        }
+    },[searchText]);
 
     
 
@@ -20,17 +36,26 @@ const SearchForRecipe = ({recipeIds}) => {
 
     return (
         <View >
-            {isLoading ? null : <><View>
+            <View>
                 <Text>Add New Recipe</Text>
                 <TextInput
                     value={searchText}
-                    onChangeText={setSearchText}
+                    onChangeText={(text) => setSearchText(text)}
                     placeholder="Search for a recipe" 
                 />
             </View>
+            {isLoading ? 
+                <Text>Loading...</Text> : 
+                error ? (
+                    <Text>Error: {error}</Text>
+                ) :
+                searchResults.length === 0 ? (
+                    <Text>No results found</Text>
+                ) :
             <View>
                 <FlatList
-                    data={data}
+                    data={searchResults}
+                    keyExtractor={(item) => item.id.toString()}
                     renderItem={({ item }) => (
                         <View>
                             <Text>{item.name}</Text>
@@ -38,8 +63,7 @@ const SearchForRecipe = ({recipeIds}) => {
                         </View>
                     )}
                 /> 
-            </View>
-            </>}
+            </View>}
         </View>
     )
 }

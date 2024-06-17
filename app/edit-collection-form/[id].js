@@ -22,6 +22,7 @@ const EditCollectionForm = () => {
     
     useEffect(() => {
         if(data) {
+            console.log(data.user)
             setName(data.name);
             setDescription(data.description);
             setSelectedRecipes(data.recipes_details);
@@ -100,6 +101,7 @@ const EditCollectionForm = () => {
     }
 
     const editFormBody = () => {
+        console.log("reload form")
         return(
             <View style={{
                 backgroundColor: 'white',
@@ -184,7 +186,7 @@ const EditCollectionForm = () => {
                         />
                     </View>
                     <View>
-                        {data ? <SearchForRecipe recipeIds={data.recipes}/> : null}
+                        {data ? <SearchForRecipe recipeIds={data.recipes} userId={data.user} /> : null}
                     </View>
             </View>
         )

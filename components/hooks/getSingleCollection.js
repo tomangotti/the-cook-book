@@ -11,7 +11,6 @@ const getSingleCollection = (endpoint) => {
             .then((r) => {
                 if (r.ok) {
                     r.json().then((data) => {
-                        console.log(data);
                         setData(data);
                         setIsLoading(false);
                     });

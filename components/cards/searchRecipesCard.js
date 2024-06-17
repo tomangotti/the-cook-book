@@ -91,9 +91,9 @@ const SearchRecipesCard = () => {
                 data={filteredRecipes}
                 keyExtractor={(item) => item.id.toString()}
                 renderItem={({ item }) => (
-                <TouchableOpacity onPress={() => handlePress(item.id)} style={{marginHorizontal: 15, marginVertical:5, padding: 5, width: '75%', borderWidth: 1, borderColor: 'black', borderRadius: 5, alignSelf: "center"}}>
-                    <Text style={{marginLeft: 10}}>{item.name} - by: {item.user_username}</Text>
-                </TouchableOpacity>
+                    <TouchableOpacity onPress={() => handlePress(item.id)} style={{marginHorizontal: 15, marginVertical:5, padding: 5, width: '75%', borderWidth: 1, borderColor: 'black', borderRadius: 5, alignSelf: "center"}}>
+                        <Text style={{marginLeft: 10}}>{item.name} - by: {item.user_username}</Text>
+                    </TouchableOpacity>
                 )}
             /> 
                 }
