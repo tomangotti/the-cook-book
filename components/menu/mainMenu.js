@@ -22,6 +22,9 @@ const MainMenu = ({userId}) => {
                 <TouchableOpacity style={styles.listItem} onPress={() => router.push(`/search-page/${userId}`)}>
                     <Text style={styles.text}>Search All</Text>
                 </TouchableOpacity>
+                <TouchableOpacity style={styles.listItem} onPress={() => router.push(`/shopping-list/${userId}`)}>
+                    <Text style={styles.text}>Shopping List</Text>
+                </TouchableOpacity>
             </View>
         );
     };
@@ -45,11 +48,6 @@ const MainMenu = ({userId}) => {
         }
     });
 
-
-
-    
-
-   
 
 
 
