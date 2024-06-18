@@ -9,6 +9,8 @@ import deleteCollection from '../../components/hooks/deleteCollection';
 import ImageHeaderButton from '../../components/buttons/ImageHeaderButton';
 import removeRecipeFromCollection from '../../components/hooks/removeRecipeFromCollection';
 import SearchForRecipe from './searchForRecipe';
+import saveCollection from '../../components/hooks/saveCollection';
+
 
 const EditCollectionForm = () => {
     const router = useRouter();
@@ -40,19 +42,17 @@ const EditCollectionForm = () => {
     };
 
     const handleSaveCollection = async () => {
-        const collection = {
-            name: name,
-            user: params.id,
-            description: description,
-            recipes: selectedRecipes
-        }
+        const formData = new FormData();
+        formData.append('name', name);
+        formData.append('description', description);
         
-        // const response = await postNewCollection(collection, params.id);
-        // if(!response) {
-        //     alert('error saving collection')
-        // } else {
-        //     router.push(`/your-recipes/${params.id}`)
-        // }
+        
+        const response = await saveCollection(formData, params.id);
+        if (!response) {
+            alert('error saving collection');
+        } else {
+            router.replace(`/collection-detail-page/${params.id}`);
+        }
     };
 
     const handleShowDelete = () => {
