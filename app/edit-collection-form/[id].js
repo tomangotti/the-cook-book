@@ -125,7 +125,7 @@ const EditCollectionForm = () => {
                 }}>
                 <View style={{alignItems: "center", width: "100%"}} >
                     <View style={{margin: 5}}>
-                        <Text style={{fontSize: 18}}>Collection Name</Text>
+                        <Text style={{fontSize: 20}}>Collection Name</Text>
                         <TextInput
                             style={{backgroundColor: "lightgrey", width: 300}}
                             placeholder="Name"
@@ -134,7 +134,7 @@ const EditCollectionForm = () => {
                         />
                     </View> 
                     <View style={{margin: 5}}>
-                        <Text style={{fontSize: 18}}>Description</Text>
+                        <Text style={{fontSize: 20}}>Description</Text>
                         <TextInput
                             style={{backgroundColor: "lightgrey", width: 300}}
                             multiline={true} numberOfLines={6}
@@ -145,7 +145,7 @@ const EditCollectionForm = () => {
                     </View>
                 </View>
                     <View>
-                        <Text style={{fontSize: 18, textAlign: "center", marginTop: 10}}>Recipes</Text>
+                        <Text style={{fontSize: 20, textAlign: "center", marginTop: 10}}>Recipes</Text>
                         <FlatList 
                             data={selectedRecipes}
                             keyExtractor={(item) => item.id}

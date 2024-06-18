@@ -28,12 +28,7 @@ const SearchForRecipe = ({recipeIds, userId, collectionId, handleAddRecipeToColl
     
 
 
-    // const styles = {
-    //     searchContainer: {},
-    //     searchInput: {},
-    //     searchResultsContainer: {},
-    //     searchResult: {},
-    // }
+    
 
     const handleButtonPress = async (recipe) => {
         console.log("recipeId", recipe.id);
@@ -47,34 +42,94 @@ const SearchForRecipe = ({recipeIds, userId, collectionId, handleAddRecipeToColl
         }
     }
 
+    const styles = {
+        searchContainer: {
+            padding: 10,
+            backgroundColor: 'white',
+            alignItems: 'center',
+        },
+        searchTitle:{
+            fontSize: 20,
+            marginBottom: 10,
+        },
+        searchInput: {
+            width: '90%',
+            padding: 10,
+            backgroundColor: 'lightgrey',
+            borderRadius: 5,
+        },
+        searchResultsContainer: {
+            padding: 10,
+            backgroundColor: 'white',
+        },
+        searchResult: {
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: "center",
+            marginVertical: 7,
+            borderRadius: 5,
+            paddingLeft: 10,
+            paddingTop: 0,
+            borderWidth: 1,
+            borderColor: 'lightgrey',
+            backgroundColor: '#F3F4F8',
+        },
+        resultTitle: {
+            fontSize: 16,
+            justifyContent: 'center',
+        },
+        resultButton:{
+            backgroundColor: 'lightblue',
+            padding: 5,
+            borderRadius: 5,
+            fontSize: 16,
+        },
+        defaultResultTitle:{
+            textAlign: "center",
+        }
+    }
+
 
 
     return (
-        <View >
-            <View>
-                <Text>Add New Recipe</Text>
+        <View>
+            <View style={styles.searchContainer}>
+                <Text style={styles.searchTitle}>Add New Recipe</Text>
                 <TextInput
                     value={searchText}
                     onChangeText={(text) => setSearchText(text)}
-                    placeholder="Search for a recipe" 
+                    placeholder="Search for a recipe"
+                    style={styles.searchInput} 
                 />
             </View>
-            {isLoading ? 
-                <Text>Loading...</Text> : 
+            {isLoading ? (
+                <View> 
+                    <Text styles={styles.defaultResultTitle}>Loading...</Text>
+                </View>
+                ) : 
                 error ? (
-                    <Text>Error: {error}</Text>
+                    <View>
+                        <Text styles={styles.defaultResultTitle}>Error: {error}</Text>
+                    </View>
+                ) :
+                searchText === "" ? (
+                    <View>
+                        <Text style={styles.defaultResultTitle}>Start typing to search</Text>
+                    </View>
                 ) :
                 searchResults.length === 0 ? (
-                    <Text>No results found</Text>
-                ) :
-            <View>
+                    <View>
+                        <Text style={styles.defaultResultTitle}>No results found</Text>
+                    </View>
+                ) : 
+            <View style={styles.searchResultsContainer}>
                 <FlatList
                     data={searchResults}
                     keyExtractor={(item) => item.id.toString()}
                     renderItem={({ item }) => (
-                        <View>
-                            <Text>{item.name}</Text>
-                            <Button title="Add" onPress={() => handleButtonPress(item)} />
+                        <View style={styles.searchResult} >
+                            <Text style={styles.resultTitle} >{item.name}</Text>
+                            <Button style={styles.resultButton} title="Add" onPress={() => handleButtonPress(item)} />
                         </View>
                     )}
                 /> 
