@@ -2,7 +2,7 @@ import {useState, useEffect} from 'react'
 
 
 
-const getShoppingLists = (userId) => {
+const getFetch = (endpoint) => {
     const [data, setData] = useState([])
     const [isLoading, setIsLoading] = useState(true)
     const [error, setError] = useState(null)
@@ -11,8 +11,8 @@ const getShoppingLists = (userId) => {
 
     const getData = () => {
         setIsLoading(true)
-        console.log(userId)
-        fetch(`https://mysite-p4xg.onrender.com/shopping-list/get/users/${userId}`)
+
+        fetch(`https://mysite-p4xg.onrender.com/${endpoint}`)
             .then((r) => {
                 if(r.ok){
                     r.json().then((data) => {
@@ -39,4 +39,4 @@ const getShoppingLists = (userId) => {
     return {data, isLoading, error}
 }
 
-export default getShoppingLists
+export default getFetch

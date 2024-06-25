@@ -5,6 +5,7 @@ import { Stack, useRouter, useGlobalSearchParams} from "expo-router";
 import ImageHeaderButton from '../../components/buttons/ImageHeaderButton';
 import ButtonTemplate from "../../components/buttons/buttonTemplate";
 import getShoppingLists from "../../components/hooks/shopping-lists-fetchs/getShoppingLists";
+import postFetch from '../../components/hooks/shopping-lists-fetchs/postFetch';
 
 const ShoppingListForm = () => {
     const router = useRouter();
@@ -13,7 +14,19 @@ const ShoppingListForm = () => {
 
 
     const handleSubmit = async () => {
-        console.log("submitted")
+        body = {
+            name: name,
+            user: params.id
+        }
+        
+        const response = await postFetch(`shopping-list/create/new/shopping_list`, body)
+        
+        if(response !== null){
+            router.replace(`shopping-list/${params.id}`)
+        } else {
+            alert("Shopping list was not create, try again later")
+        }
+
     }
 
     return(
