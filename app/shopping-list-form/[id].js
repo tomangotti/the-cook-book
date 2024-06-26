@@ -29,6 +29,34 @@ const ShoppingListForm = () => {
 
     }
 
+
+    const styles = {
+        titleContainer: {
+            alignItems: "center",
+            justifyContent: "center",
+            width: "100%",
+            paddingVertical: 10,
+        },
+        title: {
+            fontSize: 20,
+            fontWeight: "bold"
+        },
+        input: {
+            borderWidth: 1,
+            borderColor: "#000",
+            paddingVertical: 10,
+            marginVertical: 10,
+            width: "90%",
+        },
+        inputContainer: {
+            alignItems: "center",
+            justifyContent: "center",
+            width: "100%",
+            paddingVertical: 10,
+
+        }
+    }
+
     return(
         <SafeAreaView>
             <Stack.Screen options={{
@@ -42,11 +70,15 @@ const ShoppingListForm = () => {
                 headerTitleAlign: "center"
             }}/>
             <ScrollView showsVerticalScrollIndicator={false}>
-                <View>
+                <View style={styles.titleContainer}>
+                    <Text style={styles.title}>Enter Name</Text>
+                </View>
+                <View style={styles.inputContainer} >
                     <TextInput 
                         placeholder="Name"
                         value={name}
                         onChangeText={(text) => setName(text)}
+                        style={styles.input}
                     />
                 </View>
                 <View>

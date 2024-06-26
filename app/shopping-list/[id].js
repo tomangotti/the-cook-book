@@ -21,23 +21,74 @@ const ShoppingListPage = () => {
         }
     },[data])
 
+
+
     const listsBody = () => {
         if(shoppingLists.length === 0){
             return(
-                <Text>No Shopping Lists</Text>
+                <View style={styles.titleContainer}>
+                    <Text style={styles.title}>No Lists Found</Text>
+                </View>
             )
         }
         return(
-            <FlatList
-                data={shoppingLists}
-                renderItem={({item}) => (
-                    <TouchableOpacity onPress={() => router.push(`shopping-list-detail/${item.id}`)}>
-                        <Text>{item.name}</Text>
-                    </TouchableOpacity>
-                )}
-                keyExtractor={(item) => item.id}
-            />
+            <View style={styles.listContainer}>
+                <FlatList
+                    data={shoppingLists}
+                    renderItem={({item}) => (
+                        <TouchableOpacity onPress={() => router.push(`shopping-list-detail/${item.id}`)} style={styles.itemContainer}> 
+                            <Text style={styles.listItems}>{item.name}</Text>
+                        </TouchableOpacity>
+                    )}
+                    keyExtractor={(item) => item.id}
+                />
+            </View>
         )
+    }
+
+
+    const styles = {
+        listContainer: {
+            marginTop: 20,
+            alignItems: "center",
+            justifyContent: "center",
+            width: "100%",
+            borderTopWidth: 3,
+            borderBottomWidth: 3,
+            borderColor: "#000",
+            paddingVertical: 10,
+        },
+        listItems: {},
+        itemContainer: {
+            backgroundColor: "#F0F0F0",
+            padding: 10,
+            margin: 5,
+            width: 200,
+            borderRadius: 10,
+            alignItems: "center",
+            justifyContent: "center",
+            borderWidth: 1,
+            borderColor: "#000",
+            shadowColor: "#000",
+            shadowOffset: {
+                width: 0,
+                height: 2,
+            },
+            shadowOpacity: 0.25,
+            shadowRadius: 3.84,
+            elevation: 5,
+        },
+        titleContainer: {
+            alignItems: "center",
+            justifyContent: "center",
+            marginTop: 20,
+        },
+        title: {
+            fontSize: 20,
+            fontWeight: "bold",
+
+        },
+
     }
 
 
@@ -57,9 +108,7 @@ const ShoppingListPage = () => {
                 <View>
                     <ButtonTemplate title="Create New List" color="blue" pressed={() => router.push(`shopping-list-form/${params.id}`)} />
                 </View>
-                <View>
-                    <Text>Shopping List Page</Text>
-                </View>
+                
                 {isLoading ? <ActivityIndicator size="large" /> : error ? <Text>{error}</Text> : listsBody()}
             </ScrollView>
         </SafeAreaView>
