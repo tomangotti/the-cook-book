@@ -44,6 +44,7 @@ const AddNewItemForm = ({listItems, setListItems, list_id}) => {
             paddingVertical: 10,
             borderTopWidth: 3,
             borderBottomWidth: 3,
+            marginVertical: 20,
         },
         input: {
             borderWidth: 1,
@@ -51,6 +52,7 @@ const AddNewItemForm = ({listItems, setListItems, list_id}) => {
             paddingVertical: 10,
             marginVertical: 10,
             width: "90%",
+            borderRadius: 5,
         },
         title: {
             fontSize: 20,

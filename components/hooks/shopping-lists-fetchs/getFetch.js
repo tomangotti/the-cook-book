@@ -21,6 +21,7 @@ const getFetch = (endpoint) => {
                     })
                 } else{
                     console.log(r)
+                    console.log("getging data")
                     setError("Request failed")
                     setIsLoading(false)
                 }

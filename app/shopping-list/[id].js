@@ -11,6 +11,7 @@ const ShoppingListPage = () => {
     const router = useRouter();
     const params = useGlobalSearchParams();
     // const {data, isLoading, error, reFetch} = getShoppingLists(params.id)
+    console.log(params.id)
     const {data, isLoading, error, reFetch} = getFetch(`shopping-list/get/users/${params.id}`)
 
     const [shoppingLists, setShoppingLists] = useState([])
@@ -109,7 +110,7 @@ const ShoppingListPage = () => {
                     <ButtonTemplate title="Create New List" color="blue" pressed={() => router.push(`shopping-list-form/${params.id}`)} />
                 </View>
                 
-                {isLoading ? <ActivityIndicator size="large" /> : error ? <Text>{error}</Text> : listsBody()}
+                {isLoading ? <ActivityIndicator size="large" /> : error ? <Text>{error} help</Text> : listsBody()}
             </ScrollView>
         </SafeAreaView>
         
