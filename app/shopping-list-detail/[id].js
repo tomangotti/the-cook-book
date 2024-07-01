@@ -24,6 +24,7 @@ const ShoppingListDetail = () => {
     },[data])
 
 
+
     const styles = {
         listContainer: {
             width: "100%",
@@ -180,6 +181,15 @@ const ShoppingListDetail = () => {
         Linking.openURL(walmartSearchURL);
     }
 
+    const handleDeleteList = async () => {
+        const response = await deleteFetch(`shopping-list/delete/shopping_list/${params.id}`)
+        if(response !== null){
+            router.replace(`../shopping-list/${listInfo.user}`)
+        } else {
+            alert("failed to delete list, try again later")
+        }
+    }
+
 
     return (
         <SafeAreaView>
@@ -189,6 +199,9 @@ const ShoppingListDetail = () => {
                 headerBackVisible: false,
                 headerLeft: () => (
                     <ImageHeaderButton imageTitle={"back"} handlePress={() => router.back()} />
+                ),
+                headerRight: () => (
+                    <ImageHeaderButton imageTitle={"trash"} handlePress={() => handleDeleteList()} />
                 ),
                 headerTitle: "List Details",
                 headerTitleAlign: "center"
