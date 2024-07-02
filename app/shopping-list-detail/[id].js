@@ -17,7 +17,6 @@ const ShoppingListDetail = () => {
 
     useEffect(() => {
         if(data !== null){
-            console.log(data)
             setListInfo(data)
             setListItems(data.items)
         }
@@ -28,20 +27,21 @@ const ShoppingListDetail = () => {
     const styles = {
         listContainer: {
             width: "100%",
-            paddingVertical: 10,
             alignItems: "center",
             justifyContent: "center",
+            marginBottom: 0,
+            paddingBottom: 0,
         },
         listItem: {
             justifyContent: "space-between",
+            height: 80,
             alignItems: "center",
             padding: 5,
             flexDirection: "row",
             borderRadius: 12,
             backgroundColor: "#F3F4F8",
             width: "85%",
-            marginTop: 10,
-            marginBottom: 5,
+            marginVertical: 5,
             marginLeft: "auto",
             marginRight: "auto",
             shadowColor: "#000",
@@ -112,8 +112,8 @@ const ShoppingListDetail = () => {
         },
         itemText: {
             alignSelf: "center",
-            width: "30%",
-        }
+            width: "50%",
+        },
         
     }
 
@@ -127,6 +127,7 @@ const ShoppingListDetail = () => {
             <View style={styles.listContainer}>
                 <FlatList
                     data={listItems}
+
                     renderItem={({item}) => (
                         <View style={styles.listItem}>
                             <View style={styles.itemText}>
@@ -157,10 +158,12 @@ const ShoppingListDetail = () => {
                 <View style={styles.titleContainer}>
                     <Text style={styles.title} >{listInfo.name}</Text>
                 </View>
-
-                {list()}
-
                 <AddNewItemForm listItems={listItems} setListItems={setListItems} list_id={params.id} />
+                {list()}
+                
+                
+
+                
                 
             </View>
         )
@@ -206,9 +209,10 @@ const ShoppingListDetail = () => {
                 headerTitle: "List Details",
                 headerTitleAlign: "center"
             }}/>
-            <ScrollView showsVerticalScrollIndicator={false}>
-            {isLoading ? <Text>Loading...</Text> : error ? <Text>There was an error</Text> : body()}
+            <ScrollView contentContainerStyle={{ paddingBottom: 20 }}>
+                {isLoading ? <Text>Loading...</Text> : error ? <Text>There was an error</Text> : body()}
             </ScrollView>
+            
         </SafeAreaView>
     )
 }

@@ -11,11 +11,12 @@ const getFetch = (endpoint) => {
 
     const getData = () => {
         setIsLoading(true)
-
+        console.log("fetching")
         fetch(`https://mysite-p4xg.onrender.com/${endpoint}`)
             .then((r) => {
                 if(r.ok){
                     r.json().then((data) => {
+                        console.log(data)
                         setData(data)
                         setIsLoading(false)
                     })

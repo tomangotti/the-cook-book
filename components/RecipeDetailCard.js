@@ -5,6 +5,7 @@ import { useRouter } from "expo-router";
 import HorizontalLine from "./styleComponents/HorizontalLine";
 import RatingCard from "./cards/ratingCard";
 import FavoriteCard from "./cards/favoriteCard";
+import AddIngredientsToList from "./menu/addIngredientsToList";
 
 const RecipeDetailCard = ({item, ingredients, userId}) => {
     const router = useRouter();
@@ -96,7 +97,7 @@ const RecipeDetailCard = ({item, ingredients, userId}) => {
                 </View>
             <View>
                 <HorizontalLine />
-                <Text style={{fontSize: 25, margin: "auto", textAlign: "center", marginTop: 35}}>Ingredients</Text>
+                <Text style={{fontSize: 25, margin: "auto", textAlign: "center", marginTop: 25}}>Ingredients</Text>
                 {ingredients?.map((item) => (
                     <View  style={{ 
                         justifyContent: "space-between",
@@ -124,7 +125,9 @@ const RecipeDetailCard = ({item, ingredients, userId}) => {
                         </View>
                     </View>
                 ))}
+                
             </View>
+            {userId ? <AddIngredientsToList user_id={userId} recipe_id={item.id}/> : null}
             <View style={{flex: 1}}>
                 <HorizontalLine />
                 <Text style={{fontSize: 25, margin: "auto", textAlign: "center", marginTop: 35}}>Instructions</Text>
