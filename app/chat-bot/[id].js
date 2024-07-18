@@ -4,6 +4,7 @@ import { View, Text, ScrollView, SafeAreaView, TextInput, TouchableOpacity, Acti
 import { KeyboardAvoidingView, Platform } from 'react-native';
 
 
+
 import getUserMessages from "../../components/hooks/getUserMessages";
 import postNewMessage from "../../components/hooks/postNewMessage";
 import ClearChat from "../../components/hooks/clearChat";
@@ -16,7 +17,7 @@ const ChatBot = () => {
     const [refreshing, setRefreshing] = useState(false);
     const {data, isLoading, error, reFetch} = getUserMessages(params.id);
     const [sending, setSending] = useState(false);
-    
+    console.log("hello world")
     
 
     const onRefresh = useCallback(() => {
